@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import MobileMenu from "./components/MobileMenu";
 
 export default function Home() {
   const [activeCommunication, setActiveCommunication] = useState(0);
@@ -112,6 +113,8 @@ export default function Home() {
             Espace Client
             <strong>→</strong>
           </a>
+
+          <MobileMenu />
 
         </div>
       </header>
