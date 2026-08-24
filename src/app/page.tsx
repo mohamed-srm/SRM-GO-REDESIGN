@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [activeCommunication, setActiveCommunication] = useState(0);
@@ -20,6 +20,19 @@ export default function Home() {
       image: "/communication-3.png",
     },
   ];
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveCommunication((current) => {
+        if (current >= communications.length - 1) {
+          return 0;
+        }
+
+        return current + 1;
+      });
+    }, 10000);
+
+    return () => clearInterval(timer);
+  }, [communications.length]);
   
   return (
     <main className="site">
@@ -94,7 +107,7 @@ export default function Home() {
 
           </nav>
 
-          <a href="#client" className="client-button">
+          <a href="/espace-client" className="client-button">
             <span className="client-icon">♙</span>
             Espace Client
             <strong>→</strong>
@@ -223,6 +236,46 @@ export default function Home() {
 
             </div>
 
+          </section>
+          {/* COMMUNICATIONS */}
+          <section className="communications-section" id="communications">
+            <div className="container">
+
+              <div className="communications-header">
+                <div className="section-label">
+                  COMMUNICATIONS
+                  <span></span>
+                </div>
+
+                <h2>
+                  Restez connectés
+                  <br />
+                  <strong>avec la SRM.</strong>
+                </h2>
+              </div>
+
+              <div className="communications-slider">
+                <div
+                  className="communications-track"
+                  style={{
+                    transform: `translateX(-${activeCommunication * 100}%)`,
+                  }}
+                >
+                  {communications.map((communication) => (
+                    <div
+                      className="communication-slide"
+                      key={communication.id}
+                    >
+                      <img
+                        src={communication.image}
+                        alt={`Communication SRM ${communication.id}`}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
           </section>
      
       {/* SERVICES STRIP */}
@@ -565,13 +618,24 @@ export default function Home() {
 
           <div className="citizen-grid">
 
-            <a href="#facture" className="citizen-card featured">
+            <a
+              href="https://www.fatourati.ma/FatLite/ma/MTC/formulaire?cid=01&fid=1170"
+              className="citizen-card featured"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span className="citizen-number">01</span>
 
-              <div className="citizen-icon">€</div>
+              <div className="citizen-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="M3 9h18" />
+                  <path d="M7 14h3" />
+                </svg>
+              </div>
 
               <div className="citizen-card-content">
-                <h3>Payer une facture</h3>
+                <h3>Payer ma facture</h3>
                 <p>
                   Accédez rapidement à vos services
                   de paiement.

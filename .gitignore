@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# Local database
+dev.db
+
+# Generated agent/IDE files.agents/.claude/.windsurf/
+# Local database
+dev.db
+
+# Generated agent/IDE files
+.agents/
+.claude/
+.windsurf/
