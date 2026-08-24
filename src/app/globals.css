@@ -5475,3 +5475,56 @@ a {
     font-size: 18px;
   }
 }
+/* =====================================================
+   COMMUNICATIONS — MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+  .communications-section {
+    padding: 60px 0;
+  }
+
+  .communications-header {
+    margin-bottom: 24px;
+  }
+
+  .communications-header h2 {
+    font-size: 36px;
+    line-height: 1;
+    letter-spacing: -1.5px;
+  }
+
+  .communications-slider {
+    width: calc(100% - 28px);
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+
+  .communications-track {
+    transition: transform 700ms ease;
+  }
+
+  .communication-slide {
+    aspect-ratio: 4 / 3;
+  }
+
+  .communication-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  .communications-section {
+    padding: 50px 0;
+  }
+
+  .communications-header h2 {
+    font-size: 31px;
+  }
+
+  .communications-slider {
+    width: calc(100% - 20px);
+  }
+}
