@@ -1,21 +1,20 @@
-﻿import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+﻿import { redirect } from "next/navigation";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/auth/session";
 
 export default async function DashboardPage() {
-  const cookieStore = await cookies();
-  const session = cookieStore.get("srm_client_session");
+  const user = await getCurrentUser();
 
-  const userId = Number(session?.value);
-
-  if (!Number.isInteger(userId) || userId <= 0) {
+  if (!user) {
     redirect("/espace-client");
   }
 
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
+  const stats = await prisma.user.findUnique({
+    where: {
+      id: user.id,
+    },
     select: {
       identifier: true,
       createdAt: true,
@@ -28,25 +27,24 @@ export default async function DashboardPage() {
     },
   });
 
-  if (!user) {
+  if (!stats) {
     redirect("/espace-client");
   }
 
   return (
     <main className="dashboard-page dashboard-page--home">
       <div className="dashboard-home-container">
-
         <header className="dashboard-home-header">
           <div>
             <span className="dashboard-label">ESPACE CLIENT</span>
 
             <h1>
-              Bonjour, <span>{user.identifier}</span>.
+              Bonjour, <span>{stats.identifier}</span>.
             </h1>
 
             <p>
-              Retrouvez vos services, vos demandes et vos réclamations
-              au même endroit.
+              Retrouvez vos services, vos demandes et vos
+              réclamations au même endroit.
             </p>
           </div>
 
@@ -62,7 +60,7 @@ export default async function DashboardPage() {
         <section className="dashboard-welcome">
           <div className="dashboard-welcome-main">
             <div className="dashboard-avatar">
-              {user.identifier.charAt(0).toUpperCase()}
+              {stats.identifier.charAt(0).toUpperCase()}
             </div>
 
             <div>
@@ -74,24 +72,23 @@ export default async function DashboardPage() {
               <h2>Votre espace client</h2>
 
               <p>
-                Gérez facilement vos démarches auprès de la SRM Guelmim –
-                Oued Noun.
+                Gérez facilement vos démarches auprès de la SRM
+                Guelmim – Oued Noun.
               </p>
             </div>
           </div>
 
           <div className="dashboard-welcome-id">
             <span>IDENTIFIANT CLIENT</span>
-            <strong>#{String(userId).padStart(5, "0")}</strong>
+            <strong>#{String(user.id).padStart(5, "0")}</strong>
           </div>
         </section>
 
         <section className="dashboard-service-grid">
-
           <Link
             href="/espace-client/factures"
             className="dashboard-service-card dashboard-service-card--blue"
-            >
+          >
             <div className="dashboard-service-top">
               <span>01</span>
               <span className="dashboard-service-icon">↗</span>
@@ -105,7 +102,8 @@ export default async function DashboardPage() {
               <h2>Mes factures</h2>
 
               <p>
-                Consultez et payez votre facture en ligne via Fatourati.
+                Consultez et payez votre facture en ligne via
+                Fatourati.
               </p>
             </div>
 
@@ -132,12 +130,13 @@ export default async function DashboardPage() {
               <h2>Mes demandes</h2>
 
               <p>
-                Suivez vos démarches et consultez leurs références.
+                Suivez vos démarches et consultez leurs
+                références.
               </p>
             </div>
 
             <div className="dashboard-service-bottom">
-              <span>{user._count.demandes} demande(s)</span>
+              <span>{stats._count.demandes} demande(s)</span>
               <strong>→</strong>
             </div>
           </Link>
@@ -164,7 +163,9 @@ export default async function DashboardPage() {
             </div>
 
             <div className="dashboard-service-bottom">
-              <span>{user._count.reclamations} réclamation(s)</span>
+              <span>
+                {stats._count.reclamations} réclamation(s)
+              </span>
               <strong>→</strong>
             </div>
           </Link>
@@ -195,27 +196,26 @@ export default async function DashboardPage() {
               <strong>→</strong>
             </div>
           </Link>
-
         </section>
 
         <section className="dashboard-overview">
-
           <div className="dashboard-overview-card">
             <div>
               <span className="dashboard-overview-label">
                 MES DÉMARCHES
               </span>
+
               <h3>Votre activité</h3>
             </div>
 
             <div className="dashboard-overview-stats">
               <div>
-                <strong>{user._count.demandes}</strong>
+                <strong>{stats._count.demandes}</strong>
                 <span>Demandes</span>
               </div>
 
               <div>
-                <strong>{user._count.reclamations}</strong>
+                <strong>{stats._count.reclamations}</strong>
                 <span>Réclamations</span>
               </div>
 
@@ -235,8 +235,8 @@ export default async function DashboardPage() {
               <h3>Notre équipe reste à votre écoute.</h3>
 
               <p>
-                Pour toute question concernant votre espace client,
-                contactez la SRM Guelmim – Oued Noun.
+                Pour toute question concernant votre espace
+                client, contactez la SRM Guelmim – Oued Noun.
               </p>
             </div>
 
@@ -248,9 +248,7 @@ export default async function DashboardPage() {
               <span>→</span>
             </a>
           </div>
-
         </section>
-
       </div>
     </main>
   );

@@ -5,7 +5,31 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const rawBody = await request.text();
+
+    if (!rawBody.trim()) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Identifiant et mot de passe requis.",
+        },
+        { status: 400 }
+      );
+    }
+
+    let body: { identifier?: unknown; password?: unknown };
+
+    try {
+      body = JSON.parse(rawBody);
+    } catch {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Requête de connexion invalide.",
+        },
+        { status: 400 }
+      );
+    }
 
     const identifier = String(body.identifier ?? "").trim();
     const password = String(body.password ?? "");
@@ -52,9 +76,7 @@ export async function POST(request: Request) {
     const token = crypto.randomBytes(32).toString("hex");
 
     await prisma.session.deleteMany({
-      where: {
-        userId: user.id,
-      },
+      where: { userId: user.id },
     });
 
     await prisma.session.create({
@@ -70,17 +92,13 @@ export async function POST(request: Request) {
       message: "Connexion réussie.",
     });
 
-    response.cookies.set(
-      "srm_client_session",
-      token,
-      {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
-        maxAge: 60 * 60 * 8,
-      }
-    );
+    response.cookies.set("srm_client_session", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 8,
+    });
 
     return response;
   } catch (error) {

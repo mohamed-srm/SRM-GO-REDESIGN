@@ -9,17 +9,17 @@ datasource db {
 model User {
   id           Int                  @id @default(autoincrement())
   identifier   String               @unique
-  fullName     String?
-  email        String?              @unique
-  phone        String?
-  address      String?
   passwordHash String
   createdAt    DateTime             @default(now())
   updatedAt    DateTime             @updatedAt
-  resetTokens  PasswordResetToken[]
+  address      String?
+  email        String?              @unique
+  fullName     String?
+  phone        String?
   demandes     Demande[]
+  resetTokens  PasswordResetToken[]
   reclamations Reclamation[]
-  sessions Session[]
+  sessions     Session[]
 }
 
 model PasswordResetToken {
@@ -28,27 +28,26 @@ model PasswordResetToken {
   userId    Int
   expiresAt DateTime
   createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
 model Demande {
-  id          Int      @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   userId      Int
   title       String
   description String
-  status      String   @default("En attente")
-  reference   String   @unique
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  status      String        @default("En attente")
+  reference   String        @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   files       DemandeFile[]
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
+
 model Reclamation {
   id          Int      @id @default(autoincrement())
   userId      Int
@@ -58,33 +57,32 @@ model Reclamation {
   reference   String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
+
 model Session {
   id        Int      @id @default(autoincrement())
   token     String   @unique
   userId    Int
   expiresAt DateTime
   createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
+
 model DemandeFile {
-  id          Int      @id @default(autoincrement())
-  demandeId   Int
+  id           Int      @id @default(autoincrement())
+  demandeId    Int
   originalName String
   fileName     String   @unique
   mimeType     String
   size         Int
   path         String
   createdAt    DateTime @default(now())
-
-  demande Demande @relation(fields: [demandeId], references: [id], onDelete: Cascade)
+  demande      Demande  @relation(fields: [demandeId], references: [id], onDelete: Cascade)
 
   @@index([demandeId])
 }
