@@ -1,8 +1,7 @@
 ﻿import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import crypto from "crypto";
-import path from "path";
-import { mkdir, writeFile } from "fs/promises";
+import { put } from "@vercel/blob";
 import { prisma } from "@/lib/prisma";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -17,9 +16,7 @@ async function getCurrentUserId() {
   const cookieStore = await cookies();
   const token = cookieStore.get("srm_client_session")?.value;
 
-  if (!token) {
-    return null;
-  }
+  if (!token) return null;
 
   const session = await prisma.session.findUnique({
     where: { token },
@@ -42,10 +39,7 @@ export async function POST(request: Request) {
 
     if (!userId) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "Non authentifié.",
-        },
+        { success: false, message: "Non authentifié." },
         { status: 401 }
       );
     }
@@ -57,20 +51,14 @@ export async function POST(request: Request) {
 
     if (!Number.isInteger(demandeId) || demandeId <= 0) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "Demande invalide.",
-        },
+        { success: false, message: "Demande invalide." },
         { status: 400 }
       );
     }
 
     if (!(file instanceof File)) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "Fichier requis.",
-        },
+        { success: false, message: "Fichier requis." },
         { status: 400 }
       );
     }
@@ -122,22 +110,21 @@ export async function POST(request: Request) {
     const safeName =
       `${Date.now()}-${crypto.randomBytes(10).toString("hex")}${extension}`;
 
-    const uploadDir = path.join(process.cwd(), "uploads", "demandes");
-    const absolutePath = path.join(uploadDir, safeName);
+    const pathname = `demandes/${demande.id}/${safeName}`;
 
-    await mkdir(uploadDir, { recursive: true });
-
-    const bytes = await file.arrayBuffer();
-    await writeFile(absolutePath, Buffer.from(bytes));
+    const blob = await put(pathname, file, {
+      access: "private",
+      contentType: file.type,
+    });
 
     const savedFile = await prisma.demandeFile.create({
       data: {
         demandeId: demande.id,
         originalName: file.name,
-        fileName: safeName,
+        fileName: blob.pathname,
         mimeType: file.type,
         size: file.size,
-        path: `uploads/demandes/${safeName}`,
+        path: blob.pathname,
       },
     });
 
