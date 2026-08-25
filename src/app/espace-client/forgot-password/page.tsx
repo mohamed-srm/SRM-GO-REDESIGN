@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function ForgotPasswordPage() {
-  const [identifier, setIdentifier] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +23,7 @@ export default function ForgotPasswordPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          identifier,
+          email,
         }),
       });
 
@@ -90,17 +90,17 @@ export default function ForgotPasswordPage() {
           </p>
 
           <form onSubmit={handleSubmit}>
-            <label htmlFor="identifier">
-              Identifiant
+            <label htmlFor="email">
+              Adresse e-mail
             </label>
 
             <input
-              id="identifier"
-              type="text"
-              value={identifier}
-              onChange={(event) => setIdentifier(event.target.value)}
-              placeholder="Votre identifiant"
-              autoComplete="username"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="votre@email.com"
+              autoComplete="email"
               required
             />
 
@@ -137,3 +137,4 @@ export default function ForgotPasswordPage() {
     </main>
   );
 }
+

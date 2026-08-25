@@ -7,9 +7,9 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const identifier = String(body.identifier ?? "").trim();
+    const email = String(body.email ?? "").trim().toLowerCase();
 
-    if (!identifier) {
+    if (!email) {
       return NextResponse.json(
         {
           success: false,
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     const user = await prisma.user.findUnique({
       where: {
-        identifier,
+        email,
       },
     });
 
@@ -83,3 +83,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

@@ -6867,4 +6867,54 @@ a {
   .site-footer__contact > a:first-of-type {
     font-size: 16px;
   }
+}.client-register-page .client-page__form-area {
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: auto;
+  padding: 90px 60px 60px;
+}
+
+.client-register-page .client-form {
+  width: min(520px, 100%);
+  margin: 0 auto;
+}
+
+.client-register-page .client-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+}
+
+.client-register-page .client-form form label {
+  margin-top: 6px;
+}
+
+.client-register-page .client-form form input,
+.client-register-page .client-form form button {
+  grid-column: span 2;
+}
+
+.client-register-page .client-form .register-half {
+  grid-column: span 1;
+}
+
+@media (max-width: 700px) {
+  .client-register-page .client-page__form-area {
+    padding: 80px 24px 40px;
+  }
+
+  .client-register-page .client-form {
+    width: 100%;
+  }
+
+  .client-register-page .client-form form {
+    grid-template-columns: 1fr;
+  }
+
+  .client-register-page .client-form form label,
+  .client-register-page .client-form form input,
+  .client-register-page .client-form form button,
+  .client-register-page .client-form .register-half {
+    grid-column: span 1;
+  }
 }
