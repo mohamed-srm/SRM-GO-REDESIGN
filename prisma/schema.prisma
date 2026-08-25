@@ -9,12 +9,17 @@ datasource db {
 model User {
   id           Int                  @id @default(autoincrement())
   identifier   String               @unique
+  fullName     String?
+  email        String?              @unique
+  phone        String?
+  address      String?
   passwordHash String
   createdAt    DateTime             @default(now())
   updatedAt    DateTime             @updatedAt
   resetTokens  PasswordResetToken[]
   demandes     Demande[]
   reclamations Reclamation[]
+  sessions Session[]
 }
 
 model PasswordResetToken {
@@ -38,6 +43,7 @@ model Demande {
   reference   String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  files       DemandeFile[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -56,4 +62,29 @@ model Reclamation {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+model Session {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+model DemandeFile {
+  id          Int      @id @default(autoincrement())
+  demandeId   Int
+  originalName String
+  fileName     String   @unique
+  mimeType     String
+  size         Int
+  path         String
+  createdAt    DateTime @default(now())
+
+  demande Demande @relation(fields: [demandeId], references: [id], onDelete: Cascade)
+
+  @@index([demandeId])
 }

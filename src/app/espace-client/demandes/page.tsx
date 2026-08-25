@@ -12,15 +12,70 @@ type Demande = {
   createdAt: string;
 };
 
+type RequestType = "neuf" | "provisoire" | "compteur";
+
+const requestTypes = [
+  {
+    id: "neuf" as RequestType,
+    label: "Branchement Neuf",
+    title: "Demande de branchement neuf",
+    intro:
+      "Pour toute nouvelle demande de branchement d’eau, d’assainissement liquide et d’électricité, veuillez vous présenter aux agences de la SRM-GO muni des pièces suivantes :",
+    documents: [
+      "Formulaire de branchement rempli.",
+      "Copie de la carte d’identité (C.I.N.E, carte de séjour ou passeport pour les personnes physiques).",
+      "Copie des statuts et extrait de registre de commerce, ICE et CIN du gérant pour les personnes morales.",
+      "Copie de titre de propriété ou tout document justifiant la propriété.",
+      "Copie des plans de construction approuvés par les autorités compétentes.",
+      "Copie de l’autorisation de construction.",
+      "Copie d’autorisation spéciale délivrée par l’autorité compétente si le demandeur ne dispose pas de l’autorisation de construction et des plans.",
+    ],
+  },
+  {
+    id: "provisoire" as RequestType,
+    label: "Branchement Provisoire",
+    title: "Demande de branchement provisoire",
+    intro:
+      "Pour un branchement provisoire, veuillez vous rendre aux agences de la SRM-GO muni des pièces suivantes :",
+    documents: [
+      "Une demande de branchement provisoire précisant la nature des travaux à effectuer, l’adresse et la durée du branchement.",
+      "Autorisation du propriétaire signée et légalisée.",
+      "Copie de la carte d’identité (C.I.N.E).",
+      "Copie légalisée de l’acte de propriété.",
+    ],
+  },
+  {
+    id: "compteur" as RequestType,
+    label: "Ajout Compteur",
+    title: "Ajout d’un nouveau compteur",
+    intro:
+      "Pour l’ajout d’un nouveau compteur, veuillez vous munir des documents suivants :",
+    documents: [
+      "Copie de la carte d’identité nationale (C.I.N.E).",
+      "Copie de titre de propriété.",
+      "Copie des plans modificatifs approuvés.",
+      "Reçu de paiement de devis initial.",
+    ],
+  },
+];
+
 export default function DemandesPage() {
   const [demandes, setDemandes] = useState<Demande[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [title, setTitle] = useState("");
+
+  const [requestType, setRequestType] =
+    useState<RequestType>("neuf");
   const [description, setDescription] = useState("");
+  const [files, setFiles] = useState<File[]>([]);
+
+  const selectedType =
+    requestTypes.find((item) => item.id === requestType) ??
+    requestTypes[0];
 
   const loadDemandes = async () => {
     try {
@@ -44,6 +99,43 @@ export default function DemandesPage() {
     loadDemandes();
   }, []);
 
+  const selectType = (type: RequestType) => {
+    setRequestType(type);
+    setDescription("");
+    setFiles([]);
+    setError("");
+    setSuccess("");
+  };
+
+  const handleFileChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const selectedFiles = Array.from(event.target.files ?? []);
+    const validFiles: File[] = [];
+    const errors: string[] = [];
+
+    for (const file of selectedFiles) {
+      if (file.size > 10 * 1024 * 1024) {
+        errors.push(`"${file.name}" dépasse 10 Mo.`);
+        continue;
+      }
+
+      if (
+        !["application/pdf", "image/jpeg", "image/png"].includes(
+          file.type
+        )
+      ) {
+        errors.push(`Format non autorisé : "${file.name}".`);
+        continue;
+      }
+
+      validFiles.push(file);
+    }
+
+    setFiles(validFiles);
+    setError(errors.join(" "));
+  };
+
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -54,12 +146,25 @@ export default function DemandesPage() {
     setSuccess("");
 
     try {
+      const title = selectedType.title;
+
+      const fullDescription = [
+        `Type de demande : ${selectedType.label}`,
+        "",
+        description.trim(),
+      ]
+        .filter(Boolean)
+        .join("\n");
+
       const response = await fetch("/api/demandes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, description }),
+        body: JSON.stringify({
+          title,
+          description: fullDescription,
+        }),
       });
 
       const data = await response.json();
@@ -69,15 +174,60 @@ export default function DemandesPage() {
         return;
       }
 
-      setSuccess("Votre demande a été créée avec succès.");
-      setTitle("");
+      const demandeId = data.demande?.id;
+
+      if (!demandeId) {
+        setError(
+          "La demande a été créée mais son identifiant est introuvable."
+        );
+        return;
+      }
+
+      if (files.length > 0) {
+        setUploading(true);
+
+        for (const file of files) {
+          const formData = new FormData();
+
+          formData.append("demandeId", String(demandeId));
+          formData.append("file", file);
+
+          const uploadResponse = await fetch(
+            "/api/demandes/upload",
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+
+          const uploadData = await uploadResponse.json();
+
+          if (!uploadResponse.ok) {
+            throw new Error(
+              uploadData.message ||
+                `Impossible d'envoyer ${file.name}.`
+            );
+          }
+        }
+      }
+
+      setSuccess(
+        "Votre demande et vos documents ont été envoyés avec succès."
+      );
       setDescription("");
+      setFiles([]);
       setShowForm(false);
+
       await loadDemandes();
-    } catch {
-      setError("Impossible de contacter le serveur.");
+    } catch (submitError) {
+      setError(
+        submitError instanceof Error
+          ? submitError.message
+          : "Une erreur est survenue."
+      );
     } finally {
       setSubmitting(false);
+      setUploading(false);
     }
   };
 
@@ -130,39 +280,132 @@ export default function DemandesPage() {
             borderRadius: "10px",
           }}
         >
-          <h2
+          <span
             style={{
-              margin: "0 0 20px",
-              color: "var(--navy)",
-              fontSize: "28px",
+              display: "block",
+              marginBottom: "8px",
+              color: "var(--blue)",
+              fontSize: "10px",
+              fontWeight: 800,
+              letterSpacing: "2px",
             }}
           >
-            Nouvelle demande
+            NOUVELLE DEMANDE
+          </span>
+
+          <h2
+            style={{
+              margin: "0 0 24px",
+              color: "var(--navy)",
+              fontSize: "30px",
+            }}
+          >
+            Quelle demande souhaitez-vous effectuer ?
           </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns:
+                "repeat(3, minmax(0, 1fr))",
+              gap: "10px",
+              marginBottom: "28px",
+            }}
+          >
+            {requestTypes.map((item) => {
+              const active = item.id === requestType;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => selectType(item.id)}
+                  style={{
+                    minHeight: "52px",
+                    padding: "12px 16px",
+                    border: active
+                      ? "1px solid var(--green)"
+                      : "1px solid var(--blue)",
+                    background: active
+                      ? "var(--green)"
+                      : "#fff",
+                    color: active
+                      ? "#fff"
+                      : "var(--navy)",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                  }}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <div
+            style={{
+              marginBottom: "24px",
+              padding: "24px",
+              background: "#f4f8fa",
+              border: "1px solid var(--border-light)",
+            }}
+          >
+            <h3
+              style={{
+                margin: "0 0 10px",
+                color: "var(--navy)",
+                fontSize: "22px",
+              }}
+            >
+              {selectedType.title}
+            </h3>
+
+            <p
+              style={{
+                margin: "0 0 18px",
+                color: "var(--muted)",
+                fontSize: "13px",
+                lineHeight: 1.7,
+              }}
+            >
+              {selectedType.intro}
+            </p>
+
+            <strong
+              style={{
+                display: "block",
+                marginBottom: "10px",
+                color: "var(--navy)",
+                fontSize: "12px",
+              }}
+            >
+              Pièces à fournir :
+            </strong>
+
+            <ul
+              style={{
+                margin: 0,
+                paddingLeft: "20px",
+                color: "var(--muted)",
+                fontSize: "13px",
+                lineHeight: 1.8,
+              }}
+            >
+              {selectedType.documents.map(
+                (document, index) => (
+                  <li key={index}>{document}</li>
+                )
+              )}
+            </ul>
+          </div>
 
           <form
             onSubmit={handleSubmit}
-            style={{ display: "grid", gap: "14px" }}
+            style={{
+              display: "grid",
+              gap: "14px",
+            }}
           >
-            <label
-              htmlFor="title"
-              style={{
-                fontSize: "12px",
-                fontWeight: 700,
-                color: "var(--navy)",
-              }}
-            >
-              Titre
-            </label>
-
-            <input
-              id="title"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-              placeholder="Ex. Demande de branchement"
-              required
-            />
-
             <label
               htmlFor="description"
               style={{
@@ -171,25 +414,101 @@ export default function DemandesPage() {
                 color: "var(--navy)",
               }}
             >
-              Description
+              Informations complémentaires
             </label>
 
             <textarea
               id="description"
               value={description}
-              onChange={(event) => setDescription(event.target.value)}
-              placeholder="Décrivez votre demande..."
+              onChange={(event) =>
+                setDescription(event.target.value)
+              }
+              placeholder="Ajoutez les informations utiles à votre demande..."
               rows={6}
-              required
             />
+
+            <div
+              style={{
+                padding: "18px",
+                background: "#f8fbfc",
+                border: "1px dashed #bfd0d8",
+              }}
+            >
+              <strong
+                style={{
+                  display: "block",
+                  marginBottom: "8px",
+                  color: "var(--navy)",
+                  fontSize: "12px",
+                }}
+              >
+                Pièces justificatives
+              </strong>
+
+              <input
+                type="file"
+                multiple
+                accept=".pdf,.jpg,.jpeg,.png"
+                onChange={handleFileChange}
+              />
+
+              <p
+                style={{
+                  margin: "8px 0 0",
+                  color: "var(--muted)",
+                  fontSize: "11px",
+                }}
+              >
+                PDF, JPG ou PNG · 10 Mo maximum par fichier.
+              </p>
+
+              {files.length > 0 && (
+                <div style={{ marginTop: "12px" }}>
+                  {files.map((file) => (
+                    <div
+                      key={`${file.name}-${file.size}`}
+                      style={{
+                        padding: "8px 10px",
+                        marginBottom: "6px",
+                        background: "#fff",
+                        border: "1px solid var(--border-light)",
+                        fontSize: "11px",
+                        color: "var(--navy)",
+                      }}
+                    >
+                      {file.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {error && (
+              <p
+                style={{
+                  margin: 0,
+                  color: "#b42318",
+                  fontSize: "12px",
+                }}
+              >
+                {error}
+              </p>
+            )}
 
             <button
               type="submit"
               className="login-button"
-              disabled={submitting}
+              disabled={submitting || uploading}
             >
-              {submitting ? "Création..." : "Créer la demande"}
-              {!submitting && <span>→</span>}
+              {uploading
+                ? "Envoi des documents..."
+                : submitting
+                  ? "Création..."
+                  : "Envoyer la demande"}
+
+              {!submitting && !uploading && (
+                <span>→</span>
+              )}
             </button>
           </form>
         </section>
@@ -248,7 +567,10 @@ export default function DemandesPage() {
         {!loading && !error && demandes.length > 0 && (
           <section className="dashboard-grid">
             {demandes.map((demande) => (
-              <article className="request-card" key={demande.id}>
+              <article
+                className="request-card"
+                key={demande.id}
+              >
                 <div className="request-card-top">
                   <div className="request-index">
                     #{String(demande.id).padStart(2, "0")}
@@ -267,10 +589,11 @@ export default function DemandesPage() {
                 </div>
 
                 <div className="request-card-body">
-                  <span className="request-label">DEMANDE</span>
+                  <span className="request-label">
+                    DEMANDE
+                  </span>
 
                   <h2>{demande.title}</h2>
-
                   <p>{demande.description}</p>
                 </div>
 
@@ -283,13 +606,15 @@ export default function DemandesPage() {
                   <div>
                     <span>DATE DE CRÉATION</span>
                     <strong>
-                      {new Date(demande.createdAt).toLocaleDateString(
-                        "fr-FR"
-                      )}
+                      {new Date(
+                        demande.createdAt
+                      ).toLocaleDateString("fr-FR")}
                     </strong>
                   </div>
 
-                  <span className="request-card-arrow">→</span>
+                  <span className="request-card-arrow">
+                    →
+                  </span>
                 </div>
               </article>
             ))}

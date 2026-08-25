@@ -1,16 +1,13 @@
 ﻿import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/auth/session";
 
 export async function POST(request: Request) {
   try {
-    const cookieStore = await cookies();
-    const session = cookieStore.get("srm_client_session");
+    const user = await getCurrentUser();
 
-    const userId = Number(session?.value);
-
-    if (!Number.isInteger(userId) || userId <= 0) {
+    if (!user) {
       return NextResponse.json(
         {
           success: false,
@@ -39,23 +36,10 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           success: false,
-          message: "Le nouveau mot de passe doit contenir au moins 8 caractères.",
+          message:
+            "Le nouveau mot de passe doit contenir au moins 8 caractères.",
         },
         { status: 400 }
-      );
-    }
-
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-    });
-
-    if (!user) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Utilisateur introuvable.",
-        },
-        { status: 404 }
       );
     }
 
@@ -77,7 +61,9 @@ export async function POST(request: Request) {
     const passwordHash = await bcrypt.hash(newPassword, 12);
 
     await prisma.user.update({
-      where: { id: userId },
+      where: {
+        id: user.id,
+      },
       data: {
         passwordHash,
       },
@@ -88,7 +74,10 @@ export async function POST(request: Request) {
       message: "Mot de passe modifié avec succès.",
     });
   } catch (error) {
-    console.error("POST /api/profile/change-password error:", error);
+    console.error(
+      "POST /api/profile/change-password error:",
+      error
+    );
 
     return NextResponse.json(
       {

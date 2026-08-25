@@ -53,3 +53,6 @@ dev.db
 .agents/
 .claude/
 .windsurf/
+
+# Uploaded client documents
+uploads/

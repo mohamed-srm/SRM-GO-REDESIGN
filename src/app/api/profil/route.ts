@@ -1,15 +1,11 @@
 ﻿import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/auth/session";
 
 export async function GET() {
   try {
-    const cookieStore = await cookies();
-    const session = cookieStore.get("srm_client_session");
+    const user = await getCurrentUser();
 
-    const userId = Number(session?.value);
-
-    if (!Number.isInteger(userId) || userId <= 0) {
+    if (!user) {
       return NextResponse.json(
         {
           success: false,
@@ -19,29 +15,14 @@ export async function GET() {
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        identifier: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
-
-    if (!user) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Utilisateur introuvable.",
-        },
-        { status: 404 }
-      );
-    }
-
     return NextResponse.json({
       success: true,
-      user,
+      user: {
+        id: user.id,
+        identifier: user.identifier,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
     });
   } catch (error) {
     console.error("GET /api/profil error:", error);

@@ -1,24 +1,42 @@
 ﻿import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { prisma } from "@/lib/prisma";
 import crypto from "crypto";
+import { prisma } from "@/lib/prisma";
 
-function getUserId(sessionValue: string | undefined) {
-  const userId = Number(sessionValue);
+async function getCurrentUserId() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("srm_client_session")?.value;
 
-  if (!Number.isInteger(userId) || userId <= 0) {
+  if (!token) {
     return null;
   }
 
-  return userId;
+  const session = await prisma.session.findUnique({
+    where: { token },
+    select: {
+      userId: true,
+      expiresAt: true,
+    },
+  });
+
+  if (!session) {
+    return null;
+  }
+
+  if (session.expiresAt <= new Date()) {
+    await prisma.session.deleteMany({
+      where: { token },
+    });
+
+    return null;
+  }
+
+  return session.userId;
 }
 
 export async function GET() {
   try {
-    const cookieStore = await cookies();
-    const session = cookieStore.get("srm_client_session");
-
-    const userId = getUserId(session?.value);
+    const userId = await getCurrentUserId();
 
     if (!userId) {
       return NextResponse.json(
@@ -31,12 +49,8 @@ export async function GET() {
     }
 
     const reclamations = await prisma.reclamation.findMany({
-      where: {
-        userId,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
+      where: { userId },
+      orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json({
@@ -58,10 +72,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const cookieStore = await cookies();
-    const session = cookieStore.get("srm_client_session");
-
-    const userId = getUserId(session?.value);
+    const userId = await getCurrentUserId();
 
     if (!userId) {
       return NextResponse.json(

@@ -1,5 +1,6 @@
 ﻿import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
@@ -48,6 +49,22 @@ export async function POST(request: Request) {
       );
     }
 
+    const token = crypto.randomBytes(32).toString("hex");
+
+    await prisma.session.deleteMany({
+      where: {
+        userId: user.id,
+      },
+    });
+
+    await prisma.session.create({
+      data: {
+        token,
+        userId: user.id,
+        expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000),
+      },
+    });
+
     const response = NextResponse.json({
       success: true,
       message: "Connexion réussie.",
@@ -55,7 +72,7 @@ export async function POST(request: Request) {
 
     response.cookies.set(
       "srm_client_session",
-      String(user.id),
+      token,
       {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -66,7 +83,9 @@ export async function POST(request: Request) {
     );
 
     return response;
-  } catch {
+  } catch (error) {
+    console.error("POST /api/login error:", error);
+
     return NextResponse.json(
       {
         success: false,

@@ -1,10 +1,12 @@
 ﻿import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
+import { sendPasswordResetEmail } from "@/lib/mail";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
     const identifier = String(body.identifier ?? "").trim();
 
     if (!identifier) {
@@ -18,22 +20,35 @@ export async function POST(request: Request) {
     }
 
     const user = await prisma.user.findUnique({
-      where: { identifier },
+      where: {
+        identifier,
+      },
     });
 
+    // Do not reveal whether the account exists.
     if (!user) {
       return NextResponse.json({
         success: true,
         message:
-          "Si ce compte existe, les instructions de récupération seront disponibles.",
+          "Si un compte correspond à cet identifiant, un email de réinitialisation sera envoyé.",
       });
     }
 
-    const token = crypto.randomBytes(32).toString("hex");
+    if (!user.email) {
+      return NextResponse.json({
+        success: true,
+        message:
+          "Si un compte correspond à cet identifiant, un email de réinitialisation sera envoyé.",
+      });
+    }
 
     await prisma.passwordResetToken.deleteMany({
-      where: { userId: user.id },
+      where: {
+        userId: user.id,
+      },
     });
+
+    const token = crypto.randomBytes(32).toString("hex");
 
     await prisma.passwordResetToken.create({
       data: {
@@ -43,15 +58,22 @@ export async function POST(request: Request) {
       },
     });
 
+    const baseUrl =
+      process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
     const resetUrl =
-      `/espace-client/reset-password?token=${encodeURIComponent(token)}`;
+      `${baseUrl}/espace-client/reset-password?token=${encodeURIComponent(token)}`;
+
+    await sendPasswordResetEmail(user.email, resetUrl);
 
     return NextResponse.json({
       success: true,
-      message: "Demande de récupération créée.",
-      resetUrl,
+      message:
+        "Si un compte correspond à cet identifiant, un email de réinitialisation sera envoyé.",
     });
-  } catch {
+  } catch (error) {
+    console.error("POST /api/forgot-password error:", error);
+
     return NextResponse.json(
       {
         success: false,
