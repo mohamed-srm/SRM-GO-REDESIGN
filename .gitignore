@@ -56,3 +56,9 @@ dev.db
 
 # Uploaded client documents
 uploads/
+
+# Local database backups
+dev_backup_before_postgres.db
+
+# SQLite migration backup
+prisma/migrations_sqlite_backup/
