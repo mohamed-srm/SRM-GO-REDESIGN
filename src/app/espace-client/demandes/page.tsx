@@ -3,6 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+type DemandeFile = {
+  id: number;
+  originalName: string;
+  mimeType: string;
+  size: number;
+};
+
 type Demande = {
   id: number;
   title: string;
@@ -10,6 +17,7 @@ type Demande = {
   status: string;
   reference: string;
   createdAt: string;
+  files: DemandeFile[];
 };
 
 type RequestType = "neuf" | "provisoire" | "compteur";
@@ -595,6 +603,70 @@ export default function DemandesPage() {
 
                   <h2>{demande.title}</h2>
                   <p>{demande.description}</p>
+                  {demande.files?.length > 0 && (
+                    <div
+                      style={{
+                        marginTop: "20px",
+                        paddingTop: "16px",
+                        borderTop: "1px solid var(--border-light)",
+                      }}
+                    >
+                      <span
+                        style={{
+                          display: "block",
+                          marginBottom: "10px",
+                          color: "var(--navy)",
+                          fontSize: "10px",
+                          fontWeight: 800,
+                          letterSpacing: "1.5px",
+                        }}
+                      >
+                        PIÈCES JOINTES
+                      </span>
+
+                      <div
+                        style={{
+                          display: "grid",
+                          gap: "8px",
+                        }}
+                      >
+                        {demande.files.map((file) => (
+                          <a
+                            key={file.id}
+                            href={`/api/demandes/files/${file.id}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              gap: "12px",
+                              padding: "10px 12px",
+                              background: "#f8fbfc",
+                              border: "1px solid var(--border-light)",
+                              color: "var(--navy)",
+                              fontSize: "11px",
+                              textDecoration: "none",
+                            }}
+                          >
+                            <span
+                              style={{
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                whiteSpace: "nowrap",
+                              }}
+                            >
+                              📄 {file.originalName}
+                            </span>
+
+                            <strong style={{ color: "var(--blue)" }}>
+                              Ouvrir →
+                            </strong>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="request-card-meta">
@@ -624,3 +696,4 @@ export default function DemandesPage() {
     </main>
   );
 }
+

@@ -51,6 +51,9 @@ export async function GET() {
     const demandes = await prisma.demande.findMany({
       where: { userId },
       orderBy: { createdAt: "desc" },
+      include: {
+        files: true,
+      },
     });
 
     return NextResponse.json({
@@ -132,3 +135,4 @@ export async function POST(request: Request) {
     );
   }
 }
+
