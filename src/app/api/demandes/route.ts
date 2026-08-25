@@ -2,14 +2,13 @@
 import { cookies } from "next/headers";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
+import { sendPasswordResetEmail } from "@/lib/mail";
 
 async function getCurrentUserId() {
   const cookieStore = await cookies();
   const token = cookieStore.get("srm_client_session")?.value;
 
-  if (!token) {
-    return null;
-  }
+  if (!token) return null;
 
   const session = await prisma.session.findUnique({
     where: { token },
@@ -19,15 +18,7 @@ async function getCurrentUserId() {
     },
   });
 
-  if (!session) {
-    return null;
-  }
-
-  if (session.expiresAt <= new Date()) {
-    await prisma.session.deleteMany({
-      where: { token },
-    });
-
+  if (!session || session.expiresAt <= new Date()) {
     return null;
   }
 
@@ -103,7 +94,10 @@ export async function POST(request: Request) {
     }
 
     const reference =
-      `DEM-${Date.now()}-${crypto.randomBytes(4).toString("hex").toUpperCase()}`;
+      `DEM-${Date.now()}-${crypto
+        .randomBytes(4)
+        .toString("hex")
+        .toUpperCase()}`;
 
     const demande = await prisma.demande.create({
       data: {
@@ -114,6 +108,34 @@ export async function POST(request: Request) {
         reference,
       },
     });
+
+    // Email de confirmation : l'absence d'email ou une erreur SMTP
+    // ne doit pas empêcher la création de la demande.
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+          email: true,
+          fullName: true,
+        },
+      });
+
+      if (user?.email && process.env.SMTP_FROM) {
+        const baseUrl =
+          process.env.NEXT_PUBLIC_APP_URL ||
+          "http://localhost:3000";
+
+        await sendPasswordResetEmail(
+          user.email,
+          `${baseUrl}/espace-client/demandes`
+        );
+      }
+    } catch (emailError) {
+      console.error(
+        "Confirmation email error:",
+        emailError
+      );
+    }
 
     return NextResponse.json(
       {
@@ -135,4 +157,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
