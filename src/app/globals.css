@@ -6639,3 +6639,97 @@ a {
     font-size: 11px;
   }
 }
+/* =====================================================
+   SRM EN CHIFFRES — MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+  .figures-section {
+    padding: 60px 0 70px;
+  }
+
+  .figures-header {
+    width: calc(100% - 32px);
+    margin: 0 auto 30px;
+  }
+
+  .figures-header h2 {
+    font-size: 40px;
+    line-height: 0.98;
+    letter-spacing: -2px;
+  }
+
+  .figures-grid {
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border-light);
+    border-left: 1px solid var(--border-light);
+  }
+
+  .figure-item {
+    min-height: 150px;
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .figure-value {
+    font-size: 42px;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  .figure-label {
+    margin-top: 8px;
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .figures-note {
+    width: calc(100% - 32px);
+    margin: 22px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+
+  .figures-note span {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .figures-section {
+    padding: 50px 0 60px;
+  }
+
+  .figures-header,
+  .figures-grid,
+  .figures-note {
+    width: calc(100% - 28px);
+  }
+
+  .figures-header h2 {
+    font-size: 36px;
+  }
+
+  .figure-item {
+    min-height: 135px;
+    padding: 18px 14px;
+  }
+
+  .figure-value {
+    font-size: 36px;
+  }
+
+  .figure-label {
+    font-size: 9px;
+  }
+}
