@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MobileMenu from "./components/MobileMenu";
+import SiteFooter from "./components/SiteFooter";
 
 export default function Home() {
   const [activeCommunication, setActiveCommunication] = useState(0);
@@ -962,6 +963,9 @@ export default function Home() {
 
       </section>
 
+      <SiteFooter />
     </main>
   );
 }
+
+
