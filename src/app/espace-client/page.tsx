@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -10,36 +10,44 @@ export default function EspaceClientPage() {
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
-    ) => {
+  ) => {
     event.preventDefault();
 
-    const response = await fetch("/api/login", {
+    try {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
-        "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-        identifier,
-        password,
+          identifier: identifier.trim(),
+          password,
         }),
-    });
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
+      if (!response.ok) {
         alert(data.message || "Erreur de connexion.");
         return;
-    }
+      }
 
-    window.location.href = "/espace-client/dashboard";
-    };
+      window.location.href = "/espace-client/dashboard";
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Impossible de contacter le serveur.");
+    }
+  };
 
   return (
     <main className="client-page">
       <div className="client-page__visual">
         <div className="client-page__brand">
           <Link href="/">
-            <img src="/logo-srm.png" alt="SRM Guelmim Oued Noun" />
+            <img
+              src="/logo-srm.png"
+              alt="SRM Guelmim Oued Noun"
+            />
           </Link>
         </div>
 
@@ -53,8 +61,8 @@ export default function EspaceClientPage() {
           </h1>
 
           <p>
-            Accédez à votre espace personnel pour retrouver vos démarches et
-            services.
+            Accédez à votre espace personnel pour retrouver vos
+            démarches et services.
           </p>
         </div>
       </div>
@@ -65,7 +73,9 @@ export default function EspaceClientPage() {
         </Link>
 
         <div className="client-form">
-          <div className="client-form__eyebrow">CONNEXION</div>
+          <div className="client-form__eyebrow">
+            CONNEXION
+          </div>
 
           <h2>Bienvenue</h2>
 
@@ -82,7 +92,9 @@ export default function EspaceClientPage() {
               id="identifier"
               type="text"
               value={identifier}
-              onChange={(event) => setIdentifier(event.target.value)}
+              onChange={(event) =>
+                setIdentifier(event.target.value)
+              }
               placeholder="Votre identifiant"
               autoComplete="username"
               required
@@ -97,7 +109,9 @@ export default function EspaceClientPage() {
                 id="password"
                 type={showPassword ? "text" : "password"}
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) =>
+                  setPassword(event.target.value)
+                }
                 placeholder="Votre mot de passe"
                 autoComplete="current-password"
                 required
@@ -105,11 +119,8 @@ export default function EspaceClientPage() {
 
               <button
                 type="button"
-                onClick={() => setShowPassword((value) => !value)}
-                aria-label={
-                  showPassword
-                    ? "Masquer le mot de passe"
-                    : "Afficher le mot de passe"
+                onClick={() =>
+                  setShowPassword((value) => !value)
                 }
               >
                 {showPassword ? "Masquer" : "Afficher"}
@@ -117,12 +128,36 @@ export default function EspaceClientPage() {
             </div>
 
             <div className="client-form__options">
-                <Link href="/espace-client/forgot-password">
-                    Mot de passe oublié ?
-                </Link>
-             </div>
+              <Link href="/espace-client/forgot-password">
+                Mot de passe oublié ?
+              </Link>
+            </div>
 
-            <button type="submit" className="client-form__submit">
+            <div
+              style={{
+                marginTop: "18px",
+                textAlign: "center",
+                fontSize: "13px",
+              }}
+            >
+              <span style={{ color: "var(--muted)" }}>
+                Vous n’avez pas encore de compte ?
+              </span>{" "}
+              <Link
+                href="/espace-client/register"
+                style={{
+                  color: "var(--blue)",
+                  fontWeight: 700,
+                }}
+              >
+                Créer un compte
+              </Link>
+            </div>
+
+            <button
+              type="submit"
+              className="client-form__submit"
+            >
               Se connecter
               <span>→</span>
             </button>
@@ -130,7 +165,10 @@ export default function EspaceClientPage() {
 
           <div className="client-form__help">
             <span>Besoin d'aide ?</span>
-            <a href="tel:0800002026">08 00 00 20 26</a>
+
+            <a href="tel:0800002026">
+              08 00 00 20 26
+            </a>
           </div>
         </div>
       </div>
