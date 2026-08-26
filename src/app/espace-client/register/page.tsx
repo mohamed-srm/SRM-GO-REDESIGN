@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -16,6 +17,146 @@ export default function RegisterPage() {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const { language } = useLanguage();
+
+  const t = {
+    visualEyebrow:
+      language === "ar"
+        ? "فضاء الزبون"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "ESPACE CLIENT",
+
+    visualTitle1:
+      language === "ar"
+        ? "انضموا إلى"
+        : language === "ber"
+          ? "ⵔⵎⴷ ⴷ"
+          : "Rejoignez votre",
+
+    visualTitle2:
+      language === "ar"
+        ? "فضاء الزبون."
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ."
+          : "espace client.",
+
+    visualDescription:
+      language === "ar"
+        ? "أنشئوا حسابكم للوصول إلى طلباتكم وخدماتكم في مكان واحد."
+        : language === "ber"
+          ? "ⵙⵏⵓⵔⴰⵢ ⵢⴰⵏ ⵓⵙⵏⵓⵔⴰⵢ ⴰⴷ ⵜⵣⵔⵉⴷ ⵉⵙⵏⴰⵙⵏ ⴷ ⵉⵎⵙⵙⵔⵏ."
+          : "Créez votre compte pour retrouver vos démarches, vos demandes et vos services au même endroit.",
+
+    back:
+      language === "ar"
+        ? "← العودة إلى تسجيل الدخول"
+        : language === "ber"
+          ? "← ⵓⵔⴰⵔ ⵙ ⵓⴽⵛⵎ"
+          : "← Retour à la connexion",
+
+    eyebrow:
+      language === "ar"
+        ? "التسجيل"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "INSCRIPTION",
+
+    title:
+      language === "ar"
+        ? "إنشاء حساب"
+        : language === "ber"
+          ? "ⵙⵏⵓⵔⴰⵢ ⵢⴰⵏ ⵓⵙⵏⵓⵔⴰⵢ"
+          : "Créer un compte",
+
+    intro:
+      language === "ar"
+        ? "أنشئوا فضاء الزبون الخاص بكم للوصول إلى خدمات SRM."
+        : language === "ber"
+          ? "ⵙⵏⵓⵔⴰⵢ ⵓⵙⵏⵓⵔⴰⵢ ⵏⵏⴽ ⴰⴼⴰ ⴰⴷ ⵜⵔⵉⴷ ⵉⵎⵙⵙⵔⵏ."
+          : "Créez votre espace client SRM pour accéder à vos services.",
+
+    identifier: language === "ar" ? "معرّف الزبون" : language === "ber" ? "ⴰⵎⵎⴰⵍ" : "Identifiant client",
+    identifierPlaceholder: language === "ar" ? "المعرّف الخاص بكم" : language === "ber" ? "ⴰⵎⵎⴰⵍ ⵏⵏⴽ" : "Votre identifiant",
+
+    fullName: language === "ar" ? "الاسم الكامل" : language === "ber" ? "ⵉⵙⵎ ⵓⵙⴷⵉⵙ" : "Nom complet",
+    fullNamePlaceholder: language === "ar" ? "الاسم والنسب" : language === "ber" ? "ⵉⵙⵎ ⴷ ⵙⵙⵎ" : "Nom et prénom",
+
+    email: language === "ar" ? "البريد الإلكتروني" : language === "ber" ? "ⵉⵎⴰⵢⵍ" : "Adresse e-mail",
+
+    phone: language === "ar" ? "الهاتف" : language === "ber" ? "ⵜⵉⵍⵉⴼⵓⵏ" : "Téléphone",
+
+    address: language === "ar" ? "العنوان" : language === "ber" ? "ⵜⴰⵏ⎺ⵎⵎⵉⵔⵜ" : "Adresse",
+
+    addressPlaceholder: language === "ar" ? "عنوانكم" : language === "ber" ? "ⵜⴰⵏⵎⵎⵉⵔⵜ ⵏⵏⴽ" : "Votre adresse",
+
+    password: language === "ar" ? "كلمة المرور" : language === "ber" ? "ⵜⴰⵔⵔⴰⵙⵜ" : "Mot de passe",
+
+    passwordPlaceholder: language === "ar" ? "8 أحرف على الأقل" : language === "ber" ? "ⵎⴰⵔⵔⴰ 8 ⵏ ⵉⵙⴽⴽⵉⵍⵏ" : "Minimum 8 caractères",
+
+    confirmPassword:
+      language === "ar"
+        ? "تأكيد كلمة المرور"
+        : language === "ber"
+          ? "ⵙⵙⵏ ⵜⴰⵔⵔⴰⵙⵜ"
+          : "Confirmer le mot de passe",
+
+    confirmPasswordPlaceholder:
+      language === "ar"
+        ? "أعيدوا كتابة كلمة المرور"
+        : language === "ber"
+          ? "ⴰⵍⵙ ⵓⵔⴰⵔ ⵜⴰⵔⵔⴰⵙⵜ"
+          : "Répétez le mot de passe",
+
+    creating:
+      language === "ar"
+        ? "جاري الإنشاء..."
+        : language === "ber"
+          ? "ⵉⵜⵜⵡⴰⵙⵏⵓⵔⴰⵢ..."
+          : "Création...",
+
+    create:
+      language === "ar"
+        ? "إنشاء حسابي"
+        : language === "ber"
+          ? "ⵙⵏⵓⵔⴰⵢ ⵓⵙⵏⵓⵔⴰⵢ"
+          : "Créer mon compte",
+
+    mismatch:
+      language === "ar"
+        ? "كلمتا المرور غير متطابقتين."
+        : language === "ber"
+          ? "ⵜⵉⵔⵔⴰⵙⵉⵏ ⵓⵔ ⵎⵎⵉⴷⵏⵜ."
+          : "Les mots de passe ne correspondent pas.",
+
+    createError:
+      language === "ar"
+        ? "تعذر إنشاء الحساب."
+        : language === "ber"
+          ? "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵙⵏⵓⵔⴰⵢ ⵓⵙⵏⵓⵔⴰⵢ."
+          : "Impossible de créer le compte.",
+
+    serverError:
+      language === "ar"
+        ? "تعذر الاتصال بالخادم."
+        : language === "ber"
+          ? "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵏⵙⵙⵏ ⴷ ⵓⵙⵏⵓⵔ."
+          : "Impossible de contacter le serveur.",
+
+    already:
+      language === "ar"
+        ? "لديكم حساب بالفعل؟"
+        : language === "ber"
+          ? "ⵉⵙ ⵖⵓⵔⴽ ⵢⴰⵏ ⵓⵙⵏⵓⵔⴰⵢ?"
+          : "Vous avez déjà un compte ?",
+
+    login:
+      language === "ar"
+        ? "تسجيل الدخول"
+        : language === "ber"
+          ? "ⴽⵛⵎ"
+          : "Se connecter",
+  };
 
   const update = (
     key: keyof typeof form,
@@ -36,7 +177,7 @@ export default function RegisterPage() {
     setMessage("");
 
     if (form.password !== form.confirmPassword) {
-      setMessage("Les mots de passe ne correspondent pas.");
+      setMessage(t.mismatch);
       setLoading(false);
       return;
     }
@@ -53,15 +194,13 @@ export default function RegisterPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setMessage(
-          data.message || "Impossible de créer le compte."
-        );
+        setMessage(data.message || t.createError);
         return;
       }
 
       window.location.href = "/espace-client";
     } catch {
-      setMessage("Impossible de contacter le serveur.");
+      setMessage(t.serverError);
     } finally {
       setLoading(false);
     }
@@ -80,18 +219,15 @@ export default function RegisterPage() {
         </div>
 
         <div className="client-page__visual-content">
-          <span>ESPACE CLIENT</span>
+          <span>{t.visualEyebrow}</span>
 
           <h1>
-            Rejoignez votre
+            {t.visualTitle1}
             <br />
-            <strong>espace client.</strong>
+            <strong>{t.visualTitle2}</strong>
           </h1>
 
-          <p>
-            Créez votre compte pour retrouver vos démarches,
-            vos demandes et vos services au même endroit.
-          </p>
+          <p>{t.visualDescription}</p>
         </div>
       </div>
 
@@ -100,23 +236,23 @@ export default function RegisterPage() {
           href="/espace-client"
           className="client-page__back"
         >
-          ← Retour à la connexion
+          {t.back}
         </Link>
 
         <div className="client-form">
           <div className="client-form__eyebrow">
-            INSCRIPTION
+            {t.eyebrow}
           </div>
 
-          <h2>Créer un compte</h2>
+          <h2>{t.title}</h2>
 
           <p className="client-form__intro">
-            Créez votre espace client SRM pour accéder à vos services.
+            {t.intro}
           </p>
 
           <form onSubmit={handleSubmit}>
             <label htmlFor="identifier">
-              Identifiant client
+              {t.identifier}
             </label>
 
             <input
@@ -126,13 +262,13 @@ export default function RegisterPage() {
               onChange={(event) =>
                 update("identifier", event.target.value)
               }
-              placeholder="Votre identifiant"
+              placeholder={t.identifierPlaceholder}
               autoComplete="username"
               required
             />
 
             <label htmlFor="fullName">
-              Nom complet
+              {t.fullName}
             </label>
 
             <input
@@ -142,12 +278,12 @@ export default function RegisterPage() {
               onChange={(event) =>
                 update("fullName", event.target.value)
               }
-              placeholder="Nom et prénom"
+              placeholder={t.fullNamePlaceholder}
               required
             />
 
             <label htmlFor="email">
-              Adresse e-mail
+              {t.email}
             </label>
 
             <input
@@ -163,7 +299,7 @@ export default function RegisterPage() {
             />
 
             <label htmlFor="phone">
-              Téléphone
+              {t.phone}
             </label>
 
             <input
@@ -178,7 +314,7 @@ export default function RegisterPage() {
             />
 
             <label htmlFor="address">
-              Adresse
+              {t.address}
             </label>
 
             <input
@@ -188,12 +324,12 @@ export default function RegisterPage() {
               onChange={(event) =>
                 update("address", event.target.value)
               }
-              placeholder="Votre adresse"
+              placeholder={t.addressPlaceholder}
               autoComplete="street-address"
             />
 
             <label htmlFor="password">
-              Mot de passe
+              {t.password}
             </label>
 
             <input
@@ -203,14 +339,14 @@ export default function RegisterPage() {
               onChange={(event) =>
                 update("password", event.target.value)
               }
-              placeholder="Minimum 8 caractères"
+              placeholder={t.passwordPlaceholder}
               autoComplete="new-password"
               minLength={8}
               required
             />
 
             <label htmlFor="confirmPassword">
-              Confirmer le mot de passe
+              {t.confirmPassword}
             </label>
 
             <input
@@ -218,12 +354,9 @@ export default function RegisterPage() {
               type="password"
               value={form.confirmPassword}
               onChange={(event) =>
-                update(
-                  "confirmPassword",
-                  event.target.value
-                )
+                update("confirmPassword", event.target.value)
               }
-              placeholder="Répétez le mot de passe"
+              placeholder={t.confirmPasswordPlaceholder}
               autoComplete="new-password"
               minLength={8}
               required
@@ -234,10 +367,7 @@ export default function RegisterPage() {
               className="client-form__submit"
               disabled={loading}
             >
-              {loading
-                ? "Création..."
-                : "Créer mon compte"}
-
+              {loading ? t.creating : t.create}
               {!loading && <span>→</span>}
             </button>
           </form>
@@ -256,10 +386,10 @@ export default function RegisterPage() {
           )}
 
           <div className="client-form__help">
-            <span>Vous avez déjà un compte ?</span>
+            <span>{t.already}</span>
 
             <Link href="/espace-client">
-              Se connecter
+              {t.login}
             </Link>
           </div>
         </div>
@@ -267,4 +397,3 @@ export default function RegisterPage() {
     </main>
   );
 }
-
