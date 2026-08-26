@@ -68,7 +68,118 @@ const requestTypes = [
   },
 ];
 
+const translations = {
+  fr: {
+    client: "ESPACE CLIENT",
+    title: "Mes demandes.",
+    intro: "Retrouvez ici le suivi de vos demandes auprès de la SRM.",
+    back: "← Retour au dashboard",
+    close: "Fermer",
+    newRequest: "Nouvelle demande",
+    newEyebrow: "NOUVELLE DEMANDE",
+    choose: "Quelle demande souhaitez-vous effectuer ?",
+    documents: "Pièces à fournir :",
+    extra: "Informations complémentaires",
+    extraPlaceholder: "Ajoutez les informations utiles à votre demande...",
+    attachments: "Pièces justificatives",
+    formats: "PDF, JPG ou PNG · 10 Mo maximum par fichier.",
+    sendingFiles: "Envoi des documents...",
+    creating: "Création...",
+    send: "Envoyer la demande",
+    success: "Votre demande et vos documents ont été envoyés avec succès.",
+    loading: "Chargement...",
+    loadingText: "Nous récupérons vos demandes.",
+    errorTitle: "Une erreur est survenue",
+    empty: "Aucune demande",
+    emptyText: "Vous n’avez encore aucune demande enregistrée dans votre espace.",
+    request: "DEMANDE",
+    attachmentsLabel: "PIÈCES JOINTES",
+    open: "Ouvrir →",
+    reference: "RÉFÉRENCE",
+    created: "DATE DE CRÉATION",
+    typeError: "Format non autorisé",
+    sizeError: "dépasse 10 Mo.",
+    missingId: "La demande a été créée mais son identifiant est introuvable.",
+    serverError: "Une erreur est survenue.",
+    noContact: "Impossible de contacter le serveur.",
+    uploadError: "Impossible d'envoyer",
+  },
+  ar: {
+    client: "فضاء الزبون",
+    title: "طلباتي.",
+    intro: "تتبعوا هنا طلباتكم لدى الشركة الجهوية متعددة الخدمات.",
+    back: "← العودة إلى لوحة التحكم",
+    close: "إغلاق",
+    newRequest: "طلب جديد",
+    newEyebrow: "طلب جديد",
+    choose: "ما هو الطلب الذي ترغبون في تقديمه؟",
+    documents: "الوثائق المطلوبة:",
+    extra: "معلومات إضافية",
+    extraPlaceholder: "أضيفوا المعلومات المفيدة لطلبكم...",
+    attachments: "الوثائق الداعمة",
+    formats: "PDF أو JPG أو PNG · 10 ميغابايت كحد أقصى لكل ملف.",
+    sendingFiles: "جارٍ إرسال الوثائق...",
+    creating: "جارٍ الإنشاء...",
+    send: "إرسال الطلب",
+    success: "تم إرسال طلبكم ووثائقكم بنجاح.",
+    loading: "جارٍ التحميل...",
+    loadingText: "نسترجع طلباتكم.",
+    errorTitle: "حدث خطأ",
+    empty: "لا توجد طلبات",
+    emptyText: "ليس لديكم أي طلب مسجل في فضائكم بعد.",
+    request: "الطلب",
+    attachmentsLabel: "الوثائق المرفقة",
+    open: "فتح ←",
+    reference: "المرجع",
+    created: "تاريخ الإنشاء",
+    typeError: "الصيغة غير مسموح بها",
+    sizeError: "يتجاوز 10 ميغابايت.",
+    missingId: "تم إنشاء الطلب لكن معرّفه غير متوفر.",
+    serverError: "حدث خطأ.",
+    noContact: "تعذر الاتصال بالخادم.",
+    uploadError: "تعذر إرسال",
+  },
+  ber: {
+    client: "ⴰⵙⵏⵓⵔⴰⵢ",
+    title: "ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ.",
+    intro: "ⵙⵙⵏ ⴷⴰ ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ ⵙⵔ ⵙⵔⵎ.",
+    back: "← ⵓⵔⴰⵔ ⵙ ⵍⵓⵃⴰ",
+    close: "ⵎⵎⵏ",
+    newRequest: "ⵉⵙⵏⴰⵙ ⴰⵎⴰⵢⵏⵓ",
+    newEyebrow: "ⵉⵙⵏⴰⵙ ⴰⵎⴰⵢⵏⵓ",
+    choose: "ⵎⴰ ⵜⵙⵙⵏⴷ ⴰⴷ ⵜⵙⵙⵏⴷ?",
+    documents: "ⵉⵙⴽⴽⴰ ⵏ ⵓⵙⵏⵓⵔⴰⵢ:",
+    extra: "ⵉⵎⵙⵙⵏ ⵉⵎⵙⵙⵉ",
+    extraPlaceholder: "ⴰⵔⴰ ⵉⵎⵙⵙⵏ ⵏ ⵓⵙⵏⵓⵔⴰⵢ...",
+    attachments: "ⵉⵎⴰⵙⵙⴰ",
+    formats: "PDF, JPG ⵏⵉⵖ PNG · 10 Mo ⵎⴰⵣⵉⵖ ⵏ ⵢⴰⵏ ⵓⴼⴰⵢⵍ.",
+    sendingFiles: "ⴰⵣⵏ ⵏ ⵉⵎⴰⵙⵙⴰ...",
+    creating: "ⵉⵜⵜⵡⴰⵙⵏⵓⵔⴰⵢ...",
+    send: "ⴰⵣⵏ ⵉⵙⵏⴰⵙ",
+    success: "ⵉⵜⵜⵓⵣⵏ ⵉⵙⵏⴰⵙ ⴷ ⵉⵎⴰⵙⵙⴰ ⵙ ⵓⵙⵏⴼⵍ.",
+    loading: "ⵉⵜⵜⵡⴰⵙⵙⵏ...",
+    loadingText: "ⵏⵙⵙⵏ ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ.",
+    errorTitle: "ⵉⵎⴰⵏ ⵉⵎⵎⵓⵜⵏ",
+    empty: "ⵓⵔ ⵖⵓⵔⴽ ⵉⵙⵏⴰⵙⵏ",
+    emptyText: "ⵓⵔ ⵖⵓⵔⴽ ⵢⴰⵏ ⵉⵙⵏⴰⵙ ⵎⵙⵙⵏ.",
+    request: "ⵉⵙⵏⴰⵙ",
+    attachmentsLabel: "ⵉⵎⴰⵙⵙⴰ",
+    open: "ⵔⵥ →",
+    reference: "ⴰⵙⵏⴼⵍ",
+    created: "ⴰⵣⵎⵣ ⵏ ⵓⵙⵏⵓⵔⴰⵢ",
+    typeError: "ⵜⵉⵙⵏⵓⵔⴰⵢ ⵓⵔ ⵜⵜⵡⴰⵔⵔⴰ",
+    sizeError: "ⵜⴰⴼⴰⵢⵜ ⵜⵣⵣⵔ 10 Mo.",
+    missingId: "ⵉⵜⵜⵡⴰⵙⵏⵓⵔⴰⵢ ⵉⵙⵏⴰⵙ ⵎⴰⵛⴰ ⵓⵔ ⵉⵍⵉ ⵓⵎⵎⴰⵍ.",
+    serverError: "ⵉⵎⴰⵏ ⵉⵎⵎⵓⵜⵏ.",
+    noContact: "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵏⵙⵙⵏ ⴷ ⵓⵙⵏⵓⵔ.",
+    uploadError: "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵏⴰⵣⵏ",
+  },
+} as const;
+
 export default function DemandesPage() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [demandes, setDemandes] = useState<Demande[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -76,18 +187,78 @@ export default function DemandesPage() {
   const [showForm, setShowForm] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
-  const [requestType, setRequestType] =
-    useState<RequestType>("neuf");
+  const [requestType, setRequestType] = useState<RequestType>("neuf");
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState<File[]>([]);
-  const { language } = useLanguage();
 
-  const tr = (fr: string, ar: string, ber: string) =>
-    language === "ar" ? ar : language === "ber" ? ber : fr;
   const selectedType =
     requestTypes.find((item) => item.id === requestType) ??
     requestTypes[0];
+
+  const localizedType =
+    language === "ar"
+      ? {
+          label:
+            requestType === "neuf"
+              ? "ربط جديد"
+              : requestType === "provisoire"
+                ? "ربط مؤقت"
+                : "إضافة عداد",
+          title:
+            requestType === "neuf"
+              ? "طلب ربط جديد"
+              : requestType === "provisoire"
+                ? "طلب ربط مؤقت"
+                : "إضافة عداد جديد",
+          intro:
+            requestType === "neuf"
+              ? "بالنسبة لطلب ربط جديد بالماء والتطهير السائل والكهرباء، يرجى التوجه إلى وكالات SRM-GO مصحوبين بالوثائق التالية:"
+              : requestType === "provisoire"
+                ? "بالنسبة لطلب ربط مؤقت، يرجى التوجه إلى وكالات SRM-GO مصحوبين بالوثائق التالية:"
+                : "بالنسبة لإضافة عداد جديد، يرجى الإدلاء بالوثائق التالية:",
+          documents:
+            requestType === "neuf"
+              ? [
+                  "استمارة طلب الربط مملوءة.",
+                  "نسخة من بطاقة التعريف الوطنية أو بطاقة الإقامة أو جواز السفر للأشخاص الذاتيين.",
+                  "نسخة من النظام الأساسي ومستخرج السجل التجاري وICE وبطاقة تعريف المسير للأشخاص المعنويين.",
+                  "نسخة من سند الملكية أو أي وثيقة تثبت الملكية.",
+                  "نسخة من تصاميم البناء المصادق عليها.",
+                  "نسخة من رخصة البناء.",
+                  "نسخة من الترخيص الخاص الصادر عن السلطة المختصة عند عدم توفر رخصة البناء والتصاميم.",
+                ]
+              : requestType === "provisoire"
+                ? [
+                    "طلب ربط مؤقت يحدد طبيعة الأشغال والعنوان ومدة الربط.",
+                    "ترخيص المالك موقع ومصادق عليه.",
+                    "نسخة من بطاقة التعريف الوطنية.",
+                    "نسخة مصادق عليها من عقد الملكية.",
+                  ]
+                : [
+                    "نسخة من بطاقة التعريف الوطنية.",
+                    "نسخة من سند الملكية.",
+                    "نسخة من التصاميم التعديلية المصادق عليها.",
+                    "وصل أداء التقدير الأولي.",
+                  ],
+        }
+      : language === "ber"
+        ? {
+            label:
+              requestType === "neuf"
+                ? "ⴰⵙⵏⵓⵔⴰⵢ ⴰⵎⴰⵢⵏⵓ"
+                : requestType === "provisoire"
+                  ? "ⴰⵙⵏⵓⵔⴰⵢ ⵓⵎⵉⵣ"
+                  : "ⴰⵔⴰⵎ ⵏ ⵓⵎⴰⵣⵉⵔ",
+            title: selectedType.title,
+            intro: selectedType.intro,
+            documents: selectedType.documents,
+          }
+        : {
+            label: selectedType.label,
+            title: selectedType.title,
+            intro: selectedType.intro,
+            documents: selectedType.documents,
+          };
 
   const loadDemandes = async () => {
     try {
@@ -95,13 +266,13 @@ export default function DemandesPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || "Impossible de charger vos demandes.");
+        setError(data.message || t.noContact);
         return;
       }
 
       setDemandes(data.demandes || []);
     } catch {
-      setError("Impossible de contacter le serveur.");
+      setError(t.noContact);
     } finally {
       setLoading(false);
     }
@@ -128,7 +299,7 @@ export default function DemandesPage() {
 
     for (const file of selectedFiles) {
       if (file.size > 10 * 1024 * 1024) {
-        errors.push(`"${file.name}" dépasse 10 Mo.`);
+        errors.push(`"${file.name}" ${t.sizeError}`);
         continue;
       }
 
@@ -137,7 +308,7 @@ export default function DemandesPage() {
           file.type
         )
       ) {
-        errors.push(`Format non autorisé : "${file.name}".`);
+        errors.push(`${t.typeError} : "${file.name}".`);
         continue;
       }
 
@@ -182,16 +353,14 @@ export default function DemandesPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || "Impossible de créer la demande.");
+        setError(data.message || t.serverError);
         return;
       }
 
       const demandeId = data.demande?.id;
 
       if (!demandeId) {
-        setError(
-          "La demande a été créée mais son identifiant est introuvable."
-        );
+        setError(t.missingId);
         return;
       }
 
@@ -200,7 +369,6 @@ export default function DemandesPage() {
 
         for (const file of files) {
           const formData = new FormData();
-
           formData.append("demandeId", String(demandeId));
           formData.append("file", file);
 
@@ -212,20 +380,25 @@ export default function DemandesPage() {
             }
           );
 
-          const uploadData = await uploadResponse.json();
+          const uploadText = await uploadResponse.text();
+          let uploadData: { message?: string } = {};
+
+          try {
+            uploadData = uploadText ? JSON.parse(uploadText) : {};
+          } catch {
+            uploadData = {};
+          }
 
           if (!uploadResponse.ok) {
             throw new Error(
               uploadData.message ||
-                `Impossible d'envoyer ${file.name}.`
+                `${t.uploadError} ${file.name}.`
             );
           }
         }
       }
 
-      setSuccess(
-        "Votre demande et vos documents ont été envoyés avec succès."
-      );
+      setSuccess(t.success);
       setDescription("");
       setFiles([]);
       setShowForm(false);
@@ -235,7 +408,7 @@ export default function DemandesPage() {
       setError(
         submitError instanceof Error
           ? submitError.message
-          : "Une erreur est survenue."
+          : t.serverError
       );
     } finally {
       setSubmitting(false);
@@ -247,18 +420,16 @@ export default function DemandesPage() {
     <main className="dashboard-page">
       <div className="dashboard-header">
         <div>
-          <span className="dashboard-label">{tr("ESPACE CLIENT","فضاء الزبون","ⴰⵙⵏⵓⵔⴰⵢ")}</span>
-          <h1>{tr("Mes demandes.","طلباتي.","ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ.")}</h1>
-          <p>
-            {tr("Retrouvez ici le suivi de vos demandes auprès de la SRM.","تتبعوا هنا طلباتكم لدى الشركة الجهوية متعددة الخدمات.","ⵙⵙⵏ ⴷⴰ ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ ⵙⴳ SRM.")}
-          </p>
+          <span className="dashboard-label">{t.client}</span>
+          <h1>{t.title}</h1>
+          <p>{t.intro}</p>
         </div>
 
         <Link
           href="/espace-client/dashboard"
           className="dashboard-back"
         >
-          {tr("← Retour au dashboard","← العودة إلى لوحة التحكم","← ⵓⵔⴰⵔ ⵙ ⵍⵓⵃⴰ ⵏ ⵓⵙⵏⵓⵔⴰⵢ")}
+          {t.back}
         </Link>
       </div>
 
@@ -277,7 +448,7 @@ export default function DemandesPage() {
             setSuccess("");
           }}
         >
-          {showForm ? tr("Fermer","إغلاق","ⵎⵎⵏ") : tr("Nouvelle demande","طلب جديد","ⵉⵙⵏⴰⵙ ⴰⵎⴰⵢⵏⵓ")}
+          {showForm ? t.close : t.newRequest}
         </button>
       </div>
 
@@ -302,7 +473,7 @@ export default function DemandesPage() {
               letterSpacing: "2px",
             }}
           >
-            NOUVELLE DEMANDE
+            {t.newEyebrow}
           </span>
 
           <h2
@@ -312,14 +483,13 @@ export default function DemandesPage() {
               fontSize: "30px",
             }}
           >
-            Quelle demande souhaitez-vous effectuer ?
+            {t.choose}
           </h2>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns:
-                "repeat(3, minmax(0, 1fr))",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
               gap: "10px",
               marginBottom: "28px",
             }}
@@ -348,7 +518,19 @@ export default function DemandesPage() {
                     cursor: "pointer",
                   }}
                 >
-                  {item.label}
+                  {language === "ar"
+                    ? item.id === "neuf"
+                      ? "ربط جديد"
+                      : item.id === "provisoire"
+                        ? "ربط مؤقت"
+                        : "إضافة عداد"
+                    : language === "ber"
+                      ? item.id === "neuf"
+                        ? "ⴰⵙⵏⵓⵔⴰⵢ ⴰⵎⴰⵢⵏⵓ"
+                        : item.id === "provisoire"
+                          ? "ⴰⵙⵏⵓⵔⴰⵢ ⵓⵎⵉⵣ"
+                          : "ⴰⵔⴰⵎ ⵏ ⵓⵎⴰⵣⵉⵔ"
+                      : item.label}
                 </button>
               );
             })}
@@ -369,7 +551,7 @@ export default function DemandesPage() {
                 fontSize: "22px",
               }}
             >
-              {selectedType.title}
+              {localizedType.title}
             </h3>
 
             <p
@@ -380,7 +562,7 @@ export default function DemandesPage() {
                 lineHeight: 1.7,
               }}
             >
-              {selectedType.intro}
+              {localizedType.intro}
             </p>
 
             <strong
@@ -391,7 +573,7 @@ export default function DemandesPage() {
                 fontSize: "12px",
               }}
             >
-              Pièces à fournir :
+              {t.documents}
             </strong>
 
             <ul
@@ -403,7 +585,7 @@ export default function DemandesPage() {
                 lineHeight: 1.8,
               }}
             >
-              {selectedType.documents.map(
+              {localizedType.documents.map(
                 (document, index) => (
                   <li key={index}>{document}</li>
                 )
@@ -426,7 +608,7 @@ export default function DemandesPage() {
                 color: "var(--navy)",
               }}
             >
-              Informations complémentaires
+              {t.extra}
             </label>
 
             <textarea
@@ -435,7 +617,7 @@ export default function DemandesPage() {
               onChange={(event) =>
                 setDescription(event.target.value)
               }
-              placeholder="Ajoutez les informations utiles à votre demande..."
+              placeholder={t.extraPlaceholder}
               rows={6}
             />
 
@@ -454,7 +636,7 @@ export default function DemandesPage() {
                   fontSize: "12px",
                 }}
               >
-                Pièces justificatives
+                {t.attachments}
               </strong>
 
               <input
@@ -471,7 +653,7 @@ export default function DemandesPage() {
                   fontSize: "11px",
                 }}
               >
-                PDF, JPG ou PNG · 10 Mo maximum par fichier.
+                {t.formats}
               </p>
 
               {files.length > 0 && (
@@ -513,10 +695,10 @@ export default function DemandesPage() {
               disabled={submitting || uploading}
             >
               {uploading
-                ? "Envoi des documents..."
+                ? t.sendingFiles
                 : submitting
-                  ? "Création..."
-                  : "Envoyer la demande"}
+                  ? t.creating
+                  : t.send}
 
               {!submitting && !uploading && (
                 <span>→</span>
@@ -548,8 +730,8 @@ export default function DemandesPage() {
         {loading && (
           <section className="dashboard-grid">
             <div className="dashboard-card">
-              <h2>Chargement...</h2>
-              <p>Nous récupérons vos demandes.</p>
+              <h2>{t.loading}</h2>
+              <p>{t.loadingText}</p>
             </div>
           </section>
         )}
@@ -557,7 +739,7 @@ export default function DemandesPage() {
         {!loading && error && (
           <section className="dashboard-grid">
             <div className="dashboard-card">
-              <h2>Une erreur est survenue</h2>
+              <h2>{t.errorTitle}</h2>
               <p>{error}</p>
             </div>
           </section>
@@ -567,11 +749,8 @@ export default function DemandesPage() {
           <section className="dashboard-grid">
             <div className="dashboard-card dashboard-card--blue">
               <span className="dashboard-card__number">01</span>
-              <h2>Aucune demande</h2>
-              <p>
-                Vous n’avez encore aucune demande enregistrée dans votre
-                espace.
-              </p>
+              <h2>{t.empty}</h2>
+              <p>{t.emptyText}</p>
             </div>
           </section>
         )}
@@ -602,11 +781,12 @@ export default function DemandesPage() {
 
                 <div className="request-card-body">
                   <span className="request-label">
-                    DEMANDE
+                    {t.request}
                   </span>
 
                   <h2>{demande.title}</h2>
                   <p>{demande.description}</p>
+
                   {demande.files?.length > 0 && (
                     <div
                       style={{
@@ -625,7 +805,7 @@ export default function DemandesPage() {
                           letterSpacing: "1.5px",
                         }}
                       >
-                        PIÈCES JOINTES
+                        {t.attachmentsLabel}
                       </span>
 
                       <div
@@ -663,8 +843,12 @@ export default function DemandesPage() {
                               📄 {file.originalName}
                             </span>
 
-                            <strong style={{ color: "var(--blue)" }}>
-                              Ouvrir →
+                            <strong
+                              style={{
+                                color: "var(--blue)",
+                              }}
+                            >
+                              {t.open}
                             </strong>
                           </a>
                         ))}
@@ -675,16 +859,22 @@ export default function DemandesPage() {
 
                 <div className="request-card-meta">
                   <div>
-                    <span>RÉFÉRENCE</span>
+                    <span>{t.reference}</span>
                     <strong>{demande.reference}</strong>
                   </div>
 
                   <div>
-                    <span>DATE DE CRÉATION</span>
+                    <span>{t.created}</span>
                     <strong>
                       {new Date(
                         demande.createdAt
-                      ).toLocaleDateString("fr-FR")}
+                      ).toLocaleDateString(
+                        language === "ar"
+                          ? "ar-MA"
+                          : language === "ber"
+                            ? "fr-FR"
+                            : "fr-FR"
+                      )}
                     </strong>
                   </div>
 
@@ -700,7 +890,3 @@ export default function DemandesPage() {
     </main>
   );
 }
-
-
-
-
