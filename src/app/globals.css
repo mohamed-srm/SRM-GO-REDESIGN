@@ -7640,3 +7640,6 @@ textarea::placeholder {
   margin-left: auto !important;
 }
 
+
+.brand-hours{margin-top:2px;margin-left:2px;color:var(--muted);font-size:10px;font-weight:600;white-space:nowrap}
+
