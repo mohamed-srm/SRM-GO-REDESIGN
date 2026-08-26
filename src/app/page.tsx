@@ -112,7 +112,7 @@ export default function Home() {
               <span>⌄</span>
             </a>
 
-            <a href="#contact">
+            <a href="/contact">
               Contact
             </a>
 
@@ -727,7 +727,7 @@ export default function Home() {
             </a>
 
 
-            <a href="#contact" className="citizen-card">
+            <a href="/contact" className="citizen-card">
               <span className="citizen-number">06</span>
 
               <div className="citizen-icon">→</div>
@@ -976,6 +976,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 
 
