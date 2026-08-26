@@ -1,8 +1,11 @@
-﻿import { redirect } from "next/navigation";
+﻿"use client";
+
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth/session";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
@@ -32,25 +35,259 @@ export default async function DashboardPage() {
   }
 
   return (
+    <DashboardContent
+      identifier={stats.identifier}
+      userId={user.id}
+      demandes={stats._count.demandes}
+      reclamations={stats._count.reclamations}
+    />
+  );
+}
+
+function DashboardContent({
+  identifier,
+  userId,
+  demandes,
+  reclamations,
+}: {
+  identifier: string;
+  userId: number;
+  demandes: number;
+  reclamations: number;
+}) {
+  const { language } = useLanguage();
+
+  const t = {
+    eyebrow:
+      language === "ar"
+        ? "فضاء الزبون"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "ESPACE CLIENT",
+
+    hello:
+      language === "ar"
+        ? "مرحباً،"
+        : language === "ber"
+          ? "ⵣⵓⵍⵍ,"
+          : "Bonjour,",
+
+    intro:
+      language === "ar"
+        ? "تجدون هنا خدماتكم وطلباتكم وشكاياتكم."
+        : language === "ber"
+          ? "ⴰⴷ ⵜⴰⴼⴷ ⴷⴰ ⵉⵎⵙⵙⵔⵏ ⴷ ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ."
+          : "Retrouvez vos services, vos demandes et vos réclamations au même endroit.",
+
+    back:
+      language === "ar"
+        ? "← العودة إلى الموقع"
+        : language === "ber"
+          ? "← ⵓⵔⴰⵔ ⵙ ⵓⵙⵏⴰ"
+          : "← Retour au site",
+
+    active:
+      language === "ar"
+        ? "الحساب نشط"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ ⵉⵙⵙⵏ"
+          : "COMPTE ACTIF",
+
+    welcome:
+      language === "ar"
+        ? "فضاؤكم الخاص"
+        : language === "ber"
+          ? "ⵓⵙⵏⵓⵔⴰⵢ ⵏⵏⴽ"
+          : "Votre espace client",
+
+    welcomeText:
+      language === "ar"
+        ? "دبّروا بسهولة جميع طلباتكم لدى الشركة الجهوية متعددة الخدمات كلميم واد نون."
+        : language === "ber"
+          ? "ⵙⵙⵏ ⵉⵎⵙⵙⵔⵏ ⴷ ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ ⵙ ⵓⵙⵎⵔⵙ ⵏ ⵓⵙⵏⵓⵔⴰⵢ."
+          : "Gérez facilement vos démarches auprès de la SRM Guelmim – Oued Noun.",
+
+    clientId:
+      language === "ar"
+        ? "معرّف الزبون"
+        : language === "ber"
+          ? "ⴰⵎⵎⴰⵍ ⵏ ⵓⵙⴰⵎⵓ"
+          : "IDENTIFIANT CLIENT",
+
+    service:
+      language === "ar"
+        ? "الخدمة"
+        : language === "ber"
+          ? "ⴰⵎⵙⵙⵔ"
+          : "SERVICE",
+
+    invoices:
+      language === "ar"
+        ? "فواتيري"
+        : language === "ber"
+          ? "ⵉⵏⵎⵍⵏ ⵏⵏⴽ"
+          : "Mes factures",
+
+    invoicesText:
+      language === "ar"
+        ? "اطلعوا على فواتيركم وأدواها عبر الإنترنت بواسطة Fatourati."
+        : language === "ber"
+          ? "ⵣⵔ ⴷ ⵔⵔ ⵉⵏⵎⵍⵏ ⵏⵏⴽ ⵙ ⵓⵙⵔⵉⴼ."
+          : "Consultez et payez votre facture en ligne via Fatourati.",
+
+    demands:
+      language === "ar"
+        ? "طلباتي"
+        : language === "ber"
+          ? "ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ"
+          : "Mes demandes",
+
+    demandsText:
+      language === "ar"
+        ? "تتبعوا طلباتكم واطلعوا على مراجعها."
+        : language === "ber"
+          ? "ⵙⵙⵏ ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ."
+          : "Suivez vos démarches et consultez leurs références.",
+
+    complaints:
+      language === "ar"
+        ? "شكاياتي"
+        : language === "ber"
+          ? "ⵉⵙⵙⵓⴼⵔⵏ ⵏⵏⴽ"
+          : "Mes réclamations",
+
+    complaintsText:
+      language === "ar"
+        ? "ضعوا شكاية وتتبعوا تطورها."
+        : language === "ber"
+          ? "ⵔⵏⵓ ⵢⴰⵏ ⵓⵙⵙⵓⴼⵔ ⴷ ⵙⵙⵏ ⵉⵎⵙⵙⵉ."
+          : "Déposez une réclamation et suivez son évolution.",
+
+    account:
+      language === "ar"
+        ? "الحساب"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "COMPTE",
+
+    profile:
+      language === "ar"
+        ? "ملفي الشخصي"
+        : language === "ber"
+          ? "ⴰⵙⵏⴰⵙ ⵉⵎⴰⵏ"
+          : "Mon profil",
+
+    profileText:
+      language === "ar"
+        ? "دبّروا حسابكم وإعدادات الأمان."
+        : language === "ber"
+          ? "ⵙⵙⵏ ⴰⵙⵏⵓⵔⴰⵢ ⴷ ⵜⵉⵙⵙⴰⵙ ⵏ ⵓⵎⴰⵏ."
+          : "Gérez votre compte et vos paramètres de sécurité.",
+
+    access:
+      language === "ar"
+        ? "الدخول إلى الخدمة"
+        : language === "ber"
+          ? "ⴽⵛⵎ ⵖⵔ ⵓⵎⵙⵙⵔ"
+          : "Accéder au service",
+
+    demandsCount:
+      language === "ar"
+        ? `${demandes} طلب`
+        : language === "ber"
+          ? `${demandes} ⵉⵙⵏⴰⵙⵏ`
+          : `${demandes} demande(s)`,
+
+    complaintsCount:
+      language === "ar"
+        ? `${reclamations} شكاية`
+        : language === "ber"
+          ? `${reclamations} ⵉⵙⵙⵓⴼⵔⵏ`
+          : `${reclamations} réclamation(s)`,
+
+    activeAccount:
+      language === "ar"
+        ? "حساب نشط"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ ⵉⵙⵙⵏ"
+          : "Compte actif",
+
+    steps:
+      language === "ar"
+        ? "طلباتي"
+        : language === "ber"
+          ? "ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ"
+          : "MES DÉMARCHES",
+
+    activity:
+      language === "ar"
+        ? "نشاطكم"
+        : language === "ber"
+          ? "ⴰⵎⵙⵙⵉ ⵏⵏⴽ"
+          : "Votre activité",
+
+    requests:
+      language === "ar"
+        ? "الطلبات"
+        : language === "ber"
+          ? "ⵉⵙⵏⴰⵙⵏ"
+          : "Demandes",
+
+    complaintsStat:
+      language === "ar"
+        ? "الشكايات"
+        : language === "ber"
+          ? "ⵉⵙⵙⵓⴼⵔⵏ"
+          : "Réclamations",
+
+    accountStat:
+      language === "ar"
+        ? "الحساب"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "Compte",
+
+    help:
+      language === "ar"
+        ? "تحتاجون إلى المساعدة؟"
+        : language === "ber"
+          ? "ⵜⵙⵙⵓⵔⴷ ⴰⵙⵙⵉⵏ?"
+          : "BESOIN D'AIDE ?",
+
+    helpTitle:
+      language === "ar"
+        ? "فريقنا رهن إشارتكم."
+        : language === "ber"
+          ? "ⴰⵎⴰⵙ ⵏⵏⵖ ⵉⵍⴰ ⴷⴰⵔⴽ."
+          : "Notre équipe reste à votre écoute.",
+
+    helpText:
+      language === "ar"
+        ? "لأي سؤال يتعلق بفضاء الزبون، تواصلوا مع الشركة الجهوية متعددة الخدمات كلميم واد نون."
+        : language === "ber"
+          ? "ⵉ ⵎⴰ ⵢⴰⵏ ⵙⵇⵙⴰ ⵖⴼ ⵓⵙⵏⵓⵔⴰⵢ, ⵙⵙⵉⵡⵍ ⴷ SRM."
+          : "Pour toute question concernant votre espace client, contactez la SRM Guelmim – Oued Noun.",
+  };
+
+  return (
     <main className="dashboard-page dashboard-page--home">
       <div className="dashboard-home-container">
         <header className="dashboard-home-header">
           <div>
-            <span className="dashboard-label">ESPACE CLIENT</span>
+            <span className="dashboard-label">
+              {t.eyebrow}
+            </span>
 
             <h1>
-              Bonjour, <span>{stats.identifier}</span>.
+              {t.hello} <span>{identifier}</span>.
             </h1>
 
-            <p>
-              Retrouvez vos services, vos demandes et vos
-              réclamations au même endroit.
-            </p>
+            <p>{t.intro}</p>
           </div>
 
           <div className="dashboard-home-actions">
             <Link href="/" className="dashboard-back">
-              ← Retour au site
+              {t.back}
             </Link>
 
             <LogoutButton />
@@ -60,27 +297,26 @@ export default async function DashboardPage() {
         <section className="dashboard-welcome">
           <div className="dashboard-welcome-main">
             <div className="dashboard-avatar">
-              {stats.identifier.charAt(0).toUpperCase()}
+              {identifier.charAt(0).toUpperCase()}
             </div>
 
             <div>
               <span className="dashboard-welcome-status">
                 <i></i>
-                COMPTE ACTIF
+                {t.active}
               </span>
 
-              <h2>Votre espace client</h2>
+              <h2>{t.welcome}</h2>
 
-              <p>
-                Gérez facilement vos démarches auprès de la SRM
-                Guelmim – Oued Noun.
-              </p>
+              <p>{t.welcomeText}</p>
             </div>
           </div>
 
           <div className="dashboard-welcome-id">
-            <span>IDENTIFIANT CLIENT</span>
-            <strong>#{String(user.id).padStart(5, "0")}</strong>
+            <span>{t.clientId}</span>
+            <strong>
+              #{String(userId).padStart(5, "0")}
+            </strong>
           </div>
         </section>
 
@@ -96,19 +332,16 @@ export default async function DashboardPage() {
 
             <div>
               <span className="dashboard-service-label">
-                SERVICE
+                {t.service}
               </span>
 
-              <h2>Mes factures</h2>
+              <h2>{t.invoices}</h2>
 
-              <p>
-                Consultez et payez votre facture en ligne via
-                Fatourati.
-              </p>
+              <p>{t.invoicesText}</p>
             </div>
 
             <div className="dashboard-service-bottom">
-              <span>Accéder au service</span>
+              <span>{t.access}</span>
               <strong>→</strong>
             </div>
           </Link>
@@ -124,19 +357,16 @@ export default async function DashboardPage() {
 
             <div>
               <span className="dashboard-service-label">
-                SERVICE
+                {t.service}
               </span>
 
-              <h2>Mes demandes</h2>
+              <h2>{t.demands}</h2>
 
-              <p>
-                Suivez vos démarches et consultez leurs
-                références.
-              </p>
+              <p>{t.demandsText}</p>
             </div>
 
             <div className="dashboard-service-bottom">
-              <span>{stats._count.demandes} demande(s)</span>
+              <span>{t.demandsCount}</span>
               <strong>→</strong>
             </div>
           </Link>
@@ -152,20 +382,16 @@ export default async function DashboardPage() {
 
             <div>
               <span className="dashboard-service-label">
-                SERVICE
+                {t.service}
               </span>
 
-              <h2>Mes réclamations</h2>
+              <h2>{t.complaints}</h2>
 
-              <p>
-                Déposez une réclamation et suivez son évolution.
-              </p>
+              <p>{t.complaintsText}</p>
             </div>
 
             <div className="dashboard-service-bottom">
-              <span>
-                {stats._count.reclamations} réclamation(s)
-              </span>
+              <span>{t.complaintsCount}</span>
               <strong>→</strong>
             </div>
           </Link>
@@ -181,18 +407,16 @@ export default async function DashboardPage() {
 
             <div>
               <span className="dashboard-service-label">
-                COMPTE
+                {t.account}
               </span>
 
-              <h2>Mon profil</h2>
+              <h2>{t.profile}</h2>
 
-              <p>
-                Gérez votre compte et vos paramètres de sécurité.
-              </p>
+              <p>{t.profileText}</p>
             </div>
 
             <div className="dashboard-service-bottom">
-              <span>Compte actif</span>
+              <span>{t.activeAccount}</span>
               <strong>→</strong>
             </div>
           </Link>
@@ -202,26 +426,26 @@ export default async function DashboardPage() {
           <div className="dashboard-overview-card">
             <div>
               <span className="dashboard-overview-label">
-                MES DÉMARCHES
+                {t.steps}
               </span>
 
-              <h3>Votre activité</h3>
+              <h3>{t.activity}</h3>
             </div>
 
             <div className="dashboard-overview-stats">
               <div>
-                <strong>{stats._count.demandes}</strong>
-                <span>Demandes</span>
+                <strong>{demandes}</strong>
+                <span>{t.requests}</span>
               </div>
 
               <div>
-                <strong>{stats._count.reclamations}</strong>
-                <span>Réclamations</span>
+                <strong>{reclamations}</strong>
+                <span>{t.complaintsStat}</span>
               </div>
 
               <div>
                 <strong>01</strong>
-                <span>Compte</span>
+                <span>{t.accountStat}</span>
               </div>
             </div>
           </div>
@@ -229,15 +453,12 @@ export default async function DashboardPage() {
           <div className="dashboard-overview-card dashboard-overview-card--help">
             <div>
               <span className="dashboard-overview-label">
-                BESOIN D'AIDE ?
+                {t.help}
               </span>
 
-              <h3>Notre équipe reste à votre écoute.</h3>
+              <h3>{t.helpTitle}</h3>
 
-              <p>
-                Pour toute question concernant votre espace
-                client, contactez la SRM Guelmim – Oued Noun.
-              </p>
+              <p>{t.helpText}</p>
             </div>
 
             <a
