@@ -7654,3 +7654,21 @@ textarea::placeholder {
     transform: none;
   }
 }
+
+/* HERO ALIGNMENT WITH LOGO */
+.hero-content {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  box-sizing: border-box !important;
+  transform: none !important;
+}
+
+@media (max-width: 900px) {
+  .hero-content {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
