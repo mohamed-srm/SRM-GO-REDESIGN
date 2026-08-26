@@ -7643,3 +7643,14 @@ textarea::placeholder {
 
 .brand-hours{margin-top:2px;margin-left:2px;color:var(--muted);font-size:10px;font-weight:600;white-space:nowrap}
 
+
+/* HERO POSITION */
+.hero-content {
+  transform: translate(-55px, -20px);
+}
+
+@media (max-width: 900px) {
+  .hero-content {
+    transform: none;
+  }
+}
