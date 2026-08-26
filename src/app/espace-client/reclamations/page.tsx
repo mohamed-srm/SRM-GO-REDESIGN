@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 type Reclamation = {
   id: number;
@@ -12,7 +13,91 @@ type Reclamation = {
   createdAt: string;
 };
 
+const translations = {
+  fr: {
+    client: "ESPACE CLIENT",
+    title: "Mes réclamations.",
+    intro: "Consultez vos réclamations et leur suivi auprès de la SRM.",
+    back: "← Retour au dashboard",
+    close: "Fermer",
+    new: "Nouvelle réclamation",
+    object: "Objet",
+    objectPlaceholder: "Ex. Problème de facture",
+    description: "Description",
+    descriptionPlaceholder: "Décrivez votre réclamation...",
+    creating: "Création...",
+    submit: "Déposer la réclamation",
+    success: "Votre réclamation a été créée avec succès.",
+    loading: "Chargement...",
+    loadingText: "Nous récupérons vos réclamations.",
+    errorTitle: "Une erreur est survenue",
+    empty: "Aucune réclamation",
+    emptyText:
+      "Vous n’avez encore aucune réclamation enregistrée dans votre espace.",
+    label: "RÉCLAMATION",
+    reference: "RÉFÉRENCE",
+    created: "DATE DE CRÉATION",
+    serverError: "Impossible de contacter le serveur.",
+    createError: "Impossible de créer la réclamation.",
+  },
+
+  ar: {
+    client: "فضاء الزبون",
+    title: "شكاياتي.",
+    intro: "اطلعوا على شكاياتكم وتتبعوا وضعيتها لدى الشركة الجهوية متعددة الخدمات.",
+    back: "← العودة إلى لوحة التحكم",
+    close: "إغلاق",
+    new: "شكاية جديدة",
+    object: "الموضوع",
+    objectPlaceholder: "مثال: مشكل في الفاتورة",
+    description: "الوصف",
+    descriptionPlaceholder: "صفوا شكايتكم...",
+    creating: "جارٍ الإنشاء...",
+    submit: "إيداع الشكاية",
+    success: "تم إنشاء شكايتكم بنجاح.",
+    loading: "جارٍ التحميل...",
+    loadingText: "نسترجع شكاياتكم.",
+    errorTitle: "حدث خطأ",
+    empty: "لا توجد شكايات",
+    emptyText: "ليس لديكم أي شكاية مسجلة في فضائكم بعد.",
+    label: "الشكاية",
+    reference: "المرجع",
+    created: "تاريخ الإنشاء",
+    serverError: "تعذر الاتصال بالخادم.",
+    createError: "تعذر إنشاء الشكاية.",
+  },
+
+  ber: {
+    client: "ⴰⵙⵏⵓⵔⴰⵢ",
+    title: "ⵉⵙⵙⵓⴼⵔⵏ ⵏⵏⴽ.",
+    intro: "ⵙⵙⵏ ⵉⵙⵙⵓⴼⵔⵏ ⵏⵏⴽ ⴷ ⵓⵙⵏⴼⵍ ⵏⵙⵏ ⵙⵔ ⵙⵔⵎ.",
+    back: "← ⵓⵔⴰⵔ ⵙ ⵍⵓⵃⴰ",
+    close: "ⵎⵎⵏ",
+    new: "ⵉⵙⵙⵓⴼⵔ ⴰⵎⴰⵢⵏⵓ",
+    object: "ⴰⵙⵏⴼⵍ",
+    objectPlaceholder: "ⵎⴷ: ⵓⵙⵙⵉ ⵏ ⵍⴼⴰⵜⵓⵔⴰ",
+    description: "ⴰⵙⵏⵓⵔⵉ",
+    descriptionPlaceholder: "ⵔⵏⵓ ⴰⵙⵏⵓⵔⵉ ⵏ ⵓⵙⵙⵓⴼⵔ...",
+    creating: "ⵉⵜⵜⵡⴰⵙⵏⵓⵔⴰⵢ...",
+    submit: "ⴰⵣⵏ ⵉⵙⵙⵓⴼⵔ",
+    success: "ⵉⵜⵜⵡⴰⵙⵏⵓⵔⴰⵢ ⵉⵙⵙⵓⴼⵔ ⵙ ⵓⵙⵏⴼⵍ.",
+    loading: "ⵉⵜⵜⵡⴰⵙⵙⵏ...",
+    loadingText: "ⵏⵙⵙⵏ ⵉⵙⵙⵓⴼⵔⵏ ⵏⵏⴽ.",
+    errorTitle: "ⵉⵎⴰⵏ ⵉⵎⵎⵓⵜⵏ",
+    empty: "ⵓⵔ ⵖⵓⵔⴽ ⵉⵙⵙⵓⴼⵔⵏ",
+    emptyText: "ⵓⵔ ⵖⵓⵔⴽ ⵢⴰⵏ ⵉⵙⵙⵓⴼⵔ ⵎⵙⵙⵏ.",
+    label: "ⵉⵙⵙⵓⴼⵔ",
+    reference: "ⴰⵙⵏⴼⵍ",
+    created: "ⴰⵣⵎⵣ ⵏ ⵓⵙⵏⵓⵔⴰⵢ",
+    serverError: "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵏⵙⵙⵏ ⴷ ⵓⵙⵏⵓⵔ.",
+    createError: "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵙⵏⵓⵔⴰⵢ ⵉⵙⵙⵓⴼⵔ.",
+  },
+} as const;
+
 export default function ReclamationsPage() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [reclamations, setReclamations] = useState<Reclamation[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -28,13 +113,13 @@ export default function ReclamationsPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || "Impossible de charger vos réclamations.");
+        setError(data.message || t.serverError);
         return;
       }
 
       setReclamations(data.reclamations || []);
     } catch {
-      setError("Impossible de contacter le serveur.");
+      setError(t.serverError);
     } finally {
       setLoading(false);
     }
@@ -65,20 +150,18 @@ export default function ReclamationsPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(
-          data.message || "Impossible de créer la réclamation."
-        );
+        setError(data.message || t.createError);
         return;
       }
 
-      setSuccess("Votre réclamation a été créée avec succès.");
+      setSuccess(t.success);
       setTitle("");
       setDescription("");
       setShowForm(false);
 
       await loadReclamations();
     } catch {
-      setError("Impossible de contacter le serveur.");
+      setError(t.serverError);
     } finally {
       setSubmitting(false);
     }
@@ -88,20 +171,18 @@ export default function ReclamationsPage() {
     <main className="dashboard-page">
       <div className="dashboard-header">
         <div>
-          <span className="dashboard-label">ESPACE CLIENT</span>
+          <span className="dashboard-label">{t.client}</span>
 
-          <h1>Mes réclamations.</h1>
+          <h1>{t.title}</h1>
 
-          <p>
-            Consultez vos réclamations et leur suivi auprès de la SRM.
-          </p>
+          <p>{t.intro}</p>
         </div>
 
         <Link
           href="/espace-client/dashboard"
           className="dashboard-back"
         >
-          ← Retour au dashboard
+          {t.back}
         </Link>
       </div>
 
@@ -120,7 +201,7 @@ export default function ReclamationsPage() {
             setSuccess("");
           }}
         >
-          {showForm ? "Fermer" : "Nouvelle réclamation"}
+          {showForm ? t.close : t.new}
         </button>
       </div>
 
@@ -142,7 +223,7 @@ export default function ReclamationsPage() {
               fontSize: "28px",
             }}
           >
-            Nouvelle réclamation
+            {t.new}
           </h2>
 
           <form
@@ -160,14 +241,14 @@ export default function ReclamationsPage() {
                 color: "var(--navy)",
               }}
             >
-              Objet
+              {t.object}
             </label>
 
             <input
               id="reclamation-title"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-              placeholder="Ex. Problème de facture"
+              placeholder={t.objectPlaceholder}
               required
             />
 
@@ -179,7 +260,7 @@ export default function ReclamationsPage() {
                 color: "var(--navy)",
               }}
             >
-              Description
+              {t.description}
             </label>
 
             <textarea
@@ -188,7 +269,7 @@ export default function ReclamationsPage() {
               onChange={(event) =>
                 setDescription(event.target.value)
               }
-              placeholder="Décrivez votre réclamation..."
+              placeholder={t.descriptionPlaceholder}
               rows={6}
               required
             />
@@ -198,9 +279,7 @@ export default function ReclamationsPage() {
               className="login-button"
               disabled={submitting}
             >
-              {submitting
-                ? "Création..."
-                : "Déposer la réclamation"}
+              {submitting ? t.creating : t.submit}
               {!submitting && <span>→</span>}
             </button>
           </form>
@@ -229,8 +308,8 @@ export default function ReclamationsPage() {
         {loading && (
           <section className="dashboard-grid">
             <div className="dashboard-card">
-              <h2>Chargement...</h2>
-              <p>Nous récupérons vos réclamations.</p>
+              <h2>{t.loading}</h2>
+              <p>{t.loadingText}</p>
             </div>
           </section>
         )}
@@ -238,7 +317,7 @@ export default function ReclamationsPage() {
         {!loading && error && (
           <section className="dashboard-grid">
             <div className="dashboard-card">
-              <h2>Une erreur est survenue</h2>
+              <h2>{t.errorTitle}</h2>
               <p>{error}</p>
             </div>
           </section>
@@ -248,11 +327,8 @@ export default function ReclamationsPage() {
           <section className="dashboard-grid">
             <div className="dashboard-card dashboard-card--blue">
               <span className="dashboard-card__number">01</span>
-              <h2>Aucune réclamation</h2>
-              <p>
-                Vous n’avez encore aucune réclamation enregistrée dans votre
-                espace.
-              </p>
+              <h2>{t.empty}</h2>
+              <p>{t.emptyText}</p>
             </div>
           </section>
         )}
@@ -285,7 +361,7 @@ export default function ReclamationsPage() {
 
                 <div className="request-card-body">
                   <span className="request-label">
-                    RÉCLAMATION
+                    {t.label}
                   </span>
 
                   <h2>{reclamation.title}</h2>
@@ -295,16 +371,18 @@ export default function ReclamationsPage() {
 
                 <div className="request-card-meta">
                   <div>
-                    <span>RÉFÉRENCE</span>
+                    <span>{t.reference}</span>
                     <strong>{reclamation.reference}</strong>
                   </div>
 
                   <div>
-                    <span>DATE DE CRÉATION</span>
+                    <span>{t.created}</span>
                     <strong>
                       {new Date(
                         reclamation.createdAt
-                      ).toLocaleDateString("fr-FR")}
+                      ).toLocaleDateString(
+                        language === "ar" ? "ar-MA" : "fr-FR"
+                      )}
                     </strong>
                   </div>
 
