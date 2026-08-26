@@ -134,11 +134,11 @@ export default function Home() {
       <section className="hero">
 
         <div className="hero-image">
-          <img
-            src="/hero-guelmim.jpg"
-            alt="Guelmim - Oued Noun"
-          />
-        </div>
+  <img src="/hero-guelmim.jpg" alt="Guelmim - Oued Noun" />
+  <img src="/hero-guelmim-2.jpg" alt="Guelmim - Oued Noun" />
+  <img src="/hero-guelmim-3.jpg" alt="Guelmim - Oued Noun" />
+  <img src="/hero-guelmim-4.jpg" alt="Guelmim - Oued Noun" />
+</div>
 
         <div className="hero-overlay"></div>
 
@@ -976,6 +976,8 @@ export default function Home() {
     </main>
   );
 }
+
+
 
 
 
