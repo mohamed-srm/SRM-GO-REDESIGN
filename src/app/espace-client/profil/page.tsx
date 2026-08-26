@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 type User = {
   id: number;
@@ -10,7 +11,106 @@ type User = {
   updatedAt: string;
 };
 
+const translations = {
+  fr: {
+    client: "ESPACE CLIENT",
+    title: "Mon profil",
+    intro: "Gérez vos informations et la sécurité de votre compte.",
+    back: "← Retour au dashboard",
+    loading: "Chargement de votre profil...",
+    errorTitle: "Une erreur est survenue",
+    active: "COMPTE ACTIF",
+    clientLabel: "Client SRM Guelmim – Oued Noun",
+    clientId: "IDENTIFIANT CLIENT",
+    infoLabel: "INFORMATIONS",
+    infoTitle: "Informations du compte",
+    identifier: "Identifiant",
+    verified: "Vérifié",
+    created: "Compte créé",
+    updated: "Dernière mise à jour",
+    security: "SÉCURITÉ",
+    secureTitle: "Votre compte est sécurisé",
+    secureText:
+      "Votre mot de passe est stocké de manière sécurisée. Vous pouvez le modifier à tout moment.",
+    changePassword: "Modifier le mot de passe",
+    account: "Compte",
+    activeValue: "Actif",
+    since: "Depuis",
+    securityValue: "Sécurité",
+    protected: "Protégée",
+    help: "BESOIN D'AIDE ?",
+    helpTitle: "Notre équipe reste à votre écoute.",
+    helpText:
+      "Pour toute question concernant votre espace client, contactez la SRM Guelmim – Oued Noun.",
+  },
+  ar: {
+    client: "فضاء الزبون",
+    title: "ملفي الشخصي",
+    intro: "دبّروا معلوماتكم وإعدادات أمان حسابكم.",
+    back: "← العودة إلى لوحة التحكم",
+    loading: "جارٍ تحميل ملفكم الشخصي...",
+    errorTitle: "حدث خطأ",
+    active: "الحساب نشط",
+    clientLabel: "زبون الشركة الجهوية متعددة الخدمات كلميم واد نون",
+    clientId: "معرّف الزبون",
+    infoLabel: "المعلومات",
+    infoTitle: "معلومات الحساب",
+    identifier: "المعرّف",
+    verified: "موثّق",
+    created: "تاريخ إنشاء الحساب",
+    updated: "آخر تحديث",
+    security: "الأمان",
+    secureTitle: "حسابكم مؤمّن",
+    secureText:
+      "يتم تخزين كلمة المرور الخاصة بكم بشكل آمن، ويمكنكم تغييرها في أي وقت.",
+    changePassword: "تغيير كلمة المرور",
+    account: "الحساب",
+    activeValue: "نشط",
+    since: "منذ",
+    securityValue: "الأمان",
+    protected: "محمي",
+    help: "تحتاجون إلى المساعدة؟",
+    helpTitle: "فريقنا رهن إشارتكم.",
+    helpText:
+      "لأي سؤال متعلق بفضاء الزبون، تواصلوا مع الشركة الجهوية متعددة الخدمات كلميم واد نون.",
+  },
+  ber: {
+    client: "ⴰⵙⵏⵓⵔⴰⵢ",
+    title: "ⴰⵙⵏⴰⵙ ⵉⵎⴰⵏ",
+    intro: "ⵙⵙⵏ ⵉⵎⵙⵙⵏ ⴷ ⵜⵉⵙⵙⴰⵙ ⵏ ⵓⵎⴰⵏ ⵏⵏⴽ.",
+    back: "← ⵓⵔⴰⵔ ⵙ ⵍⵓⵃⴰ",
+    loading: "ⵉⵜⵜⵡⴰⵙⵙⵏ ⵓⵙⵏⴰⵙ...",
+    errorTitle: "ⵉⵎⴰⵏ ⵉⵎⵎⵓⵜⵏ",
+    active: "ⴰⵙⵏⵓⵔⴰⵢ ⵉⵙⵙⵏ",
+    clientLabel: "ⴰⵎⵙⵙⵔⵙ ⵏ SRM ⴳⵯⵍⵎⵉⵎ – ⵡⴰⴷ ⵏ ⵏⵓⵏ",
+    clientId: "ⴰⵎⵎⴰⵍ ⵏ ⵓⵙⴰⵎⵓ",
+    infoLabel: "ⵉⵎⵙⵙⵏ",
+    infoTitle: "ⵉⵎⵙⵙⵏ ⵏ ⵓⵙⵏⵓⵔⴰⵢ",
+    identifier: "ⴰⵎⵎⴰⵍ",
+    verified: "ⵉⵜⵜⵡⴰⵙⵙⵏ",
+    created: "ⴰⵙⵏⵓⵔⴰⵢ ⵉⵜⵜⵡⴰⵙⵙⵏ",
+    updated: "ⵉⵙⵏⴼⵍ ⴰⵎⵎⴰⵢ",
+    security: "ⵜⵉⵙⵙⴰⵙ",
+    secureTitle: "ⴰⵙⵏⵓⵔⴰⵢ ⵏⵏⴽ ⵉⵜⵜⵡⴰⵙⵙⵏ",
+    secureText:
+      "ⵜⴰⵔⵔⴰⵙⵜ ⵏⵏⴽ ⵜⵜⵡⴰⵙⵙⵏ ⵙ ⵓⵎⴰⵏ. ⵜⵣⵎⵔⴷ ⴰⴷ ⵜⵜⵙⵙⵏⴼⵍⴷ ⵎⵍⵍⴰ.",
+    changePassword: "ⵙⵙⵏⴼⵍ ⵜⴰⵔⵔⴰⵙⵜ",
+    account: "ⴰⵙⵏⵓⵔⴰⵢ",
+    activeValue: "ⵉⵙⵙⵏ",
+    since: "ⵙⴳ",
+    securityValue: "ⵜⵉⵙⵙⴰⵙ",
+    protected: "ⵉⵜⵜⵡⴰⵙⵙⵏ",
+    help: "ⵜⵙⵙⵓⵔⴷ ⴰⵙⵙⵉⵏ?",
+    helpTitle: "ⴰⵎⴰⵙ ⵏⵏⵖ ⵉⵍⴰ ⴷⴰⵔⴽ.",
+    helpText:
+      "ⵉ ⵎⴰ ⵢⴰⵏ ⵙⵇⵙⴰ ⵖⴼ ⵓⵙⵏⵓⵔⴰⵢ, ⵙⵙⵉⵡⵍ ⴷ SRM ⴳⵯⵍⵎⵉⵎ – ⵡⴰⴷ ⵏ ⵏⵓⵏ.",
+  },
+} as const;
+
 export default function ProfilPage() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -37,8 +137,15 @@ export default function ProfilPage() {
     loadProfile();
   }, []);
 
+  const locale =
+    language === "ar"
+      ? "ar-MA"
+      : language === "ber"
+        ? "fr-FR"
+        : "fr-FR";
+
   const createdDate = user
-    ? new Date(user.createdAt).toLocaleDateString("fr-FR", {
+    ? new Date(user.createdAt).toLocaleDateString(locale, {
         day: "2-digit",
         month: "long",
         year: "numeric",
@@ -46,7 +153,7 @@ export default function ProfilPage() {
     : "";
 
   const updatedDate = user
-    ? new Date(user.updatedAt).toLocaleDateString("fr-FR", {
+    ? new Date(user.updatedAt).toLocaleDateString(locale, {
         day: "2-digit",
         month: "long",
         year: "numeric",
@@ -56,33 +163,30 @@ export default function ProfilPage() {
   return (
     <main className="profile-page">
       <div className="profile-container">
-
         <div className="profile-topbar">
           <div>
-            <span className="profile-eyebrow">ESPACE CLIENT</span>
-            <h1>Mon profil</h1>
-            <p>
-              Gérez vos informations et la sécurité de votre compte.
-            </p>
+            <span className="profile-eyebrow">{t.client}</span>
+            <h1>{t.title}</h1>
+            <p>{t.intro}</p>
           </div>
 
           <Link
             href="/espace-client/dashboard"
             className="profile-back"
           >
-            ← Retour au dashboard
+            {t.back}
           </Link>
         </div>
 
         {loading && (
           <div className="profile-loading">
-            Chargement de votre profil...
+            {t.loading}
           </div>
         )}
 
         {!loading && error && (
           <div className="profile-error">
-            <strong>Une erreur est survenue</strong>
+            <strong>{t.errorTitle}</strong>
             <span>{error}</span>
           </div>
         )}
@@ -97,24 +201,23 @@ export default function ProfilPage() {
               <div className="profile-hero-content">
                 <span className="profile-status">
                   <i></i>
-                  COMPTE ACTIF
+                  {t.active}
                 </span>
 
                 <h2>{user.identifier}</h2>
 
-                <p>
-                  Client SRM Guelmim – Oued Noun
-                </p>
+                <p>{t.clientLabel}</p>
               </div>
 
               <div className="profile-id-box">
-                <span>IDENTIFIANT CLIENT</span>
-                <strong>#{String(user.id).padStart(5, "0")}</strong>
+                <span>{t.clientId}</span>
+                <strong>
+                  #{String(user.id).padStart(5, "0")}
+                </strong>
               </div>
             </section>
 
             <section className="profile-grid">
-
               <article className="profile-card profile-card--main">
                 <div className="profile-card-head">
                   <div className="profile-card-icon blue">
@@ -123,39 +226,38 @@ export default function ProfilPage() {
 
                   <div>
                     <span className="profile-card-label">
-                      INFORMATIONS
+                      {t.infoLabel}
                     </span>
 
-                    <h3>Informations du compte</h3>
+                    <h3>{t.infoTitle}</h3>
                   </div>
                 </div>
 
                 <div className="profile-info-list">
-
                   <div className="profile-info-row">
                     <div>
-                      <span>Identifiant</span>
+                      <span>{t.identifier}</span>
                       <strong>{user.identifier}</strong>
                     </div>
+
                     <span className="profile-info-badge">
-                      Vérifié
+                      {t.verified}
                     </span>
                   </div>
 
                   <div className="profile-info-row">
                     <div>
-                      <span>Compte créé</span>
+                      <span>{t.created}</span>
                       <strong>{createdDate}</strong>
                     </div>
                   </div>
 
                   <div className="profile-info-row">
                     <div>
-                      <span>Dernière mise à jour</span>
+                      <span>{t.updated}</span>
                       <strong>{updatedDate}</strong>
                     </div>
                   </div>
-
                 </div>
               </article>
 
@@ -167,43 +269,40 @@ export default function ProfilPage() {
 
                   <div>
                     <span className="profile-card-label">
-                      SÉCURITÉ
+                      {t.security}
                     </span>
 
-                    <h3>Votre compte est sécurisé</h3>
+                    <h3>{t.secureTitle}</h3>
                   </div>
                 </div>
 
                 <p className="profile-security-text">
-                  Votre mot de passe est stocké de manière sécurisée.
-                  Vous pouvez le modifier à tout moment.
+                  {t.secureText}
                 </p>
 
                 <Link
                   href="/espace-client/profil/password"
                   className="profile-action"
                 >
-                  Modifier le mot de passe
+                  {t.changePassword}
                   <span>→</span>
                 </Link>
               </article>
-
             </section>
 
             <section className="profile-stats">
-
               <div className="profile-stat">
                 <span className="profile-stat-number">01</span>
                 <div>
-                  <strong>Compte</strong>
-                  <span>Actif</span>
+                  <strong>{t.account}</strong>
+                  <span>{t.activeValue}</span>
                 </div>
               </div>
 
               <div className="profile-stat">
                 <span className="profile-stat-number">02</span>
                 <div>
-                  <strong>Identifiant</strong>
+                  <strong>{t.identifier}</strong>
                   <span>{user.identifier}</span>
                 </div>
               </div>
@@ -211,7 +310,7 @@ export default function ProfilPage() {
               <div className="profile-stat">
                 <span className="profile-stat-number">03</span>
                 <div>
-                  <strong>Depuis</strong>
+                  <strong>{t.since}</strong>
                   <span>{createdDate}</span>
                 </div>
               </div>
@@ -219,28 +318,27 @@ export default function ProfilPage() {
               <div className="profile-stat">
                 <span className="profile-stat-number">04</span>
                 <div>
-                  <strong>Sécurité</strong>
-                  <span>Protégée</span>
+                  <strong>{t.securityValue}</strong>
+                  <span>{t.protected}</span>
                 </div>
               </div>
-
             </section>
 
             <section className="profile-help">
               <div>
                 <span className="profile-help-label">
-                  BESOIN D'AIDE ?
+                  {t.help}
                 </span>
 
-                <h3>Notre équipe reste à votre écoute.</h3>
+                <h3>{t.helpTitle}</h3>
 
-                <p>
-                  Pour toute question concernant votre espace client,
-                  contactez la SRM Guelmim – Oued Noun.
-                </p>
+                <p>{t.helpText}</p>
               </div>
 
-              <a href="tel:0800002026" className="profile-help-button">
+              <a
+                href="tel:0800002026"
+                className="profile-help-button"
+              >
                 08 00 00 20 26
                 <span>→</span>
               </a>
