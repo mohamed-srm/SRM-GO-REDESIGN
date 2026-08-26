@@ -84,10 +84,6 @@ export default function Home() {
               alt="SRM Guelm Oued Noun"
             />
           </a>
-          <div className="brand-hours">
-            <span>◷</span>
-            <span>Ouvert de 08:00 à 16:30 · Lundi au vendredi</span>
-          </div>
 
           <nav className="nav-links">
 
@@ -980,6 +976,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 
 
