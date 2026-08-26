@@ -7622,3 +7622,21 @@ textarea::placeholder {
     display: none;
   }
 }
+
+.topbar-inner {
+  position: relative !important;
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 40px 0 38px !important;
+  box-sizing: border-box !important;
+}
+
+.topbar-left {
+  margin-left: 0 !important;
+  justify-content: flex-start !important;
+}
+
+.topbar-right {
+  margin-left: auto !important;
+}
+
