@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   --blue: #087fc1;
@@ -2190,7 +2190,7 @@ a {
   }
 }
 /* =====================================================
-   IMPORTANT ANNOUNCEMENT — FEATURE
+   IMPORTANT ANNOUNCEMENT â€” FEATURE
 ===================================================== */
 
 .announcement-feature {
@@ -3032,7 +3032,7 @@ a {
   border-color: rgba(114, 223, 69, 0.35);
 }
 /* =====================================================
-   COMMUNICATIONS SLIDER — FINAL
+   COMMUNICATIONS SLIDER â€” FINAL
 ===================================================== */
 
 .communications-slider-section {
@@ -4265,7 +4265,7 @@ a {
   }
 }
 /* =====================================================
-   CLIENT REQUESTS / CLAIMS — PREMIUM UI
+   CLIENT REQUESTS / CLAIMS â€” PREMIUM UI
 ===================================================== */
 
 .dashboard-page {
@@ -5476,7 +5476,7 @@ a {
   }
 }
 /* =====================================================
-   COMMUNICATIONS — MOBILE
+   COMMUNICATIONS â€” MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -5529,7 +5529,7 @@ a {
   }
 }
 /* =====================================================
-   SERVICE STRIP — MOBILE
+   SERVICE STRIP â€” MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -5813,7 +5813,7 @@ a {
   }
 }
 /* =====================================================
-   MISSION — FINAL MOBILE LAYOUT
+   MISSION â€” FINAL MOBILE LAYOUT
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6206,7 +6206,7 @@ a {
   }
 }
 /* =====================================================
-   FEATURED NEWS — FINAL MOBILE
+   FEATURED NEWS â€” FINAL MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6311,7 +6311,7 @@ a {
   }
 }
 /* =====================================================
-   REGION — FINAL MOBILE
+   REGION â€” FINAL MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6436,7 +6436,7 @@ a {
   }
 }
 /* =====================================================
-   CITIZEN SERVICES — FINAL MOBILE
+   CITIZEN SERVICES â€” FINAL MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6539,7 +6539,7 @@ a {
   }
 }
 /* =====================================================
-   NEWS & PROJECTS — FINAL MOBILE
+   NEWS & PROJECTS â€” FINAL MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6640,7 +6640,7 @@ a {
   }
 }
 /* =====================================================
-   SRM EN CHIFFRES — MOBILE
+   SRM EN CHIFFRES â€” MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -7051,14 +7051,26 @@ a {
 .srm-contact-form-card input,
 .srm-contact-form-card textarea {
   width: 100%;
-  border: 1px solid var(--border-light);
-  border-radius: 5px;
+  border: 1px solid #d6e3ec;
+  border-radius: 6px;
   background: #fff;
   color: var(--navy);
   outline: none;
   padding: 14px 15px;
   font: inherit;
   transition: border-color 180ms ease, box-shadow 180ms ease;
+  box-sizing: border-box;
+}
+
+.srm-contact-form-card input::placeholder,
+.srm-contact-form-card textarea::placeholder {
+  color: #8aa0b3;
+}
+
+.srm-contact-form-card input:focus,
+.srm-contact-form-card textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(8, 127, 193, 0.12);
 }
 
 .srm-contact-form-card input {
@@ -7216,3 +7228,4 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
