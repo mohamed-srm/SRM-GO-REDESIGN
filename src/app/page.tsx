@@ -1,12 +1,14 @@
 ﻿"use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";`r`nimport { useLanguage } from "./context/LanguageContext";
+import { useEffect, useState } from "react";
+import { useLanguage } from "./context/LanguageContext";
 import MobileMenu from "./components/MobileMenu";
 import SiteFooter from "./components/SiteFooter";
 
 export default function Home() {
-  const [activeCommunication, setActiveCommunication] = useState(0);`r`n  const { language, setLanguage } = useLanguage();
+  const [activeCommunication, setActiveCommunication] = useState(0);
+  const { language, setLanguage } = useLanguage();
 
   const communications = [
     {
@@ -976,6 +978,8 @@ export default function Home() {
     </main>
   );
 }
+
+
 
 
 
