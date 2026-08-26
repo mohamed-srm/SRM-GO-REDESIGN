@@ -1,6 +1,76 @@
-﻿import Link from "next/link";`r`nimport { useLanguage } from "../context/LanguageContext";
+﻿"use client";
 
-export default function SiteFooter() {`r`n  const { language } = useLanguage();
+import Link from "next/link";
+import { useLanguage } from "../context/LanguageContext";
+
+export default function SiteFooter() {
+  const { language } = useLanguage();
+
+  const t = {
+    quickLinks:
+      language === "ar"
+        ? "روابط سريعة"
+        : language === "ber"
+          ? "ⵉⵙⵖⵡⴰⵏ ⵉⵣⵔⵉⵏ"
+          : "LIENS RAPIDES",
+
+    about:
+      language === "ar"
+        ? "من نحن؟"
+        : language === "ber"
+          ? "ⵎⴰⵏ ⵏⵎⴽⴽ?"
+          : "Qui sommes-Nous ?",
+
+    services:
+      language === "ar"
+        ? "خدماتنا"
+        : language === "ber"
+          ? "ⵉⵎⵙⵙⵔⵏ"
+          : "Nos services",
+
+    communications:
+      language === "ar"
+        ? "التواصل"
+        : language === "ber"
+          ? "ⴰⵎⵙⴰⵡⴰⴹ"
+          : "Communications",
+
+    news:
+      language === "ar"
+        ? "الأخبار"
+        : language === "ber"
+          ? "ⵉⵙⵙⵓⴼⵔⵏ"
+          : "Actualités",
+
+    citizen:
+      language === "ar"
+        ? "فضاء المواطن"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ ⵏ ⵓⵎⵏⵙⴰ"
+          : "Espace citoyen",
+
+    client:
+      language === "ar"
+        ? "فضاء الزبون"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "Espace client",
+
+    contact:
+      language === "ar"
+        ? "اتصل بنا"
+        : language === "ber"
+          ? "ⵏⵏⴰⵏ"
+          : "Contact",
+
+    contactTitle:
+      language === "ar"
+        ? "اتصال"
+        : language === "ber"
+          ? "ⴰⵏⵎⵎⴰⵙ"
+          : "CONTACT",
+  };
+
   return (
     <footer className="site-footer">
       <div className="site-footer__main">
@@ -20,24 +90,26 @@ export default function SiteFooter() {`r`n  const { language } = useLanguage();
         </div>
 
         <div className="site-footer__column">
-          <span>{language === "ar" ? "روابط سريعة" : language === "ber" ? "ⵉⵙⵖⵡⴰⵏ ⵉⵣⵔⵉⵏ" : "LIENS RAPIDES"}</span>
-          <a href="#about">{language === "ar" ? "من نحن؟" : language === "ber" ? "ⵎⴰⵏ ⵏⵎⴽⴽ?" : "Qui sommes-Nous ?"}</a>
-          <a href="#services">{language === "ar" ? "خدماتنا" : language === "ber" ? "ⵉⵎⵙⵙⵔⵏ ⵏⵏⴰⵖ" : "Nos services"}</a>
-          <a href="#communications">{language === "ar" ? "التواصل" : language === "ber" ? "ⴰⵎⵙⴰⵡⴰⴹ" : "Communications"}</a>
-          <a href="#news">{language === "ar" ? "الأخبار" : language === "ber" ? "ⵉⵙⵙⵓⴼⵔⵏ" : "Actualités"}</a>
+          <span>{t.quickLinks}</span>
+          <a href="#about">{t.about}</a>
+          <a href="#services">{t.services}</a>
+          <a href="#communications">{t.communications}</a>
+          <a href="#news">{t.news}</a>
         </div>
 
         <div className="site-footer__column">
-          <span>{language === "ar" ? "الخدمات" : language === "ber" ? "ⵉⵎⵙⵙⵔⵏ" : "SERVICES"}</span>
-          <a href="#citizen-services">{language === "ar" ? "فضاء المواطن" : language === "ber" ? "ⴰⵙⵏⵓⵔⴰⵢ ⵏ ⵓⵎⴰⵣⵉⵖ" : "Espace citoyen"}</a>
-          <Link href="/espace-client">{language === "ar" ? "فضاء الزبون" : language === "ber" ? "ⴰⵙⵏⵓⵔⴰⵢ" : "Espace client"}</Link>
-          <a href="#contact">Contact</a>
+          <span>SERVICES</span>
+          <a href="#citizen-services">{t.citizen}</a>
+          <Link href="/espace-client">{t.client}</Link>
+          <Link href="/contact">{t.contact}</Link>
         </div>
 
         <div className="site-footer__contact">
-          <span>{language === "ar" ? "اتصال" : language === "ber" ? "ⴰⵏⵎⵎⴰⵙ" : "CONTACT"}</span>
+          <span>{t.contactTitle}</span>
           <a href="tel:0800002026">08 00 00 20 26</a>
-          <a href="mailto:contact@srm-go.ma">contact@srm-go.ma</a>
+          <a href="mailto:contact@srm-go.ma">
+            contact@srm-go.ma
+          </a>
           <p>
             Guelmim – Oued Noun
             <br />
@@ -47,12 +119,14 @@ export default function SiteFooter() {`r`n  const { language } = useLanguage();
       </div>
 
       <div className="site-footer__bottom">
-        <span>© {new Date().getFullYear()} SRM Guelmim – Oued Noun</span>
+        <span>
+          © {new Date().getFullYear()} SRM Guelmim – Oued Noun
+        </span>
 
-        <span>EAU · ÉLECTRICITÉ · ASSAINISSEMENT</span>
+        <span>
+          EAU · ÉLECTRICITÉ · ASSAINISSEMENT
+        </span>
       </div>
     </footer>
   );
 }
-
-
