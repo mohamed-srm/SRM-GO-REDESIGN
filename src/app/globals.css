@@ -7516,3 +7516,14 @@ textarea::placeholder {
     width: 160px !important;
   }
 }
+/* LOGO SIZE */
+.brand-logo img {
+  width: 195px !important;
+  height: auto !important;
+}
+
+@media (max-width: 1100px) {
+  .brand-logo img {
+    width: 180px !important;
+  }
+}
