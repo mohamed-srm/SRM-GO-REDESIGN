@@ -7548,3 +7548,31 @@ textarea::placeholder {
     margin-left: 0 !important;
   }
 }
+/* TOPBAR - ALIGN WITH LOGO */
+.topbar-inner {
+  position: relative !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 40px !important;
+  box-sizing: border-box !important;
+}
+
+.topbar-left {
+  margin-left: 0 !important;
+  justify-self: start !important;
+}
+
+.topbar-right {
+  margin-left: auto !important;
+}
+
+@media (max-width: 900px) {
+  .topbar-inner {
+    padding: 0 20px !important;
+  }
+
+  .topbar-left {
+    margin-left: 0 !important;
+  }
+}
