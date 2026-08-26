@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "../../../context/LanguageContext";
 
 export default function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -9,6 +10,135 @@ export default function ChangePasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { language } = useLanguage();
+
+  const t = {
+    client:
+      language === "ar"
+        ? "فضاء الزبون"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "ESPACE CLIENT",
+
+    title1:
+      language === "ar"
+        ? "احموا"
+        : language === "ber"
+          ? "ⵃⵎⵓ"
+          : "Protégez votre",
+
+    title2:
+      language === "ar"
+        ? "حسابكم."
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ ⵏⵏⴽ."
+          : "compte.",
+
+    visualText:
+      language === "ar"
+        ? "غيّروا كلمة المرور بانتظام لتعزيز أمان فضاء الزبون الخاص بكم."
+        : language === "ber"
+          ? "ⵙⵙⵏⴼⵍ ⵜⴰⵔⵔⴰⵙⵜ ⵏⵏⴽ ⵙ ⵓⵣⵎⵣ ⴰⴼⴰ ⴰⴷ ⵜⵙⵙⵏⴷ ⵜⵉⵙⵙⴰⵙ."
+          : "Modifiez votre mot de passe régulièrement pour renforcer la sécurité de votre espace client.",
+
+    back:
+      language === "ar"
+        ? "← العودة إلى الملف الشخصي"
+        : language === "ber"
+          ? "← ⵓⵔⴰⵔ ⵙ ⵓⵙⵏⴰⵙ"
+          : "← Retour au profil",
+
+    security:
+      language === "ar"
+        ? "الأمان"
+        : language === "ber"
+          ? "ⵜⵉⵙⵙⴰⵙ"
+          : "SÉCURITÉ",
+
+    formTitle:
+      language === "ar"
+        ? "تغيير كلمة المرور"
+        : language === "ber"
+          ? "ⵙⵙⵏⴼⵍ ⵜⴰⵔⵔⴰⵙⵜ"
+          : "Modifier le mot de passe",
+
+    intro:
+      language === "ar"
+        ? "أدخلوا كلمة المرور الحالية ثم اختاروا كلمة مرور جديدة."
+        : language === "ber"
+          ? "ⴽⵛⵎ ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵔⵓⵜ ⴷ ⵙⵙⵏⴼⵍ ⵜⵜ ⵙ ⵜⵎⴰⵢⵏⵓⵜ."
+          : "Entrez votre ancien mot de passe puis choisissez le nouveau.",
+
+    current:
+      language === "ar"
+        ? "كلمة المرور الحالية"
+        : language === "ber"
+          ? "ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵔⵓⵜ"
+          : "Mot de passe actuel",
+
+    newPassword:
+      language === "ar"
+        ? "كلمة المرور الجديدة"
+        : language === "ber"
+          ? "ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ"
+          : "Nouveau mot de passe",
+
+    confirm:
+      language === "ar"
+        ? "تأكيد كلمة المرور الجديدة"
+        : language === "ber"
+          ? "ⵙⵙⵏ ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ"
+          : "Confirmer le nouveau mot de passe",
+
+    minimum:
+      language === "ar"
+        ? "8 أحرف على الأقل"
+        : language === "ber"
+          ? "ⵎⴰⵔⵔⴰ 8 ⵏ ⵉⵙⴽⴽⵉⵍⵏ"
+          : "Minimum 8 caractères",
+
+    loading:
+      language === "ar"
+        ? "جارٍ التعديل..."
+        : language === "ber"
+          ? "ⵉⵜⵜⵡⴰⵙⵙⵏ..."
+          : "Modification...",
+
+    submit:
+      language === "ar"
+        ? "تغيير كلمة المرور"
+        : language === "ber"
+          ? "ⵙⵙⵏⴼⵍ ⵜⴰⵔⵔⴰⵙⵜ"
+          : "Modifier le mot de passe",
+
+    weak:
+      language === "ar"
+        ? "يجب أن تتكون كلمة المرور الجديدة من 8 أحرف على الأقل."
+        : language === "ber"
+          ? "ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ ⵉⵍⴰ ⴰⴷ ⵜⴳ 8 ⵏ ⵉⵙⴽⴽⵉⵍⵏ."
+          : "Le nouveau mot de passe doit contenir au moins 8 caractères.",
+
+    mismatch:
+      language === "ar"
+        ? "كلمتا المرور غير متطابقتين."
+        : language === "ber"
+          ? "ⵜⵉⵔⵔⴰⵙⵉⵏ ⵓⵔ ⵎⵎⵉⴷⵏⵜ."
+          : "Les mots de passe ne correspondent pas.",
+
+    success:
+      language === "ar"
+        ? "تم تغيير كلمة المرور بنجاح."
+        : language === "ber"
+          ? "ⵜⵜⵓⵙⵙⵏ ⵜⴰⵔⵔⴰⵙⵜ ⵙ ⵓⵙⵏⴼⵍ."
+          : "Votre mot de passe a été modifié avec succès.",
+
+    serverError:
+      language === "ar"
+        ? "تعذر الاتصال بالخادم."
+        : language === "ber"
+          ? "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵏⵙⵙⵏ ⴷ ⵓⵙⵏⵓⵔ."
+          : "Impossible de contacter le serveur.",
+  };
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -16,12 +146,12 @@ export default function ChangePasswordPage() {
     event.preventDefault();
 
     if (newPassword.length < 8) {
-      setMessage("Le nouveau mot de passe doit contenir au moins 8 caractères.");
+      setMessage(t.weak);
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setMessage("Les mots de passe ne correspondent pas.");
+      setMessage(t.mismatch);
       return;
     }
 
@@ -43,7 +173,7 @@ export default function ChangePasswordPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setMessage(data.message || "Une erreur est survenue.");
+        setMessage(data.message || t.serverError);
         return;
       }
 
@@ -51,9 +181,9 @@ export default function ChangePasswordPage() {
       setNewPassword("");
       setConfirmPassword("");
 
-      setMessage("Votre mot de passe a été modifié avec succès.");
+      setMessage(t.success);
     } catch {
-      setMessage("Impossible de contacter le serveur.");
+      setMessage(t.serverError);
     } finally {
       setLoading(false);
     }
@@ -72,18 +202,15 @@ export default function ChangePasswordPage() {
         </div>
 
         <div className="client-page__visual-content">
-          <span>ESPACE CLIENT</span>
+          <span>{t.client}</span>
 
           <h1>
-            Protégez votre
+            {t.title1}
             <br />
-            <strong>compte.</strong>
+            <strong>{t.title2}</strong>
           </h1>
 
-          <p>
-            Modifiez votre mot de passe régulièrement pour renforcer
-            la sécurité de votre espace client.
-          </p>
+          <p>{t.visualText}</p>
         </div>
       </div>
 
@@ -92,23 +219,23 @@ export default function ChangePasswordPage() {
           href="/espace-client/profil"
           className="client-page__back"
         >
-          ← Retour au profil
+          {t.back}
         </Link>
 
         <div className="client-form">
           <div className="client-form__eyebrow">
-            SÉCURITÉ
+            {t.security}
           </div>
 
-          <h2>Modifier le mot de passe</h2>
+          <h2>{t.formTitle}</h2>
 
           <p className="client-form__intro">
-            Entrez votre ancien mot de passe puis choisissez le nouveau.
+            {t.intro}
           </p>
 
           <form onSubmit={handleSubmit}>
             <label htmlFor="currentPassword">
-              Mot de passe actuel
+              {t.current}
             </label>
 
             <input
@@ -123,7 +250,7 @@ export default function ChangePasswordPage() {
             />
 
             <label htmlFor="newPassword">
-              Nouveau mot de passe
+              {t.newPassword}
             </label>
 
             <input
@@ -133,13 +260,13 @@ export default function ChangePasswordPage() {
               onChange={(event) =>
                 setNewPassword(event.target.value)
               }
-              placeholder="Minimum 8 caractères"
+              placeholder={t.minimum}
               autoComplete="new-password"
               required
             />
 
             <label htmlFor="confirmPassword">
-              Confirmer le nouveau mot de passe
+              {t.confirm}
             </label>
 
             <input
@@ -158,7 +285,7 @@ export default function ChangePasswordPage() {
               className="client-form__submit"
               disabled={loading}
             >
-              {loading ? "Modification..." : "Modifier le mot de passe"}
+              {loading ? t.loading : t.submit}
               {!loading && <span>→</span>}
             </button>
           </form>
