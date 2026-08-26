@@ -7694,3 +7694,204 @@ textarea::placeholder {
   100% { opacity: 1; }
 }
 .language-switch{border:0;background:transparent;color:inherit;padding:0;margin:0;font:inherit;cursor:pointer}.language-switch:hover{text-decoration:underline}
+/* ===== SRM GLOBAL TYPOGRAPHY ===== */
+
+:root {
+  --font-site:
+    "Inter",
+    "Segoe UI",
+    "Noto Sans",
+    "Noto Sans Arabic",
+    Arial,
+    sans-serif;
+}
+
+html,
+body {
+  font-family: var(--font-site);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body,
+button,
+input,
+textarea,
+select,
+a {
+  font-family: var(--font-site);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-site);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-rendering: optimizeLegibility;
+}
+
+/* Main hero */
+.hero h1 {
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.hero p,
+.hero-description {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.65;
+}
+
+/* Navigation */
+.nav-links a,
+.topbar,
+.client-button,
+.news-all-link,
+.project-link,
+.citizen-card,
+button {
+  font-family: var(--font-site);
+}
+
+.nav-links a {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Buttons */
+button,
+.client-button,
+.hero-actions a,
+.login-button,
+.client-form__submit {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Forms */
+input,
+textarea,
+select {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+label {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Cards / dashboard */
+.dashboard-page,
+.dashboard-page h1,
+.dashboard-page h2,
+.dashboard-page h3,
+.profile-page,
+.profile-page h1,
+.profile-page h2,
+.profile-page h3,
+.invoice-card,
+.request-card {
+  font-family: var(--font-site);
+}
+
+.dashboard-label,
+.profile-eyebrow,
+.profile-card-label,
+.invoice-eyebrow,
+.invoice-card-label,
+.request-label {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* Footer */
+.site-footer {
+  font-family: var(--font-site);
+}
+
+.site-footer a,
+.site-footer p,
+.site-footer span {
+  letter-spacing: -0.01em;
+}
+
+/* Contact */
+.srm-contact-page {
+  font-family: var(--font-site);
+}
+
+.srm-contact-page h1,
+.srm-contact-page h2 {
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+/* Arabic + Tifinagh */
+[dir="rtl"],
+[dir="rtl"] body,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  font-family:
+    "Noto Sans Arabic",
+    "Noto Sans",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6 {
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+/* Tifinagh readability */
+html[lang="zgh"] body {
+  font-family:
+    "Noto Sans",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+html[lang="zgh"] h1,
+html[lang="zgh"] h2,
+html[lang="zgh"] h3,
+html[lang="zgh"] p,
+html[lang="zgh"] a,
+html[lang="zgh"] button {
+  letter-spacing: 0;
+}
+
+/* Better text rhythm everywhere */
+p {
+  line-height: 1.65;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Prevent ugly inherited browser fonts */
+input::placeholder,
+textarea::placeholder {
+  font-family: var(--font-site);
+  opacity: 0.72;
+}
