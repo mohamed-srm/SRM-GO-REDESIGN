@@ -2,49 +2,200 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const { language } = useLanguage();
+
+  const t = {
+    back:
+      language === "ar"
+        ? "← العودة إلى الموقع"
+        : language === "ber"
+          ? "← ⵓⵔⴰⵔ ⵙ ⵓⵙⵏⴰ"
+          : "← Retour au site",
+
+    label:
+      language === "ar"
+        ? "اتصل بنا"
+        : language === "ber"
+          ? "ⵏⵏⴰⵏ"
+          : "CONTACT",
+
+    title1:
+      language === "ar"
+        ? "نحن دائماً"
+        : language === "ber"
+          ? "ⵏⴽⴽⵏⵉ ⵏⵍⴰ"
+          : "Nous sommes",
+
+    title2:
+      language === "ar"
+        ? "في خدمتكم."
+        : language === "ber"
+          ? "ⴷⴰⵔ ⵡⴰⵡⵔⴰ."
+          : "à votre écoute.",
+
+    intro:
+      language === "ar"
+        ? "لديكم سؤال أو طلب معلومات أو ملاحظة؟ تواصلوا مع الشركة الجهوية متعددة الخدمات كلميم واد نون."
+        : language === "ber"
+          ? "ⵉⵙ ⵖⵓⵔⴽ ⵙⵏⴰ ⵖⵔ ⵓⵙⵇⵙⵉ ⵏⵉⵖ ⵉⵙⵇⵙⵉⵏ؟ ⵙⵙⵉⵡⵍ ⴷ SRM ⴳⵯⵍⵎⵉⵎ ⵡⴰⴷ ⵏ ⵏⵓⵏ."
+          : "Une question, une demande d'information ou une remarque ? Contactez la SRM Guelmim – Oued Noun.",
+
+    write:
+      language === "ar"
+        ? "اكتبوا إلينا"
+        : language === "ber"
+          ? "ⴰⵔⴰ ⴰⵏⵖ"
+          : "NOUS ÉCRIRE",
+
+    formTitle1:
+      language === "ar"
+        ? "أرسلوا لنا"
+        : language === "ber"
+          ? "ⴰⵣⵏ ⴰⵏⵖ"
+          : "Envoyez-nous",
+
+    formTitle2:
+      language === "ar"
+        ? "رسالتكم."
+        : language === "ber"
+          ? "ⵜⴰⵙⵏⴰⵢⵜ."
+          : "votre message.",
+
+    firstName:
+      language === "ar" ? "الاسم" : language === "ber" ? "ⵉⵙⵎ" : "Prénom",
+    lastName:
+      language === "ar" ? "النسب" : language === "ber" ? "ⵙⵙⵎ" : "Nom",
+    phone:
+      language === "ar" ? "الهاتف" : language === "ber" ? "ⵜⵉⵍⵉⴼⵓⵏ" : "Téléphone",
+    email:
+      language === "ar" ? "البريد الإلكتروني" : language === "ber" ? "ⵉⵎⴰⵢⵍ" : "Email",
+    subject:
+      language === "ar" ? "الموضوع" : language === "ber" ? "ⴰⵙⵏⴼⵍ" : "Sujet",
+    message:
+      language === "ar" ? "رسالتكم" : language === "ber" ? "ⵜⴰⵙⵏⴰⵢⵜ ⵏⵏⴽ" : "Votre message",
+
+    firstNamePlaceholder:
+      language === "ar" ? "الاسم الشخصي" : language === "ber" ? "ⵉⵙⵎ ⵏⵏⴽ" : "Votre prénom",
+    lastNamePlaceholder:
+      language === "ar" ? "النسب" : language === "ber" ? "ⵙⵙⵎ ⵏⵏⴽ" : "Votre nom",
+    phonePlaceholder:
+      language === "ar" ? "06 XX XX XX XX" : "06 XX XX XX XX",
+    emailPlaceholder:
+      language === "ar" ? "votre@email.com" : "votre@email.com",
+    subjectPlaceholder:
+      language === "ar" ? "موضوع رسالتكم" : language === "ber" ? "ⴰⵙⵏⴼⵍ ⵏ ⵜⴰⵙⵏⴰⵢⵜ" : "Objet de votre message",
+    messagePlaceholder:
+      language === "ar" ? "اكتبوا رسالتكم..." : language === "ber" ? "ⴰⵔⴰ ⵜⴰⵙⵏⴰⵢⵜ ⵏⵏⴽ..." : "Écrivez votre message...",
+
+    send:
+      language === "ar"
+        ? "إرسال الرسالة"
+        : language === "ber"
+          ? "ⴰⵣⵏ ⵜⴰⵙⵏⴰⵢⵜ"
+          : "Envoyer le message",
+
+    sent:
+      language === "ar"
+        ? "تم إرسال الرسالة ✓"
+        : language === "ber"
+          ? "ⵜⵜⵓⵣⵏ ⵜⴰⵙⵏⴰⵢⵜ ✓"
+          : "Message envoyé ✓",
+
+    coordinates:
+      language === "ar"
+        ? "معلومات الاتصال"
+        : language === "ber"
+          ? "ⵜⵉⵏⵎⵍⵜ"
+          : "COORDONNÉES",
+
+    contactTitle1:
+      language === "ar"
+        ? "ابقوا"
+        : language === "ber"
+          ? "ⵇⵇⵉⵎ"
+          : "Restons",
+
+    contactTitle2:
+      language === "ar"
+        ? "على تواصل."
+        : language === "ber"
+          ? "ⴷⴰⵔ ⵙ ⵏⵏⴰⵏ."
+          : "en contact.",
+
+    contactDesc:
+      language === "ar"
+        ? "تجدون هنا أهم وسائل التواصل مع الشركة الجهوية متعددة الخدمات كلميم واد نون."
+        : language === "ber"
+          ? "ⴰⴷ ⵜⵣⵔⵉⴷ ⴷⴰ ⵉⵎⵙⵙⵔⵏ ⵏ ⵓⵙⵉⵡⵍ ⴷ SRM ⴳⵯⵍⵎⵉⵎ ⵡⴰⴷ ⵏ ⵏⵓⵏ."
+          : "Retrouvez ici les principaux moyens de contacter la SRM Guelmim – Oued Noun.",
+
+    greenNumber:
+      language === "ar"
+        ? "الرقم الأخضر"
+        : language === "ber"
+          ? "ⵓⵟⵟⵓⵏ ⴰⵣⵣⵉⵢⵣ"
+          : "NUMÉRO VERT",
+
+    address:
+      language === "ar" ? "العنوان" : language === "ber" ? "ⵜⴰⵏⵎⵎⵉⵔⵜ" : "ADRESSE",
+
+    hours:
+      language === "ar" ? "أوقات العمل" : language === "ber" ? "ⵉⵎⵉⵔ ⵏ ⵓⵙⵏⵓⵔⴰⵢ" : "HORAIRES",
+
+    follow:
+      language === "ar"
+        ? "تابعونا"
+        : language === "ber"
+          ? "ⵙⵙⵉⵡⵍ ⵉⵙ"
+          : "NOUS SUIVRE",
+
+    weekdays:
+      language === "ar"
+        ? "من الإثنين إلى الجمعة"
+        : language === "ber"
+          ? "ⵙⴳ ⵉⵎⴰⵙⵙ ⴰⵔ ⵉⵎⴰⵙⵙ"
+          : "Lundi au vendredi",
+  };
 
   return (
     <main className="srm-contact-page">
       <section className="srm-contact-hero">
         <div className="container">
           <Link href="/" className="srm-contact-back">
-            ← Retour au site
+            {t.back}
           </Link>
 
           <div className="section-label">
-            CONTACT
+            {t.label}
             <span></span>
           </div>
 
           <h1>
-            Nous sommes
+            {t.title1}
             <br />
-            <strong>à votre écoute.</strong>
+            <strong>{t.title2}</strong>
           </h1>
 
-          <p>
-            Une question, une demande d'information ou une remarque ?
-            Contactez la SRM Guelmim – Oued Noun.
-          </p>
+          <p>{t.intro}</p>
         </div>
       </section>
 
       <section className="srm-contact-content">
         <div className="container">
           <div className="srm-contact-grid">
-
             <div className="srm-contact-form-card">
               <span className="srm-contact-eyebrow">
-                NOUS ÉCRIRE
+                {t.write}
               </span>
 
               <h2>
-                Envoyez-nous
+                {t.formTitle1}
                 <br />
-                votre message.
+                {t.formTitle2}
               </h2>
 
               <form
@@ -55,19 +206,19 @@ export default function ContactPage() {
               >
                 <div className="srm-contact-row">
                   <div>
-                    <label>Prénom</label>
+                    <label>{t.firstName}</label>
                     <input
                       type="text"
-                      placeholder="Votre prénom"
+                      placeholder={t.firstNamePlaceholder}
                       required
                     />
                   </div>
 
                   <div>
-                    <label>Nom</label>
+                    <label>{t.lastName}</label>
                     <input
                       type="text"
-                      placeholder="Votre nom"
+                      placeholder={t.lastNamePlaceholder}
                       required
                     />
                   </div>
@@ -75,43 +226,43 @@ export default function ContactPage() {
 
                 <div className="srm-contact-row">
                   <div>
-                    <label>Téléphone</label>
+                    <label>{t.phone}</label>
                     <input
                       type="tel"
-                      placeholder="06 XX XX XX XX"
+                      placeholder={t.phonePlaceholder}
                     />
                   </div>
 
                   <div>
-                    <label>Email</label>
+                    <label>{t.email}</label>
                     <input
                       type="email"
-                      placeholder="votre@email.com"
+                      placeholder={t.emailPlaceholder}
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label>Sujet</label>
+                  <label>{t.subject}</label>
                   <input
                     type="text"
-                    placeholder="Objet de votre message"
+                    placeholder={t.subjectPlaceholder}
                     required
                   />
                 </div>
 
                 <div>
-                  <label>Votre message</label>
+                  <label>{t.message}</label>
                   <textarea
                     rows={7}
-                    placeholder="Écrivez votre message..."
+                    placeholder={t.messagePlaceholder}
                     required
                   />
                 </div>
 
                 <button type="submit">
-                  {sent ? "Message envoyé ✓" : "Envoyer le message"}
+                  {sent ? t.sent : t.send}
                   {!sent && <span>→</span>}
                 </button>
               </form>
@@ -120,24 +271,21 @@ export default function ContactPage() {
             <aside className="srm-contact-info">
               <div className="srm-contact-info-head">
                 <span className="srm-contact-eyebrow">
-                  COORDONNÉES
+                  {t.coordinates}
                 </span>
 
                 <h2>
-                  Restons
+                  {t.contactTitle1}
                   <br />
-                  en contact.
+                  {t.contactTitle2}
                 </h2>
 
-                <p>
-                  Retrouvez ici les principaux moyens de contacter
-                  la SRM Guelmim – Oued Noun.
-                </p>
+                <p>{t.contactDesc}</p>
               </div>
 
               <div className="srm-contact-info-list">
                 <div className="srm-contact-info-item">
-                  <span>NUMÉRO VERT</span>
+                  <span>{t.greenNumber}</span>
                   <a href="tel:0800002026">
                     08 00 00 20 26
                   </a>
@@ -151,7 +299,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="srm-contact-info-item">
-                  <span>ADRESSE</span>
+                  <span>{t.address}</span>
                   <p>
                     BP294, Avenue Mohamed VI,
                     <br />
@@ -160,9 +308,9 @@ export default function ContactPage() {
                 </div>
 
                 <div className="srm-contact-info-item">
-                  <span>HORAIRES</span>
+                  <span>{t.hours}</span>
                   <p>
-                    Lundi au vendredi
+                    {t.weekdays}
                     <br />
                     08:00 à 16:30
                   </p>
@@ -170,7 +318,7 @@ export default function ContactPage() {
               </div>
 
               <div className="srm-contact-socials">
-                <span>NOUS SUIVRE</span>
+                <span>{t.follow}</span>
 
                 <div>
                   <a
@@ -211,7 +359,6 @@ export default function ContactPage() {
                 </div>
               </div>
             </aside>
-
           </div>
         </div>
       </section>
