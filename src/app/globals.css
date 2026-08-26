@@ -7216,3 +7216,39 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* CONTACT FORM - FIELD VISIBILITY */
+.srm-contact-form-card input,
+.srm-contact-form-card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #c9d9e4;
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--navy);
+  outline: none;
+  padding: 14px 15px;
+  font: inherit;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.srm-contact-form-card input {
+  height: 52px;
+}
+
+.srm-contact-form-card textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.srm-contact-form-card input::placeholder,
+.srm-contact-form-card textarea::placeholder {
+  color: #7d95a8;
+  opacity: 1;
+}
+
+.srm-contact-form-card input:focus,
+.srm-contact-form-card textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(8, 127, 193, 0.10);
+}
