@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function ResetPasswordForm({
   token,
@@ -12,6 +13,142 @@ export default function ResetPasswordForm({
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { language } = useLanguage();
+
+  const t = {
+    visualEyebrow:
+      language === "ar"
+        ? "فضاء الزبون"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "ESPACE CLIENT",
+
+    title1:
+      language === "ar"
+        ? "أمّنوا"
+        : language === "ber"
+          ? "ⵙⵙⵉⵔⵉ"
+          : "Sécurisez votre",
+
+    title2:
+      language === "ar"
+        ? "ولوجكم."
+        : language === "ber"
+          ? "ⵓⵙⴰⵎⵎⵓ."
+          : "accès.",
+
+    visualDescription:
+      language === "ar"
+        ? "اختاروا كلمة مرور جديدة لحماية فضاء الزبون الخاص بكم."
+        : language === "ber"
+          ? "ⵙⵙⵏ ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ ⴰⴷ ⵜⴼⵔⵓⴷ ⵓⵙⵏⵓⵔⴰⵢ ⵏⵏⴽ."
+          : "Choisissez un nouveau mot de passe pour sécuriser votre espace client.",
+
+    back:
+      language === "ar"
+        ? "← العودة إلى تسجيل الدخول"
+        : language === "ber"
+          ? "← ⵓⵔⴰⵔ ⵙ ⵓⴽⵛⵎ"
+          : "← Retour à la connexion",
+
+    eyebrow:
+      language === "ar"
+        ? "كلمة مرور جديدة"
+        : language === "ber"
+          ? "ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ"
+          : "NOUVEAU MOT DE PASSE",
+
+    title:
+      language === "ar"
+        ? "إعادة التعيين"
+        : language === "ber"
+          ? "ⴰⵍⵙ"
+          : "Réinitialiser",
+
+    intro:
+      language === "ar"
+        ? "أدخلوا كلمة المرور الجديدة."
+        : language === "ber"
+          ? "ⴽⵛⵎ ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ."
+          : "Entrez votre nouveau mot de passe.",
+
+    password:
+      language === "ar"
+        ? "كلمة المرور الجديدة"
+        : language === "ber"
+          ? "ⵜⴰⵔⵔⴰⵙⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ"
+          : "Nouveau mot de passe",
+
+    passwordPlaceholder:
+      language === "ar"
+        ? "8 أحرف على الأقل"
+        : language === "ber"
+          ? "ⵎⴰⵔⵔⴰ 8 ⵏ ⵉⵙⴽⴽⵉⵍⵏ"
+          : "Minimum 8 caractères",
+
+    confirm:
+      language === "ar"
+        ? "تأكيد كلمة المرور"
+        : language === "ber"
+          ? "ⵙⵙⵏ ⵜⴰⵔⵔⴰⵙⵜ"
+          : "Confirmer le mot de passe",
+
+    confirmPlaceholder:
+      language === "ar"
+        ? "أعيدوا كتابة كلمة المرور"
+        : language === "ber"
+          ? "ⴰⵍⵙ ⵓⵔⴰⵔ ⵜⴰⵔⵔⴰⵙⵜ"
+          : "Répétez le mot de passe",
+
+    submit:
+      language === "ar"
+        ? "تعديل كلمة المرور"
+        : language === "ber"
+          ? "ⵙⵙⵏ ⵜⴰⵔⵔⴰⵙⵜ"
+          : "Modifier le mot de passe",
+
+    loading:
+      language === "ar"
+        ? "جارٍ المعالجة..."
+        : language === "ber"
+          ? "ⵉⵜⵜⵡⴰⵙⵏ..."
+          : "Traitement...",
+
+    invalidToken:
+      language === "ar"
+        ? "رابط الاسترجاع غير صالح."
+        : language === "ber"
+          ? "ⴰⵙⵖⵏ ⵓⵔ ⵉⵎⵍⵉ."
+          : "Lien de récupération invalide.",
+
+    weak:
+      language === "ar"
+        ? "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل."
+        : language === "ber"
+          ? "ⵜⴰⵔⵔⴰⵙⵜ ⵉⵍⴰ ⴰⴷ ⵜⴳ 8 ⵏ ⵉⵙⴽⴽⵉⵍⵏ."
+          : "Le mot de passe doit contenir au moins 8 caractères.",
+
+    mismatch:
+      language === "ar"
+        ? "كلمتا المرور غير متطابقتين."
+        : language === "ber"
+          ? "ⵜⵉⵔⵔⴰⵙⵉⵏ ⵓⵔ ⵎⵎⵉⴷⵏⵜ."
+          : "Les mots de passe ne correspondent pas.",
+
+    success:
+      language === "ar"
+        ? "تم تغيير كلمة المرور بنجاح."
+        : language === "ber"
+          ? "ⵜⵜⵓⵙⵙⵏ ⵜⴰⵔⵔⴰⵙⵜ ⵙ ⵓⵙⵏⴼⵍ."
+          : "Mot de passe modifié avec succès.",
+
+    serverError:
+      language === "ar"
+        ? "تعذر الاتصال بالخادم."
+        : language === "ber"
+          ? "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵏⵙⵙⵏ ⴷ ⵓⵙⵏⵓⵔ."
+          : "Impossible de contacter le serveur.",
+  };
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -19,17 +156,17 @@ export default function ResetPasswordForm({
     event.preventDefault();
 
     if (!token) {
-      setMessage("Lien de récupération invalide.");
+      setMessage(t.invalidToken);
       return;
     }
 
     if (password.length < 8) {
-      setMessage("Le mot de passe doit contenir au moins 8 caractères.");
+      setMessage(t.weak);
       return;
     }
 
     if (password !== confirmPassword) {
-      setMessage("Les mots de passe ne correspondent pas.");
+      setMessage(t.mismatch);
       return;
     }
 
@@ -55,13 +192,13 @@ export default function ResetPasswordForm({
         return;
       }
 
-      setMessage("Mot de passe modifié avec succès.");
+      setMessage(t.success);
 
       setTimeout(() => {
         window.location.href = "/espace-client";
       }, 1200);
     } catch {
-      setMessage("Impossible de contacter le serveur.");
+      setMessage(t.serverError);
     } finally {
       setLoading(false);
     }
@@ -80,17 +217,15 @@ export default function ResetPasswordForm({
         </div>
 
         <div className="client-page__visual-content">
-          <span>ESPACE CLIENT</span>
+          <span>{t.visualEyebrow}</span>
 
           <h1>
-            Sécurisez votre
+            {t.title1}
             <br />
-            <strong>accès.</strong>
+            <strong>{t.title2}</strong>
           </h1>
 
-          <p>
-            Choisissez un nouveau mot de passe pour sécuriser votre espace client.
-          </p>
+          <p>{t.visualDescription}</p>
         </div>
       </div>
 
@@ -99,37 +234,39 @@ export default function ResetPasswordForm({
           href="/espace-client"
           className="client-page__back"
         >
-          ← Retour à la connexion
+          {t.back}
         </Link>
 
         <div className="client-form">
           <div className="client-form__eyebrow">
-            NOUVEAU MOT DE PASSE
+            {t.eyebrow}
           </div>
 
-          <h2>Réinitialiser</h2>
+          <h2>{t.title}</h2>
 
           <p className="client-form__intro">
-            Entrez votre nouveau mot de passe.
+            {t.intro}
           </p>
 
           <form onSubmit={handleSubmit}>
             <label htmlFor="password">
-              Nouveau mot de passe
+              {t.password}
             </label>
 
             <input
               id="password"
               type="password"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Minimum 8 caractères"
+              onChange={(event) =>
+                setPassword(event.target.value)
+              }
+              placeholder={t.passwordPlaceholder}
               autoComplete="new-password"
               required
             />
 
             <label htmlFor="confirmPassword">
-              Confirmer le mot de passe
+              {t.confirm}
             </label>
 
             <input
@@ -139,7 +276,7 @@ export default function ResetPasswordForm({
               onChange={(event) =>
                 setConfirmPassword(event.target.value)
               }
-              placeholder="Répétez le mot de passe"
+              placeholder={t.confirmPlaceholder}
               autoComplete="new-password"
               required
             />
@@ -149,7 +286,7 @@ export default function ResetPasswordForm({
               className="client-form__submit"
               disabled={loading}
             >
-              {loading ? "Traitement..." : "Modifier le mot de passe"}
+              {loading ? t.loading : t.submit}
               {!loading && <span>→</span>}
             </button>
           </form>
