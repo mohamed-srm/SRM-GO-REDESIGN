@@ -7490,3 +7490,29 @@ textarea::placeholder {
     justify-content: space-between !important;
   }
 }
+/* TOP BAR + LOGO FINAL TUNING */
+.topbar-inner {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
+.topbar-left,
+.topbar-right {
+  gap: 10px !important;
+}
+
+.brand-logo img {
+  width: 175px !important;
+  height: auto !important;
+}
+
+.brand-logo {
+  display: flex !important;
+  align-items: center !important;
+}
+
+@media (max-width: 1100px) {
+  .brand-logo img {
+    width: 160px !important;
+  }
+}
