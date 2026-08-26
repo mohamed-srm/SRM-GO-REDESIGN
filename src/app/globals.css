@@ -7252,3 +7252,28 @@ a {
   border-color: var(--blue);
   box-shadow: 0 0 0 3px rgba(8, 127, 193, 0.10);
 }
+/* GLOBAL INPUT STYLE */
+input,
+textarea,
+select {
+  box-sizing: border-box;
+  border: 1px solid #c9d9e4;
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--navy);
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(8, 127, 193, 0.10);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #7d95a8;
+  opacity: 1;
+}
