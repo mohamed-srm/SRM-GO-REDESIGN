@@ -2,11 +2,155 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function EspaceClientPage() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { language } = useLanguage();
+
+  const t = {
+    visualEyebrow:
+      language === "ar"
+        ? "فضاء الزبون"
+        : language === "ber"
+          ? "ⴰⵙⵏⵓⵔⴰⵢ"
+          : "ESPACE CLIENT",
+
+    visualTitle1:
+      language === "ar"
+        ? "خدماتكم،"
+        : language === "ber"
+          ? "ⵉⵎⵙⵙⵔⵏ ⵏⵏⴽ,"
+          : "Vos services,",
+
+    visualTitle2:
+      language === "ar"
+        ? "في مكان واحد."
+        : language === "ber"
+          ? "ⴷⵉ ⵢⴰⵏ ⵡⴰⵎⴰⵏ."
+          : "au même endroit.",
+
+    visualDescription:
+      language === "ar"
+        ? "ولوجوا إلى فضائكم الشخصي للاطلاع على طلباتكم وخدماتكم."
+        : language === "ber"
+          ? "ⴽⵛⵎ ⵖⵔ ⵓⵙⵏⵓⵔⴰⵢ ⵏⵏⴽ ⴰⴼⴰ ⴰⴷ ⵜⵣⵔⵉⴷ ⵉⵎⵙⵙⵔⵏ ⴷ ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ."
+          : "Accédez à votre espace personnel pour retrouver vos démarches et services.",
+
+    back:
+      language === "ar"
+        ? "← العودة إلى الموقع"
+        : language === "ber"
+          ? "← ⵓⵔⴰⵔ ⵙ ⵓⵙⵏⴰ"
+          : "← Retour au site",
+
+    eyebrow:
+      language === "ar"
+        ? "تسجيل الدخول"
+        : language === "ber"
+          ? "ⴽⵛⵎ"
+          : "CONNEXION",
+
+    welcome:
+      language === "ar"
+        ? "مرحباً"
+        : language === "ber"
+          ? "ⵉⵙⵡⵉ"
+          : "Bienvenue",
+
+    intro:
+      language === "ar"
+        ? "سجّلوا الدخول إلى فضاء الزبون."
+        : language === "ber"
+          ? "ⴽⵛⵎ ⵙ ⵖⵔ ⵓⵙⵏⵓⵔⴰⵢ ⵏ ⵓⵙⴰⵎⵓ."
+          : "Connectez-vous à votre Espace Client.",
+
+    identifier:
+      language === "ar"
+        ? "المعرّف"
+        : language === "ber"
+          ? "ⴰⵎⵎⴰⵍ"
+          : "Identifiant",
+
+    identifierPlaceholder:
+      language === "ar"
+        ? "المعرّف الخاص بكم"
+        : language === "ber"
+          ? "ⴰⵎⵎⴰⵍ ⵏⵏⴽ"
+          : "Votre identifiant",
+
+    password:
+      language === "ar"
+        ? "كلمة المرور"
+        : language === "ber"
+          ? "ⵜⴰⵔⵔⴰⵙⵜ"
+          : "Mot de passe",
+
+    passwordPlaceholder:
+      language === "ar"
+        ? "كلمة المرور الخاصة بكم"
+        : language === "ber"
+          ? "ⵜⴰⵔⵔⴰⵙⵜ ⵏⵏⴽ"
+          : "Votre mot de passe",
+
+    show:
+      language === "ar"
+        ? "إظهار"
+        : language === "ber"
+          ? "ⵙⵙⴽⵏ"
+          : "Afficher",
+
+    hide:
+      language === "ar"
+        ? "إخفاء"
+        : language === "ber"
+          ? "ⵎⵎⵏ"
+          : "Masquer",
+
+    forgot:
+      language === "ar"
+        ? "هل نسيتم كلمة المرور؟"
+        : language === "ber"
+          ? "ⵜⵙⵙⵏⴷ ⵜⴰⵔⵔⴰⵙⵜ?"
+          : "Mot de passe oublié ?",
+
+    noAccount:
+      language === "ar"
+        ? "ليس لديكم حساب بعد؟"
+        : language === "ber"
+          ? "ⵓⵔ ⵖⵓⵔⴽ ⵓⵙⵏⵓⵔⴰⵢ?"
+          : "Vous n’avez pas encore de compte ?",
+
+    create:
+      language === "ar"
+        ? "إنشاء حساب"
+        : language === "ber"
+          ? "ⵙⵏⵓⵔⴰⵢ ⵢⴰⵏ ⵓⵙⵏⵓⵔⴰⵢ"
+          : "Créer un compte",
+
+    submit:
+      language === "ar"
+        ? "تسجيل الدخول"
+        : language === "ber"
+          ? "ⴽⵛⵎ"
+          : "Se connecter",
+
+    help:
+      language === "ar"
+        ? "تحتاجون إلى المساعدة؟"
+        : language === "ber"
+          ? "ⵜⵙⵙⵓⵔⴷ ⴰⵙⵙⵉⵏ?"
+          : "Besoin d'aide ?",
+
+    error:
+      language === "ar"
+        ? "تعذر الاتصال بالخادم."
+        : language === "ber"
+          ? "ⵓⵔ ⵉⵎⴽ ⴰⴷ ⵏⵙⵙⵏ ⴷ ⵓⵙⵏⵓⵔ."
+          : "Impossible de contacter le serveur.",
+  };
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -28,14 +172,14 @@ export default function EspaceClientPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.message || "Erreur de connexion.");
+        alert(data.message || t.error);
         return;
       }
 
       window.location.href = "/espace-client/dashboard";
     } catch (error) {
       console.error("Login error:", error);
-      alert("Impossible de contacter le serveur.");
+      alert(t.error);
     }
   };
 
@@ -52,40 +196,37 @@ export default function EspaceClientPage() {
         </div>
 
         <div className="client-page__visual-content">
-          <span>ESPACE CLIENT</span>
+          <span>{t.visualEyebrow}</span>
 
           <h1>
-            Vos services,
+            {t.visualTitle1}
             <br />
-            <strong>au même endroit.</strong>
+            <strong>{t.visualTitle2}</strong>
           </h1>
 
-          <p>
-            Accédez à votre espace personnel pour retrouver vos
-            démarches et services.
-          </p>
+          <p>{t.visualDescription}</p>
         </div>
       </div>
 
       <div className="client-page__form-area">
         <Link href="/" className="client-page__back">
-          ← Retour au site
+          {t.back}
         </Link>
 
         <div className="client-form">
           <div className="client-form__eyebrow">
-            CONNEXION
+            {t.eyebrow}
           </div>
 
-          <h2>Bienvenue</h2>
+          <h2>{t.welcome}</h2>
 
           <p className="client-form__intro">
-            Connectez-vous à votre Espace Client.
+            {t.intro}
           </p>
 
           <form onSubmit={handleSubmit}>
             <label htmlFor="identifier">
-              Identifiant
+              {t.identifier}
             </label>
 
             <input
@@ -95,13 +236,13 @@ export default function EspaceClientPage() {
               onChange={(event) =>
                 setIdentifier(event.target.value)
               }
-              placeholder="Votre identifiant"
+              placeholder={t.identifierPlaceholder}
               autoComplete="username"
               required
             />
 
             <label htmlFor="password">
-              Mot de passe
+              {t.password}
             </label>
 
             <div className="client-password">
@@ -112,7 +253,7 @@ export default function EspaceClientPage() {
                 onChange={(event) =>
                   setPassword(event.target.value)
                 }
-                placeholder="Votre mot de passe"
+                placeholder={t.passwordPlaceholder}
                 autoComplete="current-password"
                 required
               />
@@ -123,13 +264,13 @@ export default function EspaceClientPage() {
                   setShowPassword((value) => !value)
                 }
               >
-                {showPassword ? "Masquer" : "Afficher"}
+                {showPassword ? t.hide : t.show}
               </button>
             </div>
 
             <div className="client-form__options">
               <Link href="/espace-client/forgot-password">
-                Mot de passe oublié ?
+                {t.forgot}
               </Link>
             </div>
 
@@ -141,7 +282,7 @@ export default function EspaceClientPage() {
               }}
             >
               <span style={{ color: "var(--muted)" }}>
-                Vous n’avez pas encore de compte ?
+                {t.noAccount}
               </span>{" "}
               <Link
                 href="/espace-client/register"
@@ -150,7 +291,7 @@ export default function EspaceClientPage() {
                   fontWeight: 700,
                 }}
               >
-                Créer un compte
+                {t.create}
               </Link>
             </div>
 
@@ -158,13 +299,13 @@ export default function EspaceClientPage() {
               type="submit"
               className="client-form__submit"
             >
-              Se connecter
+              {t.submit}
               <span>→</span>
             </button>
           </form>
 
           <div className="client-form__help">
-            <span>Besoin d'aide ?</span>
+            <span>{t.help}</span>
 
             <a href="tel:0800002026">
               08 00 00 20 26
