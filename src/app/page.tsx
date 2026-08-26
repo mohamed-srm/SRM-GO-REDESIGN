@@ -56,9 +56,18 @@ export default function Home() {
             <span>FR</span>
             <span>العربية</span>
             <span>ⵜⵉⴼⵉⵏⴰⵖ</span>
-            <a className="social" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">in</a>
-            <a className="social" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">f</a>
-            <a className="social" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">▶</a>
+            <a className="social" href="https://www.linkedin.com/company/srm-go/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+            <a
+  className="social"
+  href="https://www.instagram.com/srm_guelmim_oued_noun/"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Instagram"
+>
+  ◎
+</a>
+<a className="social" href="https://www.facebook.com/SRMGO/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a className="social" href="https://www.youtube.com/channel/UCvFEUu8J2G5i-bLdhXXEy5w" target="_blank" rel="noopener noreferrer" aria-label="YouTube">▶</a>
           </div>
 
         </div>
@@ -967,6 +976,9 @@ export default function Home() {
     </main>
   );
 }
+
+
+
 
 
 
