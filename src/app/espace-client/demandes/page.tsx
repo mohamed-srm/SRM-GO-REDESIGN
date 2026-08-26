@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 type DemandeFile = {
   id: number;
@@ -80,6 +81,7 @@ export default function DemandesPage() {
     useState<RequestType>("neuf");
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState<File[]>([]);
+  const { language } = useLanguage();
 
   const selectedType =
     requestTypes.find((item) => item.id === requestType) ??
@@ -696,4 +698,5 @@ export default function DemandesPage() {
     </main>
   );
 }
+
 
