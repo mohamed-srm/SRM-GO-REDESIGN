@@ -7277,3 +7277,51 @@ textarea::placeholder {
   color: #7d95a8;
   opacity: 1;
 }
+/* HEADER SPACING / DISTRIBUTION */
+.nav-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 55px;
+}
+
+.brand-logo {
+  justify-self: start;
+}
+
+.nav-links {
+  justify-content: center;
+  gap: 34px;
+}
+
+.client-button {
+  justify-self: end;
+  margin-left: 10px;
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-left {
+  flex: 1;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 1050px) {
+  .nav-inner {
+    column-gap: 28px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+}
