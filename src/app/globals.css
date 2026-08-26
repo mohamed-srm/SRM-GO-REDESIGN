@@ -7576,3 +7576,20 @@ textarea::placeholder {
     margin-left: 0 !important;
   }
 }
+.brand-hours {
+  position: absolute;
+  left: 48px;
+  top: 126px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+@media (max-width: 900px) {
+  .brand-hours {
+    display: none;
+  }
+}
+
