@@ -146,7 +146,22 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("POST /api/demandes error:", error);
+    console.error("POST /api/demandes error:", {
+      name: error instanceof Error ? error.name : "UnknownError",
+      message: error instanceof Error ? error.message : String(error),
+      code:
+        typeof error === "object" &&
+        error !== null &&
+        "code" in error
+          ? String((error as { code?: unknown }).code)
+          : undefined,
+      meta:
+        typeof error === "object" &&
+        error !== null &&
+        "meta" in error
+          ? (error as { meta?: unknown }).meta
+          : undefined,
+    });
 
     return NextResponse.json(
       {
@@ -157,3 +172,4 @@ export async function POST(request: Request) {
     );
   }
 }
+
