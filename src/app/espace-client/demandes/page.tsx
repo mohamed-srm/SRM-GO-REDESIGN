@@ -83,6 +83,8 @@ export default function DemandesPage() {
   const [files, setFiles] = useState<File[]>([]);
   const { language } = useLanguage();
 
+  const tr = (fr: string, ar: string, ber: string) =>
+    language === "ar" ? ar : language === "ber" ? ber : fr;
   const selectedType =
     requestTypes.find((item) => item.id === requestType) ??
     requestTypes[0];
@@ -245,10 +247,10 @@ export default function DemandesPage() {
     <main className="dashboard-page">
       <div className="dashboard-header">
         <div>
-          <span className="dashboard-label">ESPACE CLIENT</span>
-          <h1>Mes demandes.</h1>
+          <span className="dashboard-label">{tr("ESPACE CLIENT","فضاء الزبون","ⴰⵙⵏⵓⵔⴰⵢ")}</span>
+          <h1>{tr("Mes demandes.","طلباتي.","ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ.")}</h1>
           <p>
-            Retrouvez ici le suivi de vos demandes auprès de la SRM.
+            {tr("Retrouvez ici le suivi de vos demandes auprès de la SRM.","تتبعوا هنا طلباتكم لدى الشركة الجهوية متعددة الخدمات.","ⵙⵙⵏ ⴷⴰ ⵉⵙⵏⴰⵙⵏ ⵏⵏⴽ ⵙⴳ SRM.")}
           </p>
         </div>
 
@@ -256,7 +258,7 @@ export default function DemandesPage() {
           href="/espace-client/dashboard"
           className="dashboard-back"
         >
-          ← Retour au dashboard
+          {tr("← Retour au dashboard","← العودة إلى لوحة التحكم","← ⵓⵔⴰⵔ ⵙ ⵍⵓⵃⴰ ⵏ ⵓⵙⵏⵓⵔⴰⵢ")}
         </Link>
       </div>
 
@@ -275,7 +277,7 @@ export default function DemandesPage() {
             setSuccess("");
           }}
         >
-          {showForm ? "Fermer" : "Nouvelle demande"}
+          {showForm ? tr("Fermer","إغلاق","ⵎⵎⵏ") : tr("Nouvelle demande","طلب جديد","ⵉⵙⵏⴰⵙ ⴰⵎⴰⵢⵏⵓ")}
         </button>
       </div>
 
@@ -698,5 +700,7 @@ export default function DemandesPage() {
     </main>
   );
 }
+
+
 
 
