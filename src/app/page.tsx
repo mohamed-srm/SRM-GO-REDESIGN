@@ -56,9 +56,9 @@ export default function Home() {
             <span>FR</span>
             <span>العربية</span>
             <span>ⵜⵉⴼⵉⵏⴰⵖ</span>
-            <span className="social">in</span>
-            <span className="social">f</span>
-            <span className="social">▶</span>
+            <a className="social" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">in</a>
+            <a className="social" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">f</a>
+            <a className="social" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">▶</a>
           </div>
 
         </div>
@@ -967,5 +967,6 @@ export default function Home() {
     </main>
   );
 }
+
 
 
