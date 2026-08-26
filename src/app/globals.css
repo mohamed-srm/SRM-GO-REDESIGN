@@ -7593,3 +7593,32 @@ textarea::placeholder {
   }
 }
 
+
+.brand-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-hours {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  margin-left: 2px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.brand-hours span:first-child {
+  color: var(--blue);
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .brand-hours {
+    display: none;
+  }
+}

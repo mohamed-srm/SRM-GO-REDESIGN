@@ -43,10 +43,7 @@ export default function Home() {
       <div className="topbar">
         <div className="container topbar-inner">
 
-          <div className="topbar-left">
-            <span>◷</span>
-            
-          </div>
+          <div className="topbar-left"></div>
 
           <div className="topbar-right">
             <span>☎ 08 00 00 20 26</span>
@@ -84,6 +81,10 @@ export default function Home() {
               alt="SRM Guelm Oued Noun"
             />
           </a>
+          <div className="brand-hours">
+            <span>◷</span>
+            <span>Ouvert de 08:00 à 16:30 · Lundi au vendredi</span>
+          </div>
 
           <nav className="nav-links">
 
@@ -976,6 +977,8 @@ export default function Home() {
     </main>
   );
 }
+
+
 
 
 
