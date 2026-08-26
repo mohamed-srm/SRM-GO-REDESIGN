@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { language } = useLanguage();
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -55,10 +57,10 @@ export default function ForgotPasswordPage() {
         </div>
 
         <div className="client-page__visual-content">
-          <span>ESPACE CLIENT</span>
+          <span>{language === "ar" ? "فضاء الزبون" : language === "ber" ? "ⴰⵙⵏⵓⵔⴰⵢ" : "ESPACE CLIENT"}</span>
 
           <h1>
-            Récupérez votre
+            {language === "ar" ? "استرجعوا" : language === "ber" ? "ⵔⴰⵔⴰ" : "Récupérez votre"}
             <br />
             <strong>accès.</strong>
           </h1>
@@ -137,4 +139,8 @@ export default function ForgotPasswordPage() {
     </main>
   );
 }
+
+
+
+
 
