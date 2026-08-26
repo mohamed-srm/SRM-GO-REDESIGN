@@ -6,7 +6,7 @@ import MobileMenu from "./components/MobileMenu";
 import SiteFooter from "./components/SiteFooter";
 
 export default function Home() {
-  const [activeCommunication, setActiveCommunication] = useState(0);
+  const [activeCommunication, setActiveCommunication] = useState(0); const [language,setLanguage]=useState("fr");
 
   const communications = [
     {
@@ -53,9 +53,9 @@ export default function Home() {
             <span className="separator">|</span>
             <span>✉ contact@srm-go.ma</span>
             <span className="separator">|</span>
-            <span>FR</span>
-            <span>العربية</span>
-            <span>ⵜⵉⴼⵉⵏⴰⵖ</span>
+            <button className="language-switch" onClick={()=>setLanguage("fr")}>FR</button>
+            <button className="language-switch" onClick={()=>setLanguage("ar")}>العربية</button>
+            <button className="language-switch" onClick={()=>setLanguage("ber")}>ⵜⵉⴼⵉⵏⴰⵖ</button>
             <a className="social" href="https://www.linkedin.com/company/srm-go/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
             <a
   className="social"
@@ -157,11 +157,11 @@ export default function Home() {
           </div>
 
           <h1>
-            L’eau.
+            {language === "ar" ? "الماء." : "L’eau."}
             <br />
-            L’énergie.
+            {language === "ar" ? "الطاقة." : "L’énergie."}
             <br />
-            <span>La vie.</span>
+            <span>{language === "ar" ? "الحياة." : "La vie."}</span>
           </h1>
 
           <p className="hero-description">
@@ -976,6 +976,11 @@ export default function Home() {
     </main>
   );
 }
+
+
+
+
+
 
 
 

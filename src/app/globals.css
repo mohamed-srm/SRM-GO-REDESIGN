@@ -7693,3 +7693,4 @@ textarea::placeholder {
   25%, 95% { opacity: 0; }
   100% { opacity: 1; }
 }
+.language-switch{border:0;background:transparent;color:inherit;padding:0;margin:0;font:inherit;cursor:pointer}.language-switch:hover{text-decoration:underline}
