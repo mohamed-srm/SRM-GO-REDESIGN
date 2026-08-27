@@ -166,12 +166,6 @@ export default function ContactPage() {
         : language === "ber"
           ? "ⴷⵉ ⵓⵙⵙⴰⵡⴰⴹ."
           : "en contact.",
-              contactTitle2:
-      language === "ar"
-        ? "على تواصل."
-        : language === "ber"
-          ? "ⴷⵉ ⵓⵙⵙⴰⵡⴰⴹ."
-          : "en contact.",
   };
 
   return (
