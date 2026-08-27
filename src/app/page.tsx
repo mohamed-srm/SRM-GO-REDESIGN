@@ -1297,9 +1297,118 @@ export default function Home() {
 
   </div>
 </section>
+<section className="services-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>NOS SERVICES</span>
+      <h2>Des services essentiels au quotidien</h2>
+    </div>
+
+    <div className="services-grid">
+
+      <div className="service-card">
+        <div className="service-icon">💧</div>
+        <h3>Eau potable</h3>
+        <p>
+          Distribution d'une eau de qualité et gestion durable
+          des ressources hydriques.
+        </p>
+        <a href="#">Découvrir →</a>
+      </div>
+
+      <div className="service-card">
+        <div className="service-icon">⚡</div>
+        <h3>Électricité</h3>
+        <p>
+          Un service électrique fiable pour accompagner
+          les citoyens et les territoires.
+        </p>
+        <a href="#">Découvrir →</a>
+      </div>
+
+      <div className="service-card">
+        <div className="service-icon">🚰</div>
+        <h3>Assainissement</h3>
+        <p>
+          Gestion et amélioration des réseaux
+          d'assainissement liquide.
+        </p>
+        <a href="#">Découvrir →</a>
+      </div>
+
+      <div className="service-card">
+        <div className="service-icon">👤</div>
+        <h3>Espace citoyen</h3>
+        <p>
+          Accédez à vos démarches, demandes et services en ligne.
+        </p>
+        <a href="/espace-client">Accéder →</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section className="services-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>NOS SERVICES</span>
+      <h2>Des services essentiels au quotidien</h2>
+    </div>
+
+    <div className="services-grid">
+
+      <div className="service-card">
+        <div className="service-icon">💧</div>
+        <h3>Eau potable</h3>
+        <p>
+          Distribution d'une eau de qualité et gestion durable
+          des ressources hydriques.
+        </p>
+        <a href="#">Découvrir →</a>
+      </div>
+
+      <div className="service-card">
+        <div className="service-icon">⚡</div>
+        <h3>Électricité</h3>
+        <p>
+          Un service électrique fiable pour accompagner
+          les citoyens et les territoires.
+        </p>
+        <a href="#">Découvrir →</a>
+      </div>
+
+      <div className="service-card">
+        <div className="service-icon">🚰</div>
+        <h3>Assainissement</h3>
+        <p>
+          Gestion et amélioration des réseaux
+          d'assainissement liquide.
+        </p>
+        <a href="#">Découvrir →</a>
+      </div>
+
+      <div className="service-card">
+        <div className="service-icon">👤</div>
+        <h3>Espace citoyen</h3>
+        <p>
+          Accédez à vos démarches, demandes et services en ligne.
+        </p>
+        <a href="/espace-client">Accéder →</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 </main>
   );
 }
+
 
 
 
