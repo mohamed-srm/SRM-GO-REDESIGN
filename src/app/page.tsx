@@ -1405,9 +1405,96 @@ export default function Home() {
 
   </div>
 </section>
+<section className="agencies-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>NOS AGENCES</span>
+      <h2>Une présence proche de vous</h2>
+    </div>
+
+    <div className="agencies-grid">
+
+      <div className="agency-card">
+        <span>📍</span>
+        <h3>Guelmim</h3>
+        <p>Agence principale</p>
+        <a href="#">Voir l'agence →</a>
+      </div>
+
+      <div className="agency-card">
+        <span>📍</span>
+        <h3>Tan-Tan</h3>
+        <p>Agence de proximité</p>
+        <a href="#">Voir l'agence →</a>
+      </div>
+
+      <div className="agency-card">
+        <span>📍</span>
+        <h3>Sidi Ifni</h3>
+        <p>Accueil citoyens</p>
+        <a href="#">Voir l'agence →</a>
+      </div>
+
+      <div className="agency-card">
+        <span>📍</span>
+        <h3>Assa-Zag</h3>
+        <p>Service régional</p>
+        <a href="#">Voir l'agence →</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section className="agencies-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>NOS AGENCES</span>
+      <h2>Une présence proche de vous</h2>
+    </div>
+
+    <div className="agencies-grid">
+
+      <div className="agency-card">
+        <span>📍</span>
+        <h3>Guelmim</h3>
+        <p>Agence principale</p>
+        <a href="#">Voir l'agence →</a>
+      </div>
+
+      <div className="agency-card">
+        <span>📍</span>
+        <h3>Tan-Tan</h3>
+        <p>Agence de proximité</p>
+        <a href="#">Voir l'agence →</a>
+      </div>
+
+      <div className="agency-card">
+        <span>📍</span>
+        <h3>Sidi Ifni</h3>
+        <p>Accueil citoyens</p>
+        <a href="#">Voir l'agence →</a>
+      </div>
+
+      <div className="agency-card">
+        <span>📍</span>
+        <h3>Assa-Zag</h3>
+        <p>Service régional</p>
+        <a href="#">Voir l'agence →</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 </main>
   );
 }
+
 
 
 
