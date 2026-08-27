@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
-import SiteHeader from "../components/SiteHeader";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
@@ -177,7 +176,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <SiteHeader />
 
       <main className="srm-contact-page">
 

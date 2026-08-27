@@ -8396,17 +8396,3 @@ textarea::placeholder {
   cursor: pointer;
 }
 
-
-/* CONTACT PAGE POSITION FIX */
-
-.srm-contact-page,
-.srm-contact-section {
-  padding-top: 80px !important;
-  margin-top: 0 !important;
-}
-
-.srm-contact-page > .container,
-.srm-contact-section > .container {
-  margin-top: 0 !important;
-}
-
