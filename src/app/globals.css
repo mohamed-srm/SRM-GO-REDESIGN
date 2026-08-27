@@ -8007,3 +8007,47 @@ textarea::placeholder {
   }
 }
 
+
+.numbers-section{
+  padding:80px 0;
+  background:white;
+}
+
+.numbers-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.number-card{
+  background:#f7f9fc;
+  padding:35px 25px;
+  border-radius:18px;
+  text-align:center;
+  border:1px solid #e5edf5;
+}
+
+.number-card strong{
+  display:block;
+  font-size:34px;
+  color:#0078c8;
+  margin-bottom:12px;
+}
+
+.number-card span{
+  color:#526477;
+  font-size:15px;
+}
+
+@media(max-width:900px){
+  .numbers-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:600px){
+  .numbers-grid{
+    grid-template-columns:1fr;
+  }
+}
+

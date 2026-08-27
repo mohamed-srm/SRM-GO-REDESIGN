@@ -1227,9 +1227,80 @@ export default function Home() {
 
   </div>
 </section>
+<section className="numbers-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>NOS CHIFFRES CLÉS</span>
+      <h2>SRM Guelmim – Oued Noun en chiffres</h2>
+    </div>
+
+    <div className="numbers-grid">
+
+      <div className="number-card">
+        <strong>+300 000</strong>
+        <span>Citoyens desservis</span>
+      </div>
+
+      <div className="number-card">
+        <strong>+20</strong>
+        <span>Communes couvertes</span>
+      </div>
+
+      <div className="number-card">
+        <strong>+2.7 Md DH</strong>
+        <span>Investissements</span>
+      </div>
+
+      <div className="number-card">
+        <strong>24/7</strong>
+        <span>Assistance client</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section className="numbers-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>NOS CHIFFRES CLÉS</span>
+      <h2>SRM Guelmim – Oued Noun en chiffres</h2>
+    </div>
+
+    <div className="numbers-grid">
+
+      <div className="number-card">
+        <strong>+300 000</strong>
+        <span>Citoyens desservis</span>
+      </div>
+
+      <div className="number-card">
+        <strong>+20</strong>
+        <span>Communes couvertes</span>
+      </div>
+
+      <div className="number-card">
+        <strong>+2.7 Md DH</strong>
+        <span>Investissements</span>
+      </div>
+
+      <div className="number-card">
+        <strong>24/7</strong>
+        <span>Assistance client</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 </main>
   );
 }
+
 
 
 
