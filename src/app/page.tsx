@@ -1491,9 +1491,128 @@ export default function Home() {
 
   </div>
 </section>
+<section className="tracking-section">
+  <div className="container">
+
+    <div className="tracking-box">
+
+      <div className="section-title">
+        <span>SUIVI EN LIGNE</span>
+        <h2>Suivez votre demande facilement</h2>
+        <p>
+          Entrez votre référence pour consulter l'état de votre démarche.
+        </p>
+      </div>
+
+      <div className="tracking-form">
+        <input 
+          type="text"
+          placeholder="Ex: SRM-2026-0001"
+        />
+
+        <button>
+          Suivre →
+        </button>
+      </div>
+
+
+      <div className="tracking-steps">
+
+        <div className="tracking-step active">
+          <span>✓</span>
+          <p>Demande reçue</p>
+        </div>
+
+        <div className="tracking-step active">
+          <span>✓</span>
+          <p>Documents vérifiés</p>
+        </div>
+
+        <div className="tracking-step current">
+          <span>⏳</span>
+          <p>En traitement</p>
+        </div>
+
+        <div className="tracking-step">
+          <span>○</span>
+          <p>Intervention</p>
+        </div>
+
+        <div className="tracking-step">
+          <span>○</span>
+          <p>Terminée</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section className="tracking-section">
+  <div className="container">
+
+    <div className="tracking-box">
+
+      <div className="section-title">
+        <span>SUIVI EN LIGNE</span>
+        <h2>Suivez votre demande facilement</h2>
+        <p>
+          Entrez votre référence pour consulter l'état de votre démarche.
+        </p>
+      </div>
+
+      <div className="tracking-form">
+        <input 
+          type="text"
+          placeholder="Ex: SRM-2026-0001"
+        />
+
+        <button>
+          Suivre →
+        </button>
+      </div>
+
+
+      <div className="tracking-steps">
+
+        <div className="tracking-step active">
+          <span>✓</span>
+          <p>Demande reçue</p>
+        </div>
+
+        <div className="tracking-step active">
+          <span>✓</span>
+          <p>Documents vérifiés</p>
+        </div>
+
+        <div className="tracking-step current">
+          <span>⏳</span>
+          <p>En traitement</p>
+        </div>
+
+        <div className="tracking-step">
+          <span>○</span>
+          <p>Intervention</p>
+        </div>
+
+        <div className="tracking-step">
+          <span>○</span>
+          <p>Terminée</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
 </main>
   );
 }
+
 
 
 

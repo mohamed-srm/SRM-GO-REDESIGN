@@ -8110,3 +8110,68 @@ textarea::placeholder {
   }
 }
 
+
+.tracking-section{
+  padding:90px 0;
+  background:#062b45;
+}
+
+.tracking-box{
+  background:white;
+  padding:45px;
+  border-radius:25px;
+}
+
+.tracking-form{
+  display:flex;
+  gap:15px;
+  margin:35px 0;
+}
+
+.tracking-form input{
+  flex:1;
+  padding:16px 20px;
+  border:1px solid #ddd;
+  border-radius:12px;
+}
+
+.tracking-form button{
+  padding:16px 30px;
+  background:#0078c8;
+  color:white;
+  border:0;
+  border-radius:12px;
+  font-weight:700;
+}
+
+.tracking-steps{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.tracking-step{
+  text-align:center;
+  color:#94a3b8;
+}
+
+.tracking-step span{
+  display:block;
+  font-size:28px;
+}
+
+.tracking-step.active,
+.tracking-step.current{
+  color:#0078c8;
+}
+
+@media(max-width:800px){
+  .tracking-steps{
+    flex-direction:column;
+  }
+
+  .tracking-form{
+    flex-direction:column;
+  }
+}
+
