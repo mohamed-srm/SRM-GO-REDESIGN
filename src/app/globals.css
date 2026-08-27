@@ -1,5 +1,4 @@
-@import "tailwindcss";
-
+﻿/* @import "tailwindcss"; */
 :root {
   --blue: #087fc1;
   --blue-dark: #063d63;
@@ -2190,7 +2189,7 @@ a {
   }
 }
 /* =====================================================
-   IMPORTANT ANNOUNCEMENT — FEATURE
+   IMPORTANT ANNOUNCEMENT â€” FEATURE
 ===================================================== */
 
 .announcement-feature {
@@ -3032,7 +3031,7 @@ a {
   border-color: rgba(114, 223, 69, 0.35);
 }
 /* =====================================================
-   COMMUNICATIONS SLIDER — FINAL
+   COMMUNICATIONS SLIDER â€” FINAL
 ===================================================== */
 
 .communications-slider-section {
@@ -4265,7 +4264,7 @@ a {
   }
 }
 /* =====================================================
-   CLIENT REQUESTS / CLAIMS — PREMIUM UI
+   CLIENT REQUESTS / CLAIMS â€” PREMIUM UI
 ===================================================== */
 
 .dashboard-page {
@@ -5476,7 +5475,7 @@ a {
   }
 }
 /* =====================================================
-   COMMUNICATIONS — MOBILE
+   COMMUNICATIONS â€” MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -5529,7 +5528,7 @@ a {
   }
 }
 /* =====================================================
-   SERVICE STRIP — MOBILE
+   SERVICE STRIP â€” MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -5813,7 +5812,7 @@ a {
   }
 }
 /* =====================================================
-   MISSION — FINAL MOBILE LAYOUT
+   MISSION â€” FINAL MOBILE LAYOUT
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6206,7 +6205,7 @@ a {
   }
 }
 /* =====================================================
-   FEATURED NEWS — FINAL MOBILE
+   FEATURED NEWS â€” FINAL MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6311,7 +6310,7 @@ a {
   }
 }
 /* =====================================================
-   REGION — FINAL MOBILE
+   REGION â€” FINAL MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6436,7 +6435,7 @@ a {
   }
 }
 /* =====================================================
-   CITIZEN SERVICES — FINAL MOBILE
+   CITIZEN SERVICES â€” FINAL MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6539,7 +6538,7 @@ a {
   }
 }
 /* =====================================================
-   NEWS & PROJECTS — FINAL MOBILE
+   NEWS & PROJECTS â€” FINAL MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6640,7 +6639,7 @@ a {
   }
 }
 /* =====================================================
-   SRM EN CHIFFRES — MOBILE
+   SRM EN CHIFFRES â€” MOBILE
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -6745,7 +6744,7 @@ a {
 .site-footer__main {
   width: min(1180px, calc(100% - 64px));
   margin: 0 auto;
-  padding: 70px 0 55px;
+  padding: 55px 0 40px;
 
   display: grid;
   grid-template-columns: 1.35fr 0.8fr 0.8fr 1fr;
@@ -8111,67 +8110,7 @@ textarea::placeholder {
 }
 
 
-.tracking-section{
-  padding:90px 0;
-  background:#062b45;
-}
 
-.tracking-box{
-  background:white;
-  padding:45px;
-  border-radius:25px;
-}
 
-.tracking-form{
-  display:flex;
-  gap:15px;
-  margin:35px 0;
-}
 
-.tracking-form input{
-  flex:1;
-  padding:16px 20px;
-  border:1px solid #ddd;
-  border-radius:12px;
-}
-
-.tracking-form button{
-  padding:16px 30px;
-  background:#0078c8;
-  color:white;
-  border:0;
-  border-radius:12px;
-  font-weight:700;
-}
-
-.tracking-steps{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.tracking-step{
-  text-align:center;
-  color:#94a3b8;
-}
-
-.tracking-step span{
-  display:block;
-  font-size:28px;
-}
-
-.tracking-step.active,
-.tracking-step.current{
-  color:#0078c8;
-}
-
-@media(max-width:800px){
-  .tracking-steps{
-    flex-direction:column;
-  }
-
-  .tracking-form{
-    flex-direction:column;
-  }
-}
 
