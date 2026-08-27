@@ -8114,3 +8114,56 @@ textarea::placeholder {
 
 
 
+
+/* FIX SPACE BEFORE FOOTER */
+.figures-section {
+  padding-bottom: 40px !important;
+  margin-bottom: 0 !important;
+}
+
+.figures-section .container {
+  padding-bottom: 0 !important;
+}
+
+.site-footer {
+  margin-top: 0 !important;
+}
+
+.site-footer__main {
+  padding-top: 30px !important;
+}
+
+
+/* FINAL FIGURES TO FOOTER SPACING */
+.figures-section {
+  padding-top: 70px !important;
+  padding-bottom: 20px !important;
+  min-height: auto !important;
+}
+
+.figures-section .container {
+  margin-bottom: 0 !important;
+}
+
+.figures-header {
+  margin-bottom: 50px !important;
+}
+
+.figures-note {
+  margin-bottom: 0 !important;
+}
+
+
+/* FINAL FOOTER GAP FIX */
+.figures-section {
+  padding-bottom: 0 !important;
+}
+
+.figures-note {
+  padding-bottom: 40px !important;
+}
+
+.site-footer {
+  margin-top: 0 !important;
+}
+
