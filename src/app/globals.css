@@ -8366,3 +8366,33 @@ textarea::placeholder {
   max-width: 1400px !important;
   margin: 0 auto !important;
 }
+/* FORCE BUTTON VISIBILITY FIX */
+
+.srm-contact-form-card button {
+  display: flex !important;
+  width: 100% !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #087fc1 !important;
+  color: white !important;
+  height: 56px !important;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.client-form__submit {
+  display: flex !important;
+  width: 100% !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #087fc1 !important;
+  color: white !important;
+  height: 54px !important;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
