@@ -163,6 +163,8 @@ export default function ContactPage() {
   };
 
   return (
+    <>
+    <SiteHeader />
     <main className="srm-contact-page">
       <section className="srm-contact-hero">
         <div className="container">
@@ -370,10 +372,7 @@ export default function ContactPage() {
         </div>
       </div>
     </main>
+    </main>
+  </>
   );
 }
-
-
-
-
-
