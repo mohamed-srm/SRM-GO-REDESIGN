@@ -1067,102 +1067,6 @@ export default function Home() {
 </section>
 
 
-<section className="services-section">
-  <div className="container">
-
-    <div className="section-title">
-      <span>NOS SERVICES</span>
-      <h2>Des services essentiels au quotidien</h2>
-    </div>
-
-    <div className="services-grid">
-
-      <div className="service-card">
-        <div className="service-icon">💧</div>
-        <h3>Eau potable</h3>
-        <p>
-          Distribution d'une eau de qualité et gestion durable
-          des ressources hydriques.
-        </p>
-        <a href="#">Découvrir →</a>
-      </div>
-
-      <div className="service-card">
-        <div className="service-icon">⚡</div>
-        <h3>Électricité</h3>
-        <p>
-          Un service électrique fiable pour accompagner
-          les citoyens et les territoires.
-        </p>
-        <a href="#">Découvrir →</a>
-      </div>
-
-      <div className="service-card">
-        <div className="service-icon">🚰</div>
-        <h3>Assainissement</h3>
-        <p>
-          Gestion et amélioration des réseaux
-          d'assainissement liquide.
-        </p>
-        <a href="#">Découvrir →</a>
-      </div>
-
-      <div className="service-card">
-        <div className="service-icon">👤</div>
-        <h3>Espace citoyen</h3>
-        <p>
-          Accédez à vos démarches, demandes et services en ligne.
-        </p>
-        <a href="/espace-client">Accéder →</a>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-<section className="agencies-section">
-  <div className="container">
-
-    <div className="section-title">
-      <span>NOS AGENCES</span>
-      <h2>Une présence proche de vous</h2>
-    </div>
-
-    <div className="agencies-grid">
-
-      <div className="agency-card">
-        <span>📍</span>
-        <h3>Guelmim</h3>
-        <p>Agence principale</p>
-        <a href="#">Voir l'agence →</a>
-      </div>
-
-      <div className="agency-card">
-        <span>📍</span>
-        <h3>Tan-Tan</h3>
-        <p>Agence de proximité</p>
-        <a href="#">Voir l'agence →</a>
-      </div>
-
-      <div className="agency-card">
-        <span>📍</span>
-        <h3>Sidi Ifni</h3>
-        <p>Accueil citoyens</p>
-        <a href="#">Voir l'agence →</a>
-      </div>
-
-      <div className="agency-card">
-        <span>📍</span>
-        <h3>Assa-Zag</h3>
-        <p>Service régional</p>
-        <a href="#">Voir l'agence →</a>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
 
 <section className="agencies-section">
   <div className="container">
@@ -1206,6 +1110,9 @@ export default function Home() {
 
   </div>
 </section>
+
+
+
 <section className="tracking-section">
   <div className="container">
 
@@ -1266,67 +1173,11 @@ export default function Home() {
 </section>
 
 
-<section className="tracking-section">
-  <div className="container">
 
-    <div className="tracking-box">
-
-      <div className="section-title">
-        <span>SUIVI EN LIGNE</span>
-        <h2>Suivez votre demande facilement</h2>
-        <p>
-          Entrez votre référence pour consulter l'état de votre démarche.
-        </p>
-      </div>
-
-      <div className="tracking-form">
-        <input 
-          type="text"
-          placeholder="Ex: SRM-2026-0001"
-        />
-
-        <button>
-          Suivre →
-        </button>
-      </div>
-
-
-      <div className="tracking-steps">
-
-        <div className="tracking-step active">
-          <span>✓</span>
-          <p>Demande reçue</p>
-        </div>
-
-        <div className="tracking-step active">
-          <span>✓</span>
-          <p>Documents vérifiés</p>
-        </div>
-
-        <div className="tracking-step current">
-          <span>⏳</span>
-          <p>En traitement</p>
-        </div>
-
-        <div className="tracking-step">
-          <span>○</span>
-          <p>Intervention</p>
-        </div>
-
-        <div className="tracking-step">
-          <span>○</span>
-          <p>Terminée</p>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
 </main>
   );
 }
+
 
 
 
