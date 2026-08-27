@@ -7948,3 +7948,62 @@ textarea::placeholder {
     opacity: 1;
   }
 }
+
+.service-status-section{
+  padding:80px 0;
+  background:#f7f9fc;
+}
+
+.section-title span{
+  color:#0088d1;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:3px;
+}
+
+.section-title h2{
+  font-size:32px;
+  color:#062b45;
+  margin:15px 0 40px;
+}
+
+.service-status-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.service-status-card{
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.service-status-card span{
+  font-size:35px;
+}
+
+.service-status-card h3{
+  color:#062b45;
+  margin:15px 0;
+}
+
+.status-green{
+  color:#16a34a;
+}
+
+.status-orange{
+  color:#f59e0b;
+}
+
+.service-status-card p{
+  color:#64748b;
+}
+
+@media(max-width:800px){
+  .service-status-grid{
+    grid-template-columns:1fr;
+  }
+}
+

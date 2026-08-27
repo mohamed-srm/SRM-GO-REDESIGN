@@ -975,9 +975,262 @@ export default function Home() {
       </section>
 
       <SiteFooter />
-    </main>
+<section className="service-status-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>ÉTAT DES SERVICES</span>
+      <h2>Nos services en temps réel</h2>
+    </div>
+
+    <div className="service-status-grid">
+
+      <div className="service-status-card">
+        <span>💧</span>
+        <h3>Eau potable</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>⚡</span>
+        <h3>Électricité</h3>
+        <strong className="status-orange">● Intervention en cours</strong>
+        <p>Merci de votre compréhension</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>🚰</span>
+        <h3>Assainissement</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section className="service-status-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>ÉTAT DES SERVICES</span>
+      <h2>Nos services en temps réel</h2>
+    </div>
+
+    <div className="service-status-grid">
+
+      <div className="service-status-card">
+        <span>💧</span>
+        <h3>Eau potable</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>⚡</span>
+        <h3>Électricité</h3>
+        <strong className="status-orange">● Intervention en cours</strong>
+        <p>Merci de votre compréhension</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>🚰</span>
+        <h3>Assainissement</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section className="service-status-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>ÉTAT DES SERVICES</span>
+      <h2>Nos services en temps réel</h2>
+    </div>
+
+    <div className="service-status-grid">
+
+      <div className="service-status-card">
+        <span>💧</span>
+        <h3>Eau potable</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>⚡</span>
+        <h3>Électricité</h3>
+        <strong className="status-orange">● Intervention en cours</strong>
+        <p>Merci de votre compréhension</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>🚰</span>
+        <h3>Assainissement</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+ 
+<section className="service-status-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>ÉTAT DES SERVICES</span>
+      <h2>Nos services en temps réel</h2>
+    </div>
+
+    <div className="service-status-grid">
+
+      <div className="service-status-card">
+        <span>💧</span>
+        <h3>Eau potable</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>⚡</span>
+        <h3>Électricité</h3>
+        <strong className="status-orange">● Intervention en cours</strong>
+        <p>Merci de votre compréhension</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>🚰</span>
+        <h3>Assainissement</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+ 
+<section className="service-status-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>ÉTAT DES SERVICES</span>
+      <h2>Nos services en temps réel</h2>
+    </div>
+
+    <div className="service-status-grid">
+
+      <div className="service-status-card">
+        <span>💧</span>
+        <h3>Eau potable</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>⚡</span>
+        <h3>Électricité</h3>
+        <strong className="status-orange">● Intervention en cours</strong>
+        <p>Merci de votre compréhension</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>🚰</span>
+        <h3>Assainissement</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+ 
+<section className="service-status-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>ÉTAT DES SERVICES</span>
+      <h2>Nos services en temps réel</h2>
+    </div>
+
+    <div className="service-status-grid">
+
+      <div className="service-status-card">
+        <span>💧</span>
+        <h3>Eau potable</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>⚡</span>
+        <h3>Électricité</h3>
+        <strong className="status-orange">● Intervention en cours</strong>
+        <p>Merci de votre compréhension</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>🚰</span>
+        <h3>Assainissement</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+ 
+<section className="service-status-section">
+  <div className="container">
+
+    <div className="section-title">
+      <span>ÉTAT DES SERVICES</span>
+      <h2>Nos services en temps réel</h2>
+    </div>
+
+    <div className="service-status-grid">
+
+      <div className="service-status-card">
+        <span>💧</span>
+        <h3>Eau potable</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>⚡</span>
+        <h3>Électricité</h3>
+        <strong className="status-orange">● Intervention en cours</strong>
+        <p>Merci de votre compréhension</p>
+      </div>
+
+      <div className="service-status-card">
+        <span>🚰</span>
+        <h3>Assainissement</h3>
+        <strong className="status-green">● Normal</strong>
+        <p>Service opérationnel</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+</main>
   );
 }
+
 
 
 
