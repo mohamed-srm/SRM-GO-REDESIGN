@@ -975,99 +975,6 @@ export default function Home() {
       </section>
 
       <SiteFooter />
-<section className="numbers-section">
-  <div className="container">
-
-    <div className="section-title">
-      <span>NOS CHIFFRES CLÉS</span>
-      <h2>SRM Guelmim – Oued Noun en chiffres</h2>
-    </div>
-
-    <div className="numbers-grid">
-
-      <div className="number-card">
-        <strong>+300 000</strong>
-        <span>Citoyens desservis</span>
-      </div>
-
-      <div className="number-card">
-        <strong>+20</strong>
-        <span>Communes couvertes</span>
-      </div>
-
-      <div className="number-card">
-        <strong>+2.7 Md DH</strong>
-        <span>Investissements</span>
-      </div>
-
-      <div className="number-card">
-        <strong>24/7</strong>
-        <span>Assistance client</span>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-
-<section className="services-section">
-  <div className="container">
-
-    <div className="section-title">
-      <span>NOS SERVICES</span>
-      <h2>Des services essentiels au quotidien</h2>
-    </div>
-
-    <div className="services-grid">
-
-      <div className="service-card">
-        <div className="service-icon">💧</div>
-        <h3>Eau potable</h3>
-        <p>
-          Distribution d'une eau de qualité et gestion durable
-          des ressources hydriques.
-        </p>
-        <a href="#">Découvrir →</a>
-      </div>
-
-      <div className="service-card">
-        <div className="service-icon">⚡</div>
-        <h3>Électricité</h3>
-        <p>
-          Un service électrique fiable pour accompagner
-          les citoyens et les territoires.
-        </p>
-        <a href="#">Découvrir →</a>
-      </div>
-
-      <div className="service-card">
-        <div className="service-icon">🚰</div>
-        <h3>Assainissement</h3>
-        <p>
-          Gestion et amélioration des réseaux
-          d'assainissement liquide.
-        </p>
-        <a href="#">Découvrir →</a>
-      </div>
-
-      <div className="service-card">
-        <div className="service-icon">👤</div>
-        <h3>Espace citoyen</h3>
-        <p>
-          Accédez à vos démarches, demandes et services en ligne.
-        </p>
-        <a href="/espace-client">Accéder →</a>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-
 <section className="agencies-section">
   <div className="container">
 
@@ -1177,6 +1084,7 @@ export default function Home() {
 </main>
   );
 }
+
 
 
 
