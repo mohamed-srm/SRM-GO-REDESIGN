@@ -137,9 +137,9 @@ export default function Home() {
 
         <div className="hero-image">
   <img src="/hero-guelmim.jpg" alt="Guelmim - Oued Noun" />
-  <img src="/hero-guelmim-2.webp" alt="Guelmim - Oued Noun" />
-  <img src="/hero-guelmim-3.webp" alt="Guelmim - Oued Noun" />
-  <img src="/hero-guelmim-4.webp" alt="Guelmim - Oued Noun" />
+  <img src="/hero-guelmim-2.png" alt="Guelmim - Oued Noun" />
+  <img src="/hero-guelmim-3.png" alt="Guelmim - Oued Noun" />
+  <img src="/hero-guelmim-4.png" alt="Guelmim - Oued Noun" />
 </div>
 
         <div className="hero-overlay"></div>
@@ -978,6 +978,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 
 
